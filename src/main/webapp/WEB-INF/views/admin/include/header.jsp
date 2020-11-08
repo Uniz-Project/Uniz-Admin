@@ -15,13 +15,20 @@
         content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>Monster Lite Template by WrapPixel</title>
+
+    
     <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" />
+   	
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/assets/images/favicon.png">
     <!-- Custom CSS -->
     <link href="/resources/assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/resources/css/style.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css"/>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

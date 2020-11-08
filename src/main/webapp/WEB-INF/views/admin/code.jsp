@@ -1,95 +1,102 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
 
-    <
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-     
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+<%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
         
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Blank Page</h3>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-4 align-self-center">
-                        <div class="text-right upgrade-btn">
-                            <a href="https://wrappixel.com/templates/monsteradmin/"
-                                class="btn btn-success d-none d-md-inline-block text-white" target="_blank">Upgrade to
-                                Pro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                This is some text within a card block.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+        
+		<div class="page-wrapper">
+    <!-- Container Fluid -->
+					<div class="container-fluid" id="container-wrapper">
+						<div class="d-sm-flex align-items-center justify-content-between mb-4">
+							<h1 class="h3 mb-0 text-gray-800">유니즈관리</h1>
+						</div>
+	
+						<!-- row -->
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="card mb-4">
+									<div class="card-header py-3">
+										<h6 class="m-0 font-weight-bold text-primary">상세정보</h6>
+									</div>
+									<div class="card-body">
+										<form id="codeForm">
+											<div class="form-group">
+												<label for="unizSn">유니즈번호</label>
+												<input class="form-control  mb-3" type="text" id="unizSn" name="unizSn" placeholder="" readonly="readonly">
+											</div>
+	
+											<div class="form-group">
+												<label for="unizTypeSn">유니즈타입</label>
+												<input class="form-control  mb-3" type="text" id="unizTypeSn" name="unizTypeSn" placeholder="" value="10">
+											</div>
+	
+											<div class="form-group">
+												<label for="unizKeyword">유니즈키워드</label>
+												<input class="form-control  mb-3" type="text" id="unizKeyword" name="unizKeyword" placeholder="">
+											</div>
+	
+											<div class="form-group">
+												<label for="enable">사용여부</label>
+												<select class="form-control mb-3" id="enable" name="enable">
+													<option value="Y">Y</option>
+													<option value="N">N</option>
+												</select>
+											</div>
+	
+											<input class="form-control" type="hidden" id="id" name="id" value="0" />
+										</form>
+										<div class="text-right">
+											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
+											<button type="button" id="btnIns" class="btn btn-success mb-1">입력</button>
+											<button type="button" id="btnUpd" class="btn btn-warning mb-1">수정</button>
+											<button type="button" id="btnDel" class="btn btn-danger mb-1">삭제</button>
+										</div>
+									</div>
+								</div>
+							</div>
+								
+							<div class="col-lg-6">
+								<div class="card mb-4">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">목록</h6>
+									</div>
+									<div class="table-responsive p-3">
+										<table class="ui table" style="width:100%" id="codeTable">
+											<thead class="thead-light">
+												<tr>
+													<th>유니즈SN</th>
+													<th>유니즈타입</th>
+													<th>유니즈키워드</th>
+													<th>사용여부</th>
+												
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- row -->
+					</div>
+					<!-- Container Fluid -->
+				</div>
+
+		<script type="text/javascript" src="/resources/js/js/uniz.js"></script>
+		<script>
+       
+			 $(document).ready(function() {
+				formClear();
+				codeList();
+				
+			}); 
+			 
+			 $("#codeTable").on("click", "tr", function(){
+					rowData = $("#codeTable").DataTable().row(this).data();
+					if(rowData !== null){
+						formChange();
+					}
+				});
+			 
+</script>
+<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>

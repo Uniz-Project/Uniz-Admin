@@ -25,7 +25,10 @@
                                     aria-hidden="true"></i><span class="hide-menu">영상관리</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/admin/code" aria-expanded="false"><i class="mr-3 fa fa-columns"
-                                    aria-hidden="true"></i><span class="hide-menu">유니즈&위니즈 관리</span></a></li>
+                                    aria-hidden="true"></i><span class="hide-menu">유니즈관리</span></a></li>
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/admin/code2" aria-expanded="false"><i class="mr-3 fa fa-columns"
+                                    aria-hidden="true"></i><span class="hide-menu">위니즈 관리관리</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="404.html" aria-expanded="false"><i class="mr-3 fa fa-info-circle"
                                     aria-hidden="true"></i><span class="hide-menu">Error 404</span></a></li>
