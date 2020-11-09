@@ -4,22 +4,50 @@
 
 <mapper namespace="com.uniz.admin.mapper.UnizMapper">
 	<select id="unizList2" resultType ="com.uniz.admin.domain.Uniz">
-		select * from uniz
+		select * from UNIZ
 	</select>
 	
 	<insert id="unizInsert">
-		INSERT INTO Uniz (unizSN, unizTypeSN, unizKeyword, enable) VALUES (UNIZ_SEQ.NEXTVAL, #{unizTypeSn} ,#{unizKeyword} , #{enable})     
+		INSERT INTO UNIZ (unizSN, unizTypeSN, unizKeyword, enable) VALUES (UNIZ_SEQ.NEXTVAL, #{unizTypeSn} ,#{unizKeyword} , #{enable})     
 	</insert>
 	
 	<select id="selectUniz" resultType="Integer">
-		SELECT count(*) FROM uniz WHERE unizTypeSn=#{unizTypeSn} AND unizKeyword=#{unizKeyword}
+		SELECT COUNT(*) FROM uniz WHERE unizTypeSn=#{unizTypeSn} AND unizKeyword=#{unizKeyword}
 	</select>
 	
 	<update id="unizUpdate">
-		UPDATE uniz SET unizkeyword= #{unizKeyword}, enable=#{enable}, updateDatetime=sysdate WHERE unizsn = #{unizSn}
+		UPDATE UNIZ SET unizkeyword= #{unizKeyword}, enable=#{enable}, updateDatetime=sysdate WHERE unizsn = #{unizSn}
 	</update>
 	
 	<delete id="unizDelete">
-		DELETE FROM uniz where unizSn = #{unizSn}
+		DELETE FROM UNIZ where unizSn = #{unizSn}
 	</delete>
+	
+	<select id="unizLayerList"  resultType ="com.uniz.admin.domain.UnizLayer">
+		select u1.unizsn , u1.parentunizsn ,u2.unizkeyword parentunizkeyword, u3.unizkeyword childunizkeyword
+		from unizLayerlist u1, uniz u2, uniz u3 
+		where u1.parentunizsn = u2.unizsn and u1.unizsn = u3.unizsn
+	</select>
+	
+	<insert id="unizLayerInsert">
+		INSERT INTO UNIZLAYERLIST (unizSN, parentUnizSN) VALUES (#{unizSn}, #{parentUnizSn})     
+	</insert>
+	
+	<select id="unizLayerCheck" resultType="Integer">
+		select count(*) from unizlayerlist where unizsn = #{unizSn} and parentunizsn = #{parentUnizSn}
+	</select>
+	
+	<update id="unizLayerUpdate">
+		UPDATE UNIZLAYERLIST SET unizSn = #{unizSn}, parentUnizSn = #{parentUnizSn} where unizSn = #{unizSn} and parentUnizSn = #{parentUnizSn}
+	</update>
+	
+	<delete id="unizLayerDelete">
+		DELETE FROM UNIZ where unizSn = #{unizSn} and parentUnizSn = #{parentUnizSn}
+	</delete>
+	
+	<select id="unizNotLayerList" resultType ="com.uniz.admin.domain.Uniz">
+		select unizsn, uniztypesn, unizKeyword, enable from uniz where unizsn not in (select unizsn from unizlayerlist)
+	</select>
+	
+	
 </mapper>
