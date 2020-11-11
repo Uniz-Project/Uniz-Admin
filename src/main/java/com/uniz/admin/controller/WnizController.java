@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.uniz.admin.domain.UWmatchList;
 import com.uniz.admin.domain.Wniz;
 import com.uniz.admin.service.WnizService;
 
@@ -84,5 +84,79 @@ public class WnizController {
 		System.out.println("DEBUG - Delete data(post) : " +map);
 		return map;
 	}
+	@GetMapping("/admin/wniz/uwmatch")
+	public String uwmatch() {
+		return "admin/uwMatchList";
+	}
 	
+	
+	@GetMapping("/admin/wniz/uwlist")
+	public @ResponseBody Map<String,Object> uwMatchList(){
+		
+		List<UWmatchList> uwMatchList = wnizService.uwMatchList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", uwMatchList);
+		
+		log.info("UWMatchList : GET : " + map);
+		
+		return map; 
+		
+	}
+	@GetMapping("/admin/wniz/uwNotlist")
+	public @ResponseBody Map<String,Object> uwNotMatchList(){
+		
+		List<Wniz> uwNotMatchList = wnizService.uwNotMatchList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("data", uwNotMatchList);
+		
+		log.info("UWMatchList : GET : " + map);
+		
+		System.out.println("map");
+		
+		return map; 
+		
+		
+	}
+	
+	@PostMapping("/admin/wniz/uwMatchinsert")
+	public @ResponseBody Map<String, Object> uwMatchInsert(UWmatchList uwlist) {
+
+		String result = wnizService.uwMatchInsert(uwlist);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		
+		System.out.println("DEBUG - Insert data(post) : " +map);
+		
+		return map;
+	}
+	
+	@PostMapping("/admin/wniz/uwMatchdelete")
+	public @ResponseBody Map<String, Object> uwMatchDelete(UWmatchList uwlist) {
+
+		String result = wnizService.uwMatchDelete(uwlist);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		
+		System.out.println("DEBUG - Insert data(post) : " +map);
+		
+		return map;
+	}
+	
+//	@PostMapping("/admin/wniz/uwMatchupdate")
+//	public @ResponseBody Map<String, Object> uwMatchUpdate(UWmatchList uwlist) {
+//
+//		String result = wnizService.uwMatchUpdate(uwlist);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("result", result);
+//		
+//		System.out.println("DEBUG - Insert data(post) : " +map);
+//		
+//		return map;
+//	}
 }

@@ -52,7 +52,7 @@
                          
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						    <a class="dropdown-item" href="/admin/wniz">Wniz관리</a>
-						    <a class="dropdown-item" href="/admin/wniz/">UWMatchList관리</a>
+						    <a class="dropdown-item" href="/admin/wniz/uwmatch">UWMatchList관리</a>
 						    <a class="dropdown-item" href="#">Something else here</a>
  						 </div>
                         

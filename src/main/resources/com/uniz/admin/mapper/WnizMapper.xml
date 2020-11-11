@@ -3,27 +3,68 @@
 
 
 <mapper namespace="com.uniz.admin.mapper.WnizMapper">
-	
+
 	<select id="getWnizList" resultType="com.uniz.admin.domain.Wniz">
 		select * from wniz
 	</select>
-	
+
 	<select id="selectWniz" resultType="Integer">
-		SELECT COUNT(*) FROM wniz WHERE wnizSn= #{wnizSn}
+		SELECT COUNT(*) FROM wniz
+		WHERE wnizSn= #{wnizSn}
 	</select>
-	
+
 	<insert id="wnizInsert">
-		insert into Wniz(wnizsn, title,imgurl) values(wniz_seq.nextval,#{title}, #{imgUrl})
+		insert into Wniz(wnizsn, title,imgurl)
+		values(wniz_seq.nextval,#{title}, #{imgUrl})
 	</insert>
-	
+
 	<update id="wnizUpdate">
-		UPDATE wniz SET title =#{title}, imgUrl= #{imgUrl}, updateDateTime= sysdate where wnizsn =#{wnizSn}																									 
+		UPDATE wniz SET title =#{title}, imgUrl= #{imgUrl},
+		updateDateTime= sysdate where wnizsn =#{wnizSn}
 	</update>
-	
+
 	<delete id="wnizDelete">
 		DELETE from wniz where wnizSn = #{wnizSn}
-	
+
 	</delete>
+
+	<select id="getUWMatchList"
+		resultType="com.uniz.admin.domain.UWmatchList">
+		select distinct u.wnizsn
+		,u.unizsn,w.title,u2.unizkeyword,maxunizpoint, minunizpoint, priority
+		from uwmatchlist u , wniz w , uniz u2
+		where u.wnizsn = w.wnizsn and
+		u.unizSn = u2.unizsn
+		order by u.wnizsn asc 
+	</select>
+
+	<select id="getNotUWMatchList"
+		resultType="com.uniz.admin.domain.Wniz">
+		select * from wniz
+		where wnizsn in (SELECT distinct w.wnizsn
+		from wniz w, uwmatchlist uw where w.wnizsn != uw.wnizsn)
+		
+	</select>
+
+	<select id="selectUWFK" resultType="Integer">
+		select sum(fkcount)
+		from
+		(select count(*)fkcount from wniz w where wnizsn = #{wnizSn}
+		union all
+		select
+		count(*) from uniz where unizsn = #{unizSn})
+
+	</select>
+
+	<insert id="uwMatchInsert">
+
+		insert into uwmatchlist(wnizsn,unizsn,maxunizpoint,minunizpoint, priority)
+		values (#{wnizSn}, #{unizSn}, #{maxUnizPoint}, #{minUnizPoint}, #{priority})
+		
+	</insert>
 	
-	
+	<delete id="uwMatchDelete">
+	delete uwmatchlist
+	where wnizsn= #{wnizSn} and unizsn = #{unizSn} 
+	</delete>
 </mapper>
