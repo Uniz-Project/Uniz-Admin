@@ -11,16 +11,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Uniz {
-	
-	private int unizSn;
-	private int unizTypeSn;
-	private String unizKeyword;
+public class Wniz {
+	private int wnizSn;
+	private String title;
 	private String imgUrl;
-	private String enable;
+//	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date createDatetime;
+	private Date createDateTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date updateDatetime;
-	
+	private Date updateDateTime;
 }

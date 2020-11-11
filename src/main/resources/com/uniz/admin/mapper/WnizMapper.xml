@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.WnizMapper">
+	
+	<select id="getWnizList" resultType="com.uniz.admin.domain.Wniz">
+		select * from wniz
+	</select>
+	
+	<select id="selectWniz" resultType="Integer">
+		SELECT COUNT(*) FROM wniz WHERE wnizSn= #{wnizSn}
+	</select>
+	
+	<insert id="wnizInsert">
+		insert into Wniz(wnizsn, title,imgurl) values(wniz_seq.nextval,#{title}, #{imgUrl})
+	</insert>
+	
+	<update id="wnizUpdate">
+		UPDATE wniz SET title =#{title}, imgUrl= #{imgUrl}, updateDateTime= sysdate where wnizsn =#{wnizSn}																									 
+	</update>
+	
+	<delete id="wnizDelete">
+		DELETE from wniz where wnizSn = #{wnizSn}
+	
+	</delete>
+	
+	
+</mapper>

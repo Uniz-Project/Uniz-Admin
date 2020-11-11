@@ -1,18 +1,19 @@
 function formChange(){
 	$("#id").val(rowData.id);
 	$("#unizSn").val(rowData.unizSn);
-	$("#unizTypeSn").val(rowData.unizTypeSn);
-	$("#unizKeyword").val(rowData.unizKeyword);
-	$("#enable").val(rowData.enable);
+	$("#parentUnizSn").val(rowData.parentUnizSn);
+	$("#parentUnizKeyword").val(rowData.parentUnizKeyword);
+	$("#childUnizKeyword").val(rowData.childUnizKeyword);
+	//$("#enable").val(rowData.enable);
 	
 //	$("#unizSn").attr("readonly", "readonly");
 //	$("#unizTypeSn").attr("readonly", "readonly");
 //	$("#unizKeyword").attr("readonly", "readonly");
 //	
-	$("#btnIns").attr("disabled", "disabled");
-	$("#btnIns").css("opacity","0.3");
-	$("#btnIns").removeAttr("onClick");
-	
+//	$("#btnIns").attr("disabled", "disabled");
+//	$("#btnIns").css("opacity","0.3");
+//	$("#btnIns").removeAttr("onClick");
+	1
 	$("#btnUpd").removeAttr("disabled");
 	$("#btnUpd").removeAttr("style");
 	$("#btnUpd").attr("onClick", "codeUpdate();");
@@ -20,15 +21,16 @@ function formChange(){
 
 function formClear(){
 	$("#unizSn").val("");
-	$("#unizTypeSn").val("10");
-	$("#unizKeyword").val("");
-	$("#enable").val("Y");
+	$("#parentUnizSn").val("");
+	$("#parentUnizSn").val("");
+	$("#parentUnizKeyword").val("");
+	$("#childUnizKeyword").val("");
 	$("#id").val("0");
 	
-	
 //	$("#unizSn").removeAttr("readonly");
-	$("#unizTypeSn").removeAttr("readonly");
-	$("#unizKeyword").removeAttr("readonly");
+	$("#parentUnizSn").removeAttr("readonly");
+	$("#parentUnizSn").removeAttr("readonly");
+	$("#childUnizKeyword").removeAttr("readonly");
 	
 	$("#btnIns").removeAttr("disabled");
 	$("#btnUpd").removeAttr("disabled");
@@ -50,59 +52,16 @@ function formClear(){
 	
 }
 
-
-function codeList(){
-	
-	console.log("실행.....")
-	
-	$("#codeTable").DataTable({
-		processing: true,
-		serverSide: false,
-		paging: true,
-		pagingType: "simple_numbers",
-		order: false,
-		ordering: false,
-		info: true,
-		filter: true,
-		
-		language: {
-			"zeroRecords": "데이터가 없습니다.",
-			"lengthMenu": "_MENU_ 개씩 보기",
-			"search": "검색:",
-			"info": "_PAGE_ / _PAGES_",
-			"infoFiltered": "(전체 _MAX_개의 데이터 중 검색결과)",
-			"paginate": {
-				"previous": "이전",
-				"next": "다음"
-			} 
-		},
-		ajax:{
-			"url": "/admin/uniz/unizlist",
-			"type" :"GET",
-			"dataType" : "json"
-		},
-		columns: [
-			{data: "unizSn"},
-			{data: "unizTypeSn"},
-			{data: "unizKeyword"},
-			{data: "enable"}
-		]
-	});
-}
-
 function codeInsert(){
 	
-	$("#unizSn").val("0");
-	
-	if(!($("#unizTypeSn").val().length == 2)){
-		alert("코드는 반드시 2자리 숫자여야 합니다. ex)01, 02, ..");
-		return false;
-	} else {
+
 		var codeForm = $("#codeForm").serialize();
 		
 		console.log("codeForm: "+codeForm);
+		
+		
 		$.ajax({
-			url: "/admin/uniz/unizinsert",
+			url: "/admin/uniz/unizLayerinsert",
 			type: "post", 
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			data: codeForm,
@@ -126,14 +85,14 @@ function codeInsert(){
 			}
 		});
 	}
-}
+
 
 function codeUpdate(){
 	var codeForm = $("#codeForm").serialize();
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/uniz/unizupdate",
+		url: "/admin/uniz/unizLayerupdate",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,
@@ -161,7 +120,7 @@ function codeDelete(){
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/uniz/unizdelete",
+		url: "/admin/uniz/unizLayerdelete",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,
@@ -182,5 +141,101 @@ function codeDelete(){
 	});
 }
 
+function unizLayerList(){
+		
+	$("#column1").text("유니즈번호");
+	$("#column2").text("부모유니즈");
+	$("#column3").text("부모유니즈키워드");
+	$("#column4").text("자손유니즈키워드");
+	
+	console.log("실행.....")
+	
+	$("#codeTable").DataTable().destroy();
+	
+	$("#codeTable").DataTable({
+		processing: true,
+		serverSide: false,
+		paging: true,
+		pagingType: "simple_numbers",
+		order: false,
+		ordering: false,
+		info: true,
+		filter: true,
+		
+		language: {
+			"zeroRecords": "데이터가 없습니다.",
+			"lengthMenu": "_MENU_ 개씩 보기",
+			"search": "검색:",
+			"info": "_PAGE_ / _PAGES_",
+			"infoFiltered": "(전체 _MAX_개의 데이터 중 검색결과)",
+			"paginate": {
+				"previous": "이전",
+				"next": "다음"
+			}
+		},
+		
+		ajax:{
+			"url": "/admin/uniz/unizLayerlist",
+			"type" :"GET",
+			"dataType" : "json"
+		},
+		
+		columns: [
+			{data: "unizSn"},
+			{data: "parentUnizSn"},
+			{data: "parentUnizKeyword"},
+			{data: "childUnizKeyword"}		
+		]
+	});
+	
+	
+}
 
+function unizNotLayerList(){
+
+	$("#column1").text("유니즈SN");
+	$("#column2").text("유니즈타입");
+	$("#column3").text("유니즈키워드");
+	$("#column4").text("사용여부");
+	//실행하면 먼저 ""로 초기화하기
+	
+	$("#codeTable").DataTable().destroy();
+	
+	console.log("실행.....")
+	
+	$("#codeTable").DataTable({
+		processing: true,
+		serverSide: false,
+		paging: true,
+		pagingType: "simple_numbers",
+		order: false,
+		ordering: false,
+		info: true,
+		filter: true,
+		
+		language: {
+			"zeroRecords": "데이터가 없습니다.",
+			"lengthMenu": "_MENU_ 개씩 보기",
+			"search": "검색:",
+			"info": "_PAGE_ / _PAGES_",
+			"infoFiltered": "(전체 _MAX_개의 데이터 중 검색결과)",
+			"paginate": {
+				"previous": "이전",
+				"next": "다음"
+			}
+		},
+		ajax:{
+			"url": "/admin/uniz/unizNotLayerlist",
+			"type" :"GET",
+			"dataType" : "json"
+		},
+		
+		columns: [
+			{data: "unizSn"},
+			{data: "unizTypeSn"},
+			{data: "unizKeyword"},
+			{data: "enable"}
+		]
+	});
+}
 

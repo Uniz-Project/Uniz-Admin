@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-public class CodeController {
+public class UnizController {
 
 	private UnizService unizService;
 
