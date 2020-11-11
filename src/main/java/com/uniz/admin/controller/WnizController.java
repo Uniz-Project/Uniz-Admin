@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.uniz.admin.domain.Uniz;
 import com.uniz.admin.domain.Wniz;
 import com.uniz.admin.service.WnizService;
 
@@ -34,11 +33,6 @@ public class WnizController {
 	public @ResponseBody Map<String,Object> wnizList(){
 		
 		List<Wniz> wnizList = wnizService.wnizList();
-		
-		
-		
-		
-		
 		
 		System.out.println("위니즈리스트 " + wnizList);
 		

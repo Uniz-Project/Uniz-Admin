@@ -29,14 +29,14 @@ public class UnizServiceImpl implements UnizService{
 	
 	@Override
 	public List<Uniz> unizList(Criteria cri, Long unizSn) {
-		// TODO Auto-generated method stub
+		
 		log.info("get Uniz LiST :" + unizSn);
 		
 		return unizMapper.getListWithPaging(cri, unizSn);
 	}
 	@Override
 	public unizPageDTO getListPage(Criteria cri, Long unizSn) {
-		// TODO Auto-generated method stub
+
 		return new unizPageDTO(
 				unizMapper.getCountByUniz(unizSn), 
 				unizMapper.getListWithPaging(cri, unizSn));				
@@ -48,9 +48,7 @@ public class UnizServiceImpl implements UnizService{
 	
 	@Override
 	public String unizInsert(Uniz uniz) {
-		// TODO Auto-generated method stub
 
-		
 		int check = unizCheck(uniz);
 		String resultStr ="";
 		
@@ -96,7 +94,7 @@ public class UnizServiceImpl implements UnizService{
 
 	@Override
 	public String unizDelete(Uniz uniz) {
-		// TODO Auto-generated method stub
+
 		System.out.println("service Uniz"+ uniz);
 		
 			String resultStr ="";
@@ -118,13 +116,13 @@ public class UnizServiceImpl implements UnizService{
 	
 	@Override
 	public List<UnizLayer> unizLayerList() {
-		// TODO Auto-generated method stub
+		
 		return unizMapper.unizLayerList();
 	}
 
 	@Override
 	public String unizLayerInsert(UnizLayer unizLayer) {
-		// TODO Auto-generated method stub
+		
 		int check = unizMapper.unizLayerCheck(unizLayer);
 		String resultStr ="";
 		
@@ -150,7 +148,7 @@ public class UnizServiceImpl implements UnizService{
 
 	@Override
 	public String unizLayerUpdate(UnizLayer unizLayer) {
-		// TODO Auto-generated method stub
+		
 		String resultStr ="";
 		try{
 			int resultCnt = unizMapper.unizLayerUpdate(unizLayer);
@@ -169,7 +167,7 @@ public class UnizServiceImpl implements UnizService{
 
 	@Override
 	public String unizLayerDelete(UnizLayer unizLayer) {
-		// TODO Auto-generated method stub
+
 		String resultStr ="";
 		try{
 			int resultCnt = unizMapper.unizLayerDelete(unizLayer);
@@ -188,7 +186,7 @@ public class UnizServiceImpl implements UnizService{
 
 	@Override
 	public List<Uniz> unizNotLayerList() {
-		// TODO Auto-generated method stub
+		
 		return unizMapper.unizNotLayerList();
 	}
 

@@ -22,16 +22,13 @@ public class WnizServiceImpl implements WnizService{
 	
 	@Override
 	public List<Wniz> wnizList() {
-		// TODO Auto-generated method stub
-				
+	
 		return wnizMapper.getWnizList();
 	}
 	
-	
-
 	@Override
 	public String wnizInsert(Wniz wniz) {
-		// TODO Auto-generated method stub
+	
 		int check = wnizCheck(wniz);
 		String resultStr ="";
 		
@@ -57,7 +54,7 @@ public class WnizServiceImpl implements WnizService{
 
 	@Override
 	public String wnizUpdate(Wniz wniz) {
-		// TODO Auto-generated method stub
+
 		int check = wnizCheck(wniz);
 		String resultStr ="";
 		
@@ -83,7 +80,7 @@ public class WnizServiceImpl implements WnizService{
 
 	@Override
 	public String wnizDelete(Wniz wniz) {
-		// TODO Auto-generated method stub
+	
 		int check = wnizCheck(wniz);
 		String resultStr ="";
 		
