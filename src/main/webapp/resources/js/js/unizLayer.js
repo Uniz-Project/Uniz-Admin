@@ -13,7 +13,7 @@ function formChange(){
 //	$("#btnIns").attr("disabled", "disabled");
 //	$("#btnIns").css("opacity","0.3");
 //	$("#btnIns").removeAttr("onClick");
-	1
+	
 	$("#btnUpd").removeAttr("disabled");
 	$("#btnUpd").removeAttr("style");
 	$("#btnUpd").attr("onClick", "codeUpdate();");

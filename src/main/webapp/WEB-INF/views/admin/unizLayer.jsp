@@ -23,7 +23,7 @@
 										<form id="codeForm">
 											<div class="form-group">
 												<label for="unizSn">유니즈번호</label>
-												<input class="form-control  mb-3" type="text" id="unizSn" name="unizSn" placeholder="" readonly="readonly">
+												<input class="form-control  mb-3" type="text" id="unizSn" name="unizSn" placeholder="">
 											</div>
 	
 											<div class="form-group">
