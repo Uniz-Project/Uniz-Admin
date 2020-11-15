@@ -29,9 +29,14 @@
     <script src="/resources/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--flot chart-->
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/flot/jquery.flot.js"></script>
     <script src="/resources/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="/resources/js/pages/dashboards/dashboard1.js"></script>
+  
 </body>
 
 </html>

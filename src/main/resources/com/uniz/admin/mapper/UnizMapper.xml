@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.UnizMapper">
+	<select id="unizList2" resultType ="com.uniz.admin.domain.Uniz">
+		select * from uniz
+	</select>
+	
+	<insert id="unizInsert">
+		INSERT INTO Uniz (unizSN, unizTypeSN, unizKeyword, enable) VALUES (UNIZ_SEQ.NEXTVAL, #{unizTypeSn} ,#{unizKeyword} , #{enable})     
+	</insert>
+	
+	<select id="selectUniz" resultType="Integer">
+		SELECT count(*) FROM uniz WHERE unizTypeSn=#{unizTypeSn} AND unizKeyword=#{unizKeyword}
+	</select>
+	
+	<update id="unizUpdate">
+		UPDATE uniz SET unizkeyword= #{unizKeyword}, enable=#{enable}, updateDatetime=sysdate WHERE unizsn = #{unizSn}
+	</update>
+	
+	<delete id="unizDelete">
+		DELETE FROM uniz where unizSn = #{unizSn}
+	</delete>
+</mapper>
