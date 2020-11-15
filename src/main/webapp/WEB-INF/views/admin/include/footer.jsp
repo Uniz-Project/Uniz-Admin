@@ -29,7 +29,9 @@
     <script src="/resources/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--flot chart-->
-    
+    <!-- <script src="/resources/scss/bootstrap/datatables/jquery.dataTables.min.js"></script>
+	<script src="/resources/scss/bootstrap/datatables/dataTables.bootstrap4.min.js"></script> -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
