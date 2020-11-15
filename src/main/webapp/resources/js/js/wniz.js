@@ -1,10 +1,9 @@
 function formChange(){
 	$("#id").val(rowData.id);
-	$("#unizSn").val(rowData.unizSn);
-	$("#unizTypeSn").val(rowData.unizTypeSn);
-	$("#unizKeyword").val(rowData.unizKeyword);
-	$("#enable").val(rowData.enable);
-	
+	$("#tableData1").val(rowData.wnizSn);
+	$("#tableData2").val(rowData.title);
+	$("#tableData3").val(rowData.imgUrl);
+
 //	$("#unizSn").attr("readonly", "readonly");
 //	$("#unizTypeSn").attr("readonly", "readonly");
 //	$("#unizKeyword").attr("readonly", "readonly");
@@ -19,16 +18,13 @@ function formChange(){
 }
 
 function formClear(){
-	$("#unizSn").val("");
-	$("#unizTypeSn").val("10");
-	$("#unizKeyword").val("");
-	$("#enable").val("Y");
-	$("#id").val("0");
-	
-	
+	$("#tableData1").val("");
+	$("#tableData2").val("");
+	$("#tableData3").val("");
+
 //	$("#unizSn").removeAttr("readonly");
-	$("#unizTypeSn").removeAttr("readonly");
-	$("#unizKeyword").removeAttr("readonly");
+	$("#tableData2").removeAttr("readonly");
+	$("#tableData3").removeAttr("readonly");
 	
 	$("#btnIns").removeAttr("disabled");
 	$("#btnUpd").removeAttr("disabled");
@@ -74,35 +70,33 @@ function codeList(){
 			"paginate": {
 				"previous": "이전",
 				"next": "다음"
-			} 
+			}
 		},
 		ajax:{
-			"url": "/admin/uniz/unizlist",
+			"url": "/admin/wniz/wnizlist",
 			"type" :"GET",
 			"dataType" : "json"
 		},
 		columns: [
-			{data: "unizSn"},
-			{data: "unizTypeSn"},
-			{data: "unizKeyword"},
-			{data: "enable"}
+			{data: "wnizSn"},
+			{data: "title"},
+			{data: "imgUrl"},
+			{data: "createDateTime"},
+			{data: "updateDateTime"}
 		]
 	});
 }
 
 function codeInsert(){
 	
-	$("#unizSn").val("0");
-	
-	if(!($("#unizTypeSn").val().length == 2)){
-		alert("코드는 반드시 2자리 숫자여야 합니다. ex)01, 02, ..");
-		return false;
-	} else {
+		$("#tableData1").val("00")
+		$("#tableData3").val("00"); //임시
+		
 		var codeForm = $("#codeForm").serialize();
 		
 		console.log("codeForm: "+codeForm);
 		$.ajax({
-			url: "/admin/uniz/unizinsert",
+			url: "/admin/wniz/wnizinsert",
 			type: "post", 
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			data: codeForm,
@@ -125,7 +119,7 @@ function codeInsert(){
 				console.log("error:" + error);
 			}
 		});
-	}
+	
 }
 
 function codeUpdate(){
@@ -133,7 +127,7 @@ function codeUpdate(){
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/uniz/unizupdate",
+		url: "/admin/wniz/wnizupdate",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,
@@ -158,10 +152,11 @@ function codeUpdate(){
 
 function codeDelete(){
 	var codeForm = $("#codeForm").serialize();
+	
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/uniz/unizdelete",
+		url: "/admin/wniz/wnizdelete",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,

@@ -41,17 +41,24 @@
                         </div>
                         
                         </li>
-                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="/admin/code2" aria-expanded="false"><i class="mr-3 fa fa-columns"
-                                    aria-hidden="true"></i><span class="hide-menu">위니즈 관리관리</span></a></li>
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="404.html" aria-expanded="false"><i class="mr-3 fa fa-info-circle"
-                                    aria-hidden="true"></i><span class="hide-menu">Error 404</span></a></li>
-                        <li class="text-center p-20 upgrade-btn">
-                            <a href="https://www.wrappixel.com/templates/monsteradmin/"
-                                class="btn btn-danger text-white mt-4" target="_blank">Upgrade to
-                                Pro</a>
-                        </li> -->
+                        <li class="sidebar-item">
+                        <div class="dropdown">
+                        	
+						<button style="border: 0px; background-color: white;"class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown">
+						<i class="mr-3 fa fa-columns"
+  				 			aria-hidden="true">
+  				 	    </i><span class="hide-menu">위니즈관리</span>
+                         </button>
+                         
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" href="/admin/wniz">Wniz관리</a>
+						    <a class="dropdown-item" href="/admin/wniz/">UWMatchList관리</a>
+						    <a class="dropdown-item" href="#">Something else here</a>
+ 						 </div>
+                        
+                        </div>
+                        
+                        </li>
                     </ul>
 
                 </nav>
