@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.VideoMapper">
+	<select id="getVideoList" resultType = "com.uniz.admin.domain.Video">
+		select * from videodata
+	</select>
+	
+	<insert id="videoRegister">
+		insert into videodata (videosn, title, authornick, urlpath, thumburl, likecnt, followcnt,viewcount,utbcatesn)
+		values (videodata_seq.nextval,#{title},#{authorNick}, #{urlPath}, #{thumbUrl},#{likeCnt},#{followCnt},#{viewCount}, #{utbCateSn})		
+	</insert>
+	
+	<select id="selectVideo" resultType="Integer">
+		select count(*) from uniz where unizsn = #{utbCateSn}
+	</select>
+	
+	<select id="getVideo" resultType="com.uniz.admin.domain.Video">
+		select * from videoData where videosn = #{videoSn}
+	</select>
+</mapper>
