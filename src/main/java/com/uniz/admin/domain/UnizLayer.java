@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UnizLayerList {
+public class UnizLayer {
 	private int unizSn;
 	private int parentUnizSn;
+	private String parentUnizKeyword;
+	private String childUnizKeyword;	
 	private Date createDatedate;
 	private Date updateDatedate;
 }

@@ -19,15 +19,16 @@ function formChange(){
 }
 
 function formClear(){
-//	$("#unizSn").val("");
-//	$("#unizTypeSn").val("");
+	$("#unizSn").val("");
+	$("#unizTypeSn").val("10");
 	$("#unizKeyword").val("");
-//	$("#enable").val("");
-//	$("#id").val("0");
+	$("#enable").val("Y");
+	$("#id").val("0");
+	
 	
 //	$("#unizSn").removeAttr("readonly");
-//	$("#unizTypeSn").removeAttr("readonly");
-//	$("#unizKeyword").removeAttr("readonly");
+	$("#unizTypeSn").removeAttr("readonly");
+	$("#unizKeyword").removeAttr("readonly");
 	
 	$("#btnIns").removeAttr("disabled");
 	$("#btnUpd").removeAttr("disabled");
@@ -76,7 +77,7 @@ function codeList(){
 			}
 		},
 		ajax:{
-			"url": "/admin/code/list",
+			"url": "/admin/uniz/unizlist",
 			"type" :"GET",
 			"dataType" : "json"
 		},
@@ -91,14 +92,17 @@ function codeList(){
 
 function codeInsert(){
 	
+	$("#unizSn").val("0");
+	
 	if(!($("#unizTypeSn").val().length == 2)){
 		alert("코드는 반드시 2자리 숫자여야 합니다. ex)01, 02, ..");
 		return false;
 	} else {
 		var codeForm = $("#codeForm").serialize();
-		console.log(codeForm);
+		
+		console.log("codeForm: "+codeForm);
 		$.ajax({
-			url: "/admin/code/insert",
+			url: "/admin/uniz/unizinsert",
 			type: "post", 
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			data: codeForm,
@@ -129,7 +133,7 @@ function codeUpdate(){
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/code/update",
+		url: "/admin/uniz/unizupdate",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,
@@ -157,7 +161,7 @@ function codeDelete(){
 	console.log(codeForm);
 	
 	$.ajax({
-		url: "/admin/code/delete",
+		url: "/admin/uniz/unizdelete",
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: codeForm,
@@ -177,4 +181,6 @@ function codeDelete(){
 		}
 	});
 }
+
+
 

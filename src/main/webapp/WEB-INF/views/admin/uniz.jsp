@@ -45,6 +45,7 @@
 											</div>
 	
 											<input class="form-control" type="hidden" id="id" name="id" value="0" />
+											
 										</form>
 										<div class="text-right">
 											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
