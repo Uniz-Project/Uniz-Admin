@@ -4,24 +4,25 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UWmatchList {
-	private int wnizSn;
-	private int unizSn;
+public class Board {
+	private Long userSN;
+	private Long postSN;
 	private String title;
-	private String unizKeyword;
-	private int maxUnizPoint;
-	private int minUnizPoint;
-	private int priority;
+	private String nick;
+	private String boardTitle;
+	private String postContent;
+	private int viewCnt;
+	private int likeCnt;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date createDateTime;
+	private Date createDatetime; //가입일시
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date updateDateTime;
+	private Date updateDatetime; //변경일시
+	
 }
-

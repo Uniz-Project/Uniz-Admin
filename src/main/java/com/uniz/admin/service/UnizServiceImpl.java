@@ -97,7 +97,8 @@ public class UnizServiceImpl implements UnizService{
 
 		System.out.println("service Uniz"+ uniz);
 		
-			String resultStr ="";
+			String resultStr = "";
+			
 			try{
 				int resultCnt = unizMapper.unizDelete(uniz);
 				
@@ -150,6 +151,7 @@ public class UnizServiceImpl implements UnizService{
 	public String unizLayerUpdate(UnizLayer unizLayer) {
 		
 		String resultStr ="";
+		
 		try{
 			int resultCnt = unizMapper.unizLayerUpdate(unizLayer);
 			
