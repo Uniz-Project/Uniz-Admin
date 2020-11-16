@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.ChannelMapper">
+	<select id="getChannelList" resultType = "com.uniz.admin.domain.Channel">
+		SELECT CP.POSTSN, C.TITLE CHANNELTITLE, C.TEXT CHANNELTEXT , U.NICK, CP.VIEWCNT, CP.LIKECNT, C.CREATEDATETIME, C.UPDATEDATETIME
+		FROM 
+		CHANNEL C, CHANNELPOST CP , USERDATA U 
+		WHERE C.CHANNELSN = CP.CHANNELSN AND CP.USERSN = U.USERSN
+	</select>
+	
+	<select id="getBoard" resultType = "com.uniz.admin.domain.Channel"> 
+		SELECT CP.POSTSN, C.TITLE CHANNELTITLE, C.TEXT CHANNELTEXT , CP.TITLE POSTTITLE, CPC.POSTCONTENT, U.NICK, CP.VIEWCNT, CP.LIKECNT, C.CREATEDATETIME, C.UPDATEDATETIME 
+		FROM 
+		CHANNEL C, CHANNELPOST CP , USERDATA U , CHANNELPOSTCONTENT CPC
+		WHERE C.CHANNELSN = CP.CHANNELSN AND CP.USERSN = U.USERSN AND CP.POSTSN = CPC.POSTSN AND CP.POSTSN =#{postSN}
+	</select>
+	
+	<select id="selectChannel" resultType="Integer">
+		SELECT COUNT(*) FROM CHANNELPOST WHERE POSTSN = #{postSN} 
+	</select>
+	
+	<delete id="channelDelete">
+		DELETE FROM CHANNELPOST WHERE POSTSN = #{postSN}
+	</delete>
+</mapper>

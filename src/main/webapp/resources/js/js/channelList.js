@@ -10,7 +10,7 @@ function formClear(){
 	$("#tableData9").val("");
 	
 }
-function boardList(){
+function channelList(){
 	
 	$("#boardTable").DataTable({
 		processing: true,
@@ -34,7 +34,7 @@ function boardList(){
 			} 
 		},
 		ajax:{
-			"url": "/admin/board/list",
+			"url": "/admin/channel/list",
 			"type" :"GET",
 			"dataType" : "json"
 		},
@@ -44,17 +44,17 @@ function boardList(){
 				  <button style="border: 0px; background-color: white;"class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown">\n\
 				  <span class="hide-menu">'+data+'</span> </button>\n\
 			      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">\n\
-			      		<button class="dropdown-item" onclick="boardDetail('+data+')">게시물상세</button>\n\
-						<button class="dropdown-item" onclick="boardUpdate('+data+')">게시물수정</button>\n\
-						<button class="dropdown-item" onClick="boardDelete('+data+');">게시물삭제</button>\n\
+			      		<button class="dropdown-item" onclick="channelDetail('+data+')">게시물상세</button>\n\
+						<button class="dropdown-item" onclick="channelUpdate('+data+')">게시물수정</button>\n\
+						<button class="dropdown-item" onClick="channelDelete('+data+');">게시물삭제</button>\n\
 					</div>\n\
 			      </div>'
 				
 				}
 			},
-			{data: "title"},
+			{data: "channelTitle"},
+			{data: "channelText"},
 			{data: "nick"},
-			{data: "boardTitle"},
 			{data: "viewCnt"},
 			{data: "likeCnt"},
 			{data: "createDatetime"},
@@ -63,20 +63,20 @@ function boardList(){
 	});
 }
 
-function boardDetail(postSN){
-	location.href="/admin/board/detail/"+postSN;
+function channelDetail(postSN){
+	location.href="/admin/channel/detail/"+postSN;
 } 
 
-function boardUpdate(postSN){
+function channelUpdate(postSN){
 	alert("미구현");
 //	location.href="/admin/board/update/"+postSN;
 }
 
-function boardDelete(postSN){
+function channelDelete(postSN){
 	var boardForm = $("#boardForm").serialize();
 	
 	$.ajax({
-		url: "/admin/board/delete/"+postSN,
+		url: "/admin/channel/delete/"+postSN,
 		type: "post", 
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		data: boardForm,

@@ -79,7 +79,6 @@ public class BoardController {
 		
 		model.addAttribute("board",board); 
 		
-		
 		return "/admin/boardDetail";
 	}
 }
