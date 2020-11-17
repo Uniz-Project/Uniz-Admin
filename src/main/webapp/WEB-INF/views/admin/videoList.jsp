@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+	</head>
+	<body>
+ 	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+	
+		<%@ include file="/WEB-INF/views/admin/include/topbar.jsp" %>
+				
         <%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
-		<body>
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -36,7 +39,7 @@
 										<table class="table align-items-center table-flush table-hover" style="width: 100%" id="boardTable">
 											<thead class="thead-light">
 												<tr>
-													<th>비디오번호</th>
+													<th>번호</th>
 													<th>제목</th>
 													<th>게시자ID</th>
 													<th>게시자명</th>
@@ -45,7 +48,7 @@
 													<th>좋아요수</th>
 													<th>구독자수</th>
 													<th>조회수</th>
-													<th>매핑카테고리</th>		
+													<th>카테고리</th>		
 												</tr>
 											</thead>
 										</table>
@@ -57,6 +60,11 @@
 					</div>
 					<!---Container Fluid-->
 				</div>
+		   <%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+			<!-- Container Fluid -->
+	</div>
+	<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
+		   
 <script type="text/javascript" src="/resources/js/js/videoList.js"></script>
 <script>
        
@@ -66,4 +74,5 @@
 				
 			});  
 </script>
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+</body>
+</html>

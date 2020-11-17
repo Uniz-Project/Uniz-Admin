@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+	</head>
+	<body>
+ 	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+	
+		<%@ include file="/WEB-INF/views/admin/include/topbar.jsp" %>
+				
         <%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
-		<body>
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -57,13 +60,21 @@
 					</div>
 					<!---Container Fluid-->
 				</div>
-<script type="text/javascript" src="/resources/js/js/memberList.js"></script>
-<script>
+				<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+					<!-- Container Fluid -->
+	</div>
+	<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
+	<script type="text/javascript" src="/resources/js/js/memberList.js"></script>
+	<script>
        
 			 $(document).ready(function() {
 				
 				 memberList();
 				
 			});  
-</script>
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+	</script>
+
+</body>
+</html>
+
+

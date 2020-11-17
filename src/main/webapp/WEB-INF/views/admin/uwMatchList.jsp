@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+	</head>
+	<body>
+ 	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+	
+		<%@ include file="/WEB-INF/views/admin/include/topbar.jsp" %>
+				
+        <%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
 
-<%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
-
-<%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
-        
         
 		<div class="page-wrapper">
     <!-- Container Fluid -->
@@ -97,7 +105,10 @@
 					</div>
 					<!-- Container Fluid -->
 				</div>
-
+		<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+					<!-- Container Fluid -->
+	</div>
+	<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
 		<script type="text/javascript" src="/resources/js/js/wniz.js"></script>
 		<script>
        
@@ -113,4 +124,5 @@
 				});
 			 
 </script>
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+</body>
+</html>

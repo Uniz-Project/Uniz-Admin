@@ -1,20 +1,18 @@
-
-
-<%@ include file="/WEB-INF/views/admin/include/header.jsp" %>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+	</head>
+	<body>
+ 	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+	
+		<%@ include file="/WEB-INF/views/admin/include/topbar.jsp" %>
+				
         <%@ include file="/WEB-INF/views/admin/include/nav.jsp" %>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
+		
+		<div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -246,10 +244,14 @@
                 <!-- Recent blogss -->
                 <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+      	  <!-- End Container fluid  -->
+      	</div>
+      	 <!-- Page wrapper  -->
+      	 
+      	 <%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+		</div>
+		
+		<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
+	</body>
+</html>
+
