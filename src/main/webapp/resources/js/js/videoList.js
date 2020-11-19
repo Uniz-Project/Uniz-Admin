@@ -45,13 +45,13 @@ function videoList(){
 		columns: [
 			{data: "videoSn", render : function(data, type, row, targets){return "<a href='/admin/video/registerForm/"+data+"'>"+data+ "</a>"}},
 			{data: "title"},
-			{data: "authorId" },
+			{data: "authorId"},
 			{data: "authorNick"},
 			{data: "urlPath"},
 			{data: "thumbUrl",render : function(data, type, row){return "<img src='"+data+"' style='height: 50px; ' alt='등록된 썸네일이 없습니다.'></img>"} },
 			{data: "likeCnt"},
 			{data: "followCnt"},
-			{data: "viewCount"},
+			{data: "viewCnt"},
 			{data: "utbCateSn"}
 			
 		]

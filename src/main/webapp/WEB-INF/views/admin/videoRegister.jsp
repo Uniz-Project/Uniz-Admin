@@ -60,11 +60,15 @@
 											</div>
 											<div class="form-group">
 												<label for="tableData8">조회수</label>
-												<input class="form-control  mb-3" type="text" id="tableData8" name="viewCount" value="${video.viewCount}" placeholder="" >
+												<input class="form-control  mb-3" type="text" id="tableData8" name="viewCnt" value="${video.viewCnt}" placeholder="" >
 											</div>
 											<div class="form-group">
 												<label for="tableData9">매핑카테고리</label>
 												<input class="form-control  mb-3" type="text" id="tableData9" name="utbCateSn" value="${video.utbCateSn}"placeholder="" >
+											</div>
+											<div class="form-group">
+												<label for="tableData9">비디오아이디</label>
+												<input class="form-control  mb-3" type="text" id="tableData10" name="utbVideoID" value="${video.utbVideoID}"placeholder="" >
 											</div>
 	
 											
@@ -72,7 +76,7 @@
 											<input class="form-control" type="hidden" id="id" name="id" value="0" />
 											
 										</form>									
-										${video }
+										
 										<div class="text-right">
 											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
 											<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="videoInsert();">입력</button>
@@ -89,6 +93,7 @@
 					<!-- Container Fluid -->
 				</div>
 		<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+		<script type="text/javascript" src="/resources/js/js/videoList.js"></script>
 			</div>
 <%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
 	

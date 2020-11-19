@@ -94,10 +94,6 @@ function codeInsert(){
 	
 	$("#unizSn").val("0");
 	
-	if(!($("#unizTypeSn").val().length == 2)){
-		alert("코드는 반드시 2자리 숫자여야 합니다. ex)01, 02, ..");
-		return false;
-	} else {
 		var codeForm = $("#codeForm").serialize();
 		
 		console.log("codeForm: "+codeForm);
@@ -126,7 +122,7 @@ function codeInsert(){
 			}
 		});
 	}
-}
+
 
 function codeUpdate(){
 	var codeForm = $("#codeForm").serialize();
