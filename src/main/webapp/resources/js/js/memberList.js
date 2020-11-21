@@ -134,8 +134,8 @@ function memberBoard(userSN){
 	$("#boardTable").DataTable().destroy().draw();
 	
 	var element =
-		"<th>회원번호</th>\n\
-		<th>게시물번호</th>\n\
+		
+		"<th>게시물번호</th>\n\
 		<th>제목</th>\n\
 		<th>닉네임</th>\n\
 		<th>게시판명</th>\n\
@@ -174,22 +174,20 @@ function memberBoard(userSN){
 			"dataType" : "json"
 		},
 		columns: [
-			{data: "userSN", render : function(data, type, row){
+			{data: "postSN", render : function(data, type, row){
 				
 				return '<div class="dropdown">\n\
 				  <button style="border: 0px; background-color: white;"class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown">\n\
 				  <span class="hide-menu">'+data+'</span> </button>\n\
 			      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">\n\
-						<button class="dropdown-item" onclick="memberUpdate('+data+')">회원정보수정</button>\n\
-						<button class="dropdown-item" onClick="memberBoard('+data+');">게시물확인</button>\n\
-						<button class="dropdown-item" onClick="memberUniz('+data+');">유니즈확인</button>\n\
-					  <button class="dropdown-item" onClick="memberDelete('+data+');">회원삭제</button>\n\
+				  <button class="dropdown-item" onClick="boardDetail('+data+');">게시물확인</button>\n\
+						<button class="dropdown-item" onclick="boardUpdate('+data+')">게시물수정</button>\n\
+						<button class="dropdown-item" onClick="boardDelete('+data+');">게시물삭제</button>\n\
 					</div>\n\
 			      </div>'
 				
 				}
 			},
-			{data: "postSN"},
 			{data: "title"},
 			{data: "nick"},
 			{data: "boardTitle"},
@@ -266,5 +264,37 @@ function memberDelete(userSN){
 	location.href="/admin/member/delete/"+userSN;
 }
 
+function boardDetail(postSN){
+	location.href="/admin/board/detail/"+postSN;
+} 
 
+function boardUpdate(postSN){
+	alert("미구현");
+//	location.href="/admin/board/update/"+postSN;
+}
+
+function boardDelete(postSN){
+	var boardForm = $("#boardForm").serialize();
+	
+	$.ajax({
+		url: "/admin/board/delete/"+postSN,
+		type: "post", 
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		data: boardForm,
+		dataType: "json",
+		success: function(data){
+			if(data.result === "success"){
+				$("#boardTable").DataTable().ajax.reload();
+				alert("정상적으로 수정되었습니다.");
+			} else {
+				alert("데이터 수정 중 오류가 발생하였습니다.\n입력한 정보를 다시 확인해 주세요.");
+			}
+		},
+		error: function(request, status, error){
+			console.log("code:" + request.status);
+			console.log("message:" + request.responseText);
+			console.log("error:" + error);
+		}
+	});
+}
 
