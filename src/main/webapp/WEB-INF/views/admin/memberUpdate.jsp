@@ -60,6 +60,7 @@
 										</form>									
 										
 										<div class="text-right">
+											<button type="button"  onClick="history.go(-1)" id="btnClear" class="btn btn-secondary">목록</button>
 											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
 											<button type="button" id="btnUpd" class="btn btn-warning mb-1" onclick="Update();">수정</button>
 											<button type="button" id="btnDel" class="btn btn-danger mb-1" onclick="memberDelete();">삭제</button>

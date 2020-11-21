@@ -128,6 +128,7 @@ function codeDelete(){
 		success: function(data){
 			if(data.result === "success"){
 				$("#codeTable").DataTable().ajax.reload();
+				formClear();
 				alert("정상적으로 수정되었습니다.");
 			} else {
 				alert("데이터 수정 중 오류가 발생하였습니다.\n입력한 정보를 다시 확인해 주세요.");

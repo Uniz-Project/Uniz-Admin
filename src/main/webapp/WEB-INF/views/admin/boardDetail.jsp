@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:formatDate var="board_createDatetime" value="${board.createDatetime}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="board_updateDatetime" value="${board.updateDatetime}" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,8 +40,8 @@
 
 								<div style="font-size: 8px; margin-top: 10px">
 									<span style="margin-right: 15px">작성자 : ${board.nick}</span> <span
-										style="margin-right: 15px">작성일시 :${board.createDatetime }</span>
-									<span>최종 수정일시 : ${board.updateDatetime}</span>
+										style="margin-right: 15px">작성일시 :${board_createDatetime }</span>
+									<span>최종 수정일시 : ${board_updateDatetime}</span>
 								</div>
 								<hr />
 								<div>${board.postContent}</div>
@@ -48,8 +51,7 @@
 								<hr />
 
 								<div id="divBtns" class="text-right p-3">
-									<button type="button" id="btnCancel"
-										class="btn btn-primary mb-1">목록</button>
+									<button type="button"  onClick="history.go(-1)" id="btnClear" class="btn btn-secondary">목록</button>
 								</div>
 							</div>
 						</div>
