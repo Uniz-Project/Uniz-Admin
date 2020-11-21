@@ -48,8 +48,7 @@
 								<hr />
 
 								<div id="divBtns" class="text-right p-3">
-									<button type="button" id="btnCancel"
-										class="btn btn-primary mb-1">목록</button>
+									<button type="button"  onClick="history.go(-1)" id="btnClear" class="btn btn-secondary">목록</button>
 								</div>
 							</div>
 						</div>
