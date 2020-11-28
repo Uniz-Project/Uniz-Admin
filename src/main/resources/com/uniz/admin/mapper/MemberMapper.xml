@@ -4,17 +4,10 @@
 
 <mapper namespace="com.uniz.admin.mapper.MemberMapper">
 	<select id="getMemberList" resultType="com.uniz.admin.domain.Member">
-		SELECT * FROM USERDATA
+		SELECT * 
+		FROM USERDATA
 	</select>
-	
-	<select id="getBoardList" resultType="com.uniz.admin.domain.Board">
-	SELECT U.USERSN,B.POSTSN,B.TITLE,U.NICK,B2.BOARDTITLE,VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
-	FROM BOARDPOST B, USERDATA U, BOARD B2 
-	where  B.USERSN = U.USERSN AND B.BOARDSN = B2.BOARDSN
-	 AND u.usersn = #{userSN}
 		
-	</select>
-	
 	<select id="getMember" resultType="com.uniz.admin.domain.Member">
 		SELECT *
 		FROM USERDATA
@@ -22,21 +15,21 @@
 	</select>
 	
 	<select id="selectMember" resultType="Integer">
-		SELECT COUNT(*) FROM USERDATA WHERE USERSN = #{userSN}
+		SELECT COUNT(*) FROM 
+		USERDATA 
+		WHERE USERSN = #{userSN}
 	</select>
 	
 	<update id="memberUpdate" >
 		UPDATE USERDATA
 		SET
 		USERSN = #{userSN},
-		PROVIDER = #{provider},
 		USERTYPE = #{userType},
 		NICK = #{nick},
 		IMGURL = #{imgUrl},
 		STATE = #{state},
 		UPDATEDATETIME = sysdate
-		WHERE USERSN = 2
-
+		WHERE USERSN = {userSN}
 	</update>
 	
 	

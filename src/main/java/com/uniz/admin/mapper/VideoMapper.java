@@ -3,16 +3,19 @@ package com.uniz.admin.mapper;
 import java.util.List;
 
 import com.uniz.admin.domain.Video;
+import com.uniz.admin.domain.Video2;
 
 public interface VideoMapper {
 
-	List<Video> getVideoList();
+	public List<Video> getVideoList();
 
-	int videoRegister(Video video);
+	public int videoRegister(Video video);
 
-	int selectVideo(Video video);
+	public int selectVideo(Video video);
 
-	Video getVideo(int videoSn);
+	public Video getVideo(int videoSn);
+
+	public List<Video2> getTodayData(String todayDate);
 	
 	
 }

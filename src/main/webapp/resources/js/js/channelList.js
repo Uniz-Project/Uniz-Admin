@@ -1,3 +1,4 @@
+//데이터 테이블 필드 초기화
 function formClear(){
 	$("#tableData1").val("");
 	$("#tableData2").val("");
@@ -10,6 +11,8 @@ function formClear(){
 	$("#tableData9").val("");
 	
 }
+
+//채널 리스트 출력
 function channelList(){
 	
 	$("#boardTable").DataTable({

@@ -23,7 +23,7 @@ public class VideoController {
 	private VideoService videoService;
 	
 	@GetMapping("/admin/video")
-	public String showVideoList() {
+	public String viewVideoList() {
 		
 		return "admin/videoList";
 	}
@@ -45,7 +45,7 @@ public class VideoController {
 	}
 	
 	@PostMapping("/admin/video/registerForm")
-	public @ResponseBody Map<String, Object> VideoReigster(Video video) {
+	public @ResponseBody Map<String, Object> VideoRegister(Video video) {
 		System.out.println("----video"+video);
 		String result = videoService.register(video);
 		
@@ -70,5 +70,4 @@ public class VideoController {
 		return "admin/videoRegister"; 
 	}
 	
-
 }

@@ -4,19 +4,30 @@
 
 <mapper namespace="com.uniz.admin.mapper.VideoMapper">
 	<select id="getVideoList" resultType = "com.uniz.admin.domain.Video">
-		select * from videodata
+		SELECT * 
+		FROM videodata
 	</select>
 	
 	<insert id="videoRegister">
-		insert into videodata (videosn, title, authornick, urlpath, thumburl, likecnt, followcnt,viewcnt,utbcatesn,utbVideoID)
-		values (videodata_seq.nextval,#{title},#{authorNick}, #{urlPath}, #{thumbUrl},#{likeCnt},#{followCnt},#{viewCnt}, #{utbCateSn}, #{utbVideoID})		
+		INSERT INTO VIDEODATA 
+		(videosn, title, authornick, urlpath, thumburl, likecnt, followcnt,viewcnt,utbcatesn,utbVideoID)
+		VALUES 
+		(videodata_seq.nextval,#{title},#{authorNick}, #{urlPath}, #{thumbUrl},#{likeCnt},#{followCnt},#{viewCnt}, #{utbCateSn}, #{utbVideoID})		
 	</insert>
 	
 	<select id="selectVideo" resultType="Integer">
-		select count(*) from uniz where unizsn = #{utbCateSn}
+		SELECT COUNT(*) 
+		FROM uniz 
+		WHERE unizsn = #{utbCateSn}
 	</select>
 	
 	<select id="getVideo" resultType="com.uniz.admin.domain.Video">
-		select * from videoData where videosn = #{videoSn}
+		SELECT * FROM videoData WHERE VIDEOSN = #{videoSn}
+	</select>
+	
+	<select id="getTodayData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
+		SELECT * 
+		FROM VIDEODATA2
+		WHERE TO_CHAR(CREATEDATETIME) = #{todayDate}
 	</select>
 </mapper>

@@ -24,7 +24,7 @@ public class WnizController {
 	private WnizService wnizService; 
 	
 	@GetMapping("/admin/wniz")
-	public String wniz() {
+	public String viewWnizList() {
 		
 		return "admin/wniz";
 	}

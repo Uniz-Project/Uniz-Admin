@@ -1,3 +1,4 @@
+//데이터 테이블 필드 초기화
 function formClear(){
 	$("#tableData1").val("");
 	$("#tableData2").val("");
@@ -10,6 +11,8 @@ function formClear(){
 	$("#tableData9").val("");
 	
 }
+
+//boardList 출력
 function boardList(){
 	
 	$("#boardTable").DataTable({
@@ -39,6 +42,8 @@ function boardList(){
 			"dataType" : "json"
 		},
 		columns: [
+			
+			//postSN에 드랍다운 메뉴 추가 - render 
 			{data: "postSN", render : function(data, type, row){
 				return '<div class="dropdown">\n\
 				  <button style="border: 0px; background-color: white;"class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown">\n\
@@ -63,6 +68,7 @@ function boardList(){
 	});
 }
 
+//해당 게시글의 게시판 상세페이지로 이동
 function boardDetail(postSN){
 	location.href="/admin/board/detail/"+postSN;
 } 
@@ -72,6 +78,7 @@ function boardUpdate(postSN){
 //	location.href="/admin/board/update/"+postSN;
 }
 
+//해당 게시물 삭제
 function boardDelete(postSN){
 	var boardForm = $("#boardForm").serialize();
 	
@@ -83,7 +90,7 @@ function boardDelete(postSN){
 		dataType: "json",
 		success: function(data){
 			if(data.result === "success"){
-				$("#boardTable").DataTable().ajax.reload();
+				$("#boardTable").DataTable().ajax.reload(); //게시물 삭제 후 리로드
 				alert("정상적으로 수정되었습니다.");
 			} else {
 				alert("데이터 수정 중 오류가 발생하였습니다.\n입력한 정보를 다시 확인해 주세요.");

@@ -32,11 +32,6 @@
 												<label for="tableData1">유저번호</label>
 												<input class="form-control  mb-3" type="text" id="tableData1" name="userSN" value="${member.userSN}" placeholder="" readonly="readonly">
 											</div>
-	
-											<div class="form-group">
-												<label for="tableData2">소셜가입처</label>
-												<input class="form-control  mb-3" type="text" id="tableData2" name="provider" value="${member.provider}"placeholder="" readonly="readonly" >
-											</div>
 											<div class="form-group">
 												<label for="tableData3">유저타입</label>
 												<input class="form-control  mb-3" type="text" id="tableData3" name="userType" value="${member.userType}" placeholder="" >

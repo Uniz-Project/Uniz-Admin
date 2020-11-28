@@ -9,8 +9,6 @@ public interface MemberService {
 
 	public List<Member> getMemberList();
 
-	public List<Board> getBoardList(Long userSN);
-
 	public Member getMember(Long userSN);
 
 	public String memberUpdate(Member member);

@@ -34,49 +34,51 @@ public class UnizServiceImpl implements UnizService{
 		
 		return unizMapper.getListWithPaging(cri, unizSn);
 	}
-	@Override
-	public unizPageDTO getListPage(Criteria cri, Long unizSn) {
 
-		return new unizPageDTO(
-				unizMapper.getCountByUniz(unizSn), 
-				unizMapper.getListWithPaging(cri, unizSn));				
-	}
-	
 	public int unizCheck(Uniz uniz){
 		return unizMapper.selectUniz(uniz);
 	}
-	
+
 	@Override
 	public String unizInsert(Uniz uniz) {
-
+		
+		//유니즈 중복체크
 		int check = unizCheck(uniz);
 		String resultStr ="";
 		
+		//유니즈 중복이 아니면
 		if(check <= 0) {
 			try{
+				//DB에 문제가 있을 수 있으니 예외처리
+				//쿼리 실행
 				int resultCnt = unizMapper.unizInsert(uniz);
 				
 				if(resultCnt >0) {
+					//제대로 동작했을 경우 "success" 반환
 					resultStr = "success";
-				}else {
+				} else {
+					//문제가 있을 시 "fail"
 					resultStr = "fail";
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
+				// DB에 문제가 있을 시 역시 "fail"
 				e.printStackTrace();
 				resultStr = "fail";
 			}
 		} else {
+			// 해당 게시물이 존재하지 않을경우 "duplicate"
 			resultStr = "duplicate";
 		}
 		
+		//js에서 ajax호출시 반환받은 resultStr값으로 상태에 따른 alert출력.
 		return resultStr;
 	}
 
 	@Override
 	public String unizUpdate(Uniz uniz) {
-		System.out.println("service Uniz"+ uniz);
 		
 		String resultStr ="";
+		
 			try{
 				int resultCnt = unizMapper.unizUpdate(uniz);
 				

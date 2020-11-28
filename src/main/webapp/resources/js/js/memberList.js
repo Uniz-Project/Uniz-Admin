@@ -1,3 +1,4 @@
+//필드 초기화 
 function formClear(){
 	$("#tableData1").val("");
 	$("#tableData2").val("");
@@ -14,6 +15,7 @@ function formClear(){
 
 function memberList(){
 	
+	//memberList호출시 테이블 요소 변경
 	var element =
 		"<th>회원번호</th>\n\
 		<th>소셜가입처</th>\n\
@@ -26,7 +28,7 @@ function memberList(){
 		<th>변경일시</th>\n\
 		<th>최종회원상태</th>";
 		
-	
+	//테이블에 추가
 	$("#rowData").html(element);
 	
 	$("#boardTable").DataTable({
@@ -51,7 +53,7 @@ function memberList(){
 			} 
 		},
 		ajax:{
-			"url": "/admin/member/list",
+			"url": "/admin/member/list", 
 			"type" :"GET",
 			"dataType" : "json"
 		},
@@ -122,7 +124,7 @@ function Update(){
 //REST로 바꿔야한다....소스정리할때 할것
 function memberUpdate(userSN){
 	
-	location.href="/admin/member/update/"+userSN;
+	location.href="/admin/member/detail/"+userSN;
 }
 
 function memberBoard(userSN){

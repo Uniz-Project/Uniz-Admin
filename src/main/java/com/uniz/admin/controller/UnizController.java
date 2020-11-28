@@ -24,7 +24,7 @@ public class UnizController {
 	private UnizService unizService;
 
 	@GetMapping("/admin/uniz/uniz")
-	public String uniz() {
+	public String viewUnizList() {
 
 		return "admin/uniz";
 	}

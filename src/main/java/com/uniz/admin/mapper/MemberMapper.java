@@ -9,8 +9,6 @@ public interface MemberMapper {
 
 	public List<Member> getMemberList();
 
-	public List<Board> getBoardList(Long userSN);
-
 	public Member getMember(Long userSN);
 
 	public int memberUpdate(Member member);

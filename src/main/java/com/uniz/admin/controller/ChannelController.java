@@ -25,7 +25,7 @@ public class ChannelController {
 	private ChannelService channelService;
 	
 	@GetMapping("/admin/channel")
-	public String main() {
+	public String viewChannelList() {
 		
 		return "admin/channelList";
 	}
@@ -48,7 +48,7 @@ public class ChannelController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", result);
 		
-		log.info("channelDelete"+ result);
+		log.info("channelDelete"+ map);
 		
 		return map;
 	}

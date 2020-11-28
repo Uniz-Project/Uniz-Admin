@@ -23,15 +23,17 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @AllArgsConstructor
 public class BoardController {
-
+	
 	private BoardService boardService;
 	
+	//게시물 관리 페이지
 	@GetMapping("/admin/board")
-	public String main() {
+	public String viewBoardList() {
 		
 		return "admin/boardList";
 	}
-		
+	
+	//게시물 관리 페이지 - ajax로 리스트 데이트 전달	
 	@GetMapping("/admin/board/list")
 	public @ResponseBody Map<String, Object> boardList(){
 		

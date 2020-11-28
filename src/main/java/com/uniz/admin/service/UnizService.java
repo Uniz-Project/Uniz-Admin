@@ -12,9 +12,7 @@ public interface UnizService {
 	public List<Uniz> unizList(Criteria cri, Long unizSn);
 	
 	public List<Uniz> unizList2();
-	
-	public unizPageDTO getListPage(Criteria cri,Long unizSn);
-	
+		
 	public String unizInsert(Uniz uniz);
 	
 	public String unizUpdate(Uniz uniz);

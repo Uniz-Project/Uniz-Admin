@@ -14,6 +14,8 @@ public interface BoardMapper {
 
 	public Board getBoard(Long postSN);
 
+	public List<Board> getMemberBoardList(Long userSN);
+
 	//public int boardUpdate(Long postSN);
 	
 }

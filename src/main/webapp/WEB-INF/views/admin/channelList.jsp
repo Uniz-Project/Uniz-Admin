@@ -26,7 +26,7 @@
            
 					<div class="container-fluid" id="container-wrapper">
 						<div class="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 게시판관리 > 목록</h1>
+							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 채널게시판관리 > 목록</h1>
 							<!-- <button type="button" id="btnIns" class="btn btn-success mb-1" onclick="location.href='/admin/member/registerForm'">회원추가</button> -->
 						</div>
 	
