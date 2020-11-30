@@ -25,9 +25,14 @@
 		SELECT * FROM videoData WHERE VIDEOSN = #{videoSn}
 	</select>
 	
-	<select id="getTodayData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
+	<select id="getTodayVideoData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
 		SELECT * 
 		FROM VIDEODATA2
 		WHERE TO_CHAR(CREATEDATETIME) = #{todayDate}
+	</select>
+	
+	<select id="getVideo2List" resultType = "com.uniz.admin.domain.Video2">
+		SELECT * 
+		FROM VIDEODATA2
 	</select>
 </mapper>

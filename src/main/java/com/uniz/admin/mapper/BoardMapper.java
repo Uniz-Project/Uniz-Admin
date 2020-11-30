@@ -3,7 +3,7 @@ package com.uniz.admin.mapper;
 import java.util.List;
 
 import com.uniz.admin.domain.Board;
-
+ 
 public interface BoardMapper {
 
 	public List<Board> getBoardList();

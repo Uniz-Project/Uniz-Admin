@@ -74,5 +74,48 @@
 		WHERE unizsn NOT IN (SELECT unizsn FROM unizlayerlist)
 	</select>
 	
+	<select id="getCountUnizKeyWord" resultType="Integer">
+		SELECT COUNT(UNIZKEYWORD) 
+		FROM UNIZ 
+		WHERE UNIZKEYWORD = #{keyWord}
+	</select>
 	
+	<insert id="unizKeyWordInsert">
+		INSERT INTO UNIZ
+		(unizSN, unizTypeSN, unizKeyword) 
+		SELECT UNIZ_SEQ.NEXTVAL, A.* FROM(
+		<foreach collection="searchUnizType" item="item" separator="UNION ALL ">		
+			SELECT #{item} as UnizTypeSN, 
+				   #{keyWord} as UnizKeyWord
+			FROM dual
+		</foreach>) A
+	</insert>
+	
+	<insert id= "titleVideoUnizListInsert">
+		<selectKey keyProperty="UnizSN" resultType="Integer" order="BEFORE">
+			SELECT UNIZSN
+			FROM UNIZ
+			WHERE UNIZKEYWORD = #{UnizKeyWord}
+			AND UnizTypeSN = #{UnizTypeSN}
+			
+		</selectKey>
+		INSERT INTO VIDEOUNIZLIST(VIDEOSN, UNIZSN)
+		VALUES 
+		(#{videoSN}, #{UnizSN})
+		
+	</insert>
+	
+	<insert id= "titleVideoUnizListInsertAll">
+		<selectKey keyProperty="UnizSN" resultType="Integer" order="BEFORE">
+			SELECT UNIZSN
+			FROM UNIZ
+			WHERE UNIZKEYWORD = #{UnizKeyWord}
+			
+		</selectKey>
+		INSERT INTO VIDEOUNIZLIST(VIDEOSN, UNIZSN)
+		VALUES 
+		(#{videoSN}, #{UnizSN})
+		
+	</insert>
+
 </mapper>

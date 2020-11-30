@@ -2,6 +2,8 @@ package com.uniz.admin.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.uniz.admin.domain.Criteria;
 import com.uniz.admin.domain.Uniz;
 import com.uniz.admin.domain.UnizLayer;
@@ -33,4 +35,12 @@ public interface  UnizMapper {
 	public int unizLayerCheck(UnizLayer unizLayer);
 
 	public List<Uniz> unizNotLayerList();
+
+	public int getCountUnizKeyWord(String keyWord);
+
+	public int unizKeyWordInsert(@Param("searchUnizType") List<Integer> searchUnizType, @Param("keyWord")String keyWord);
+
+	public int titleVideoUnizListInsert(@Param("videoSN")int videoSN, @Param("UnizKeyWord")String UnizKeyWord, @Param("UnizTypeSN")int UnizTypeSN);
+
+	public int titleVideoUnizListInsertAllKeyword(int videoSn, @Param("splitKeyWord")List<String> splitKeyWord, @Param("UnizTypeSN")int unizTypeSN);
 }

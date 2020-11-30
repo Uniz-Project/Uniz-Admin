@@ -15,7 +15,9 @@ public interface VideoMapper {
 
 	public Video getVideo(int videoSn);
 
-	public List<Video2> getTodayData(String todayDate);
-	
+	public List<Video2> getTodayVideoData(String todayDate);
+
+	public List<Video2> getVideo2List();
+
 	
 }
