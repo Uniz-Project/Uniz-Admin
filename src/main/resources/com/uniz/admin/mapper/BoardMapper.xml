@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.BoardMapper">
+
+	<select id="getBoardList" resultType = "com.uniz.admin.domain.Board">
+		SELECT B.POSTSN,B.TITLE,U.NICK,B2.BOARDTITLE,VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
+		FROM BOARDPOST B, USERDATA U, BOARD B2 
+		WHERE  B.USERSN = U.USERSN 
+		AND B.BOARDSN = B2.BOARDSN
+	</select>
+	
+	<select id="selectBoard" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM BOARDPOST 
+		WHERE POSTSN = #{postSN}
+	</select>
+	
+	<select id="getBoard" resultType="com.uniz.admin.domain.Board">
+		SELECT B.TITLE, U.NICK, B2.BOARDTITLE, BC.POSTCONTENT, B.VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
+		FROM BOARDPOST B, BOARDPOSTCONTENT BC, USERDATA U, BOARD B2
+		WHERE B.POSTSN = BC.POSTSN AND B.POSTSN = #{postSN} 
+		AND U.USERSN = B.USERSN AND B.BOARDSN = B2.BOARDSN
+
+	</select>
+	
+	<delete id="boardDelete">
+		DELETE FROM BOARDPOST 
+		WHERE POSTSN = #{postSN}
+	</delete>
+	
+	<select id="getMemberBoardList" resultType="com.uniz.admin.domain.Board">
+		SELECT U.USERSN,B.POSTSN,B.TITLE,U.NICK,B2.BOARDTITLE,VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
+		FROM BOARDPOST B, USERDATA U, BOARD B2 
+		where  B.USERSN = U.USERSN 
+		AND B.BOARDSN = B2.BOARDSN
+		AND u.usersn = #{userSN}
+	</select>
+	
+</mapper>

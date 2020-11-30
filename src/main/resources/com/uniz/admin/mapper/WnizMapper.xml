@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.WnizMapper">
+
+	<select id="getWnizList" resultType="com.uniz.admin.domain.Wniz">
+		SELECT * 
+		FROM wniz
+	</select>
+
+	<select id="selectWniz" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM wniz
+		WHERE wnizSn= #{wnizSn}
+	</select>
+
+	<insert id="wnizInsert">
+		INSERT INTO Wniz
+		(wnizsn, title,imgurl)
+		VALUES
+		(wniz_seq.nextval,#{title}, #{imgUrl})
+	</insert>
+
+	<update id="wnizUpdate">
+		UPDATE wniz 
+		SET 
+		title =#{title}, imgUrl= #{imgUrl},
+		updateDateTime=sysdate 
+		WHERE wnizsn =#{wnizSn}
+	</update>
+
+	<delete id="wnizDelete">
+		DELETE from 
+		wniz 
+		where wnizSn = #{wnizSn}
+
+	</delete>
+
+	<select id="getUWMatchList" resultType="com.uniz.admin.domain.UWmatchList">
+		SELECT DISTINCT 
+		u.wnizsn ,u.unizsn,w.title,u2.unizkeyword,maxunizpoint, minunizpoint, priority
+		FROM uwmatchlist u , wniz w , uniz u2
+		WHERE u.wnizsn = w.wnizsn 
+		AND u.unizSn = u2.unizsn
+		ORDER BY u.wnizsn ASC 
+	</select>
+
+	<select id="getNotUWMatchList" resultType="com.uniz.admin.domain.Wniz">
+		SELECT * FROM wniz 
+		WHERE wnizsn IN 
+		(
+			SELECT distinct w.wnizsn
+			FROM wniz w, uwmatchlist uw 
+			WHERE w.wnizsn != uw.wnizsn
+		)
+		
+	</select>
+
+	<select id="selectUWFK" resultType="Integer">
+		SELECT sum(fkcount)
+		FROM
+			(SELECT COUNT(*) fkcount 
+			 FROM wniz w 
+			 WHERE wnizsn = #{wnizSn}
+			 
+			 UNION ALL
+			 
+			 SELECT
+			 COUNT(*) FROM uniz 
+			 WHERE unizsn = #{unizSn}
+			 )
+
+	</select>
+
+	<insert id="uwMatchInsert">
+
+		INSERT INTO uwmatchlist
+		(wnizsn,unizsn,maxunizpoint,minunizpoint, priority)
+		VALUES 
+		(#{wnizSn}, #{unizSn}, #{maxUnizPoint}, #{minUnizPoint}, #{priority})
+		
+	</insert>
+	
+	<delete id="uwMatchDelete">
+		DELETE uwmatchlist
+		WHERE wnizsn= #{wnizSn} 
+		AND unizsn = #{unizSn} 
+	</delete>
+</mapper>

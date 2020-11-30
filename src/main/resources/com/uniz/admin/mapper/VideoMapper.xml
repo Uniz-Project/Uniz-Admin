@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.VideoMapper">
+	<select id="getVideoList" resultType = "com.uniz.admin.domain.Video">
+		SELECT * 
+		FROM videodata
+	</select>
+	
+	<insert id="videoRegister">
+		INSERT INTO VIDEODATA 
+		(videosn, title, authornick, urlpath, thumburl, likecnt, followcnt,viewcnt,utbcatesn,utbVideoID)
+		VALUES 
+		(videodata_seq.nextval,#{title},#{authorNick}, #{urlPath}, #{thumbUrl},#{likeCnt},#{followCnt},#{viewCnt}, #{utbCateSn}, #{utbVideoID})		
+	</insert>
+	
+	<select id="selectVideo" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM uniz 
+		WHERE unizsn = #{utbCateSn}
+	</select>
+	
+	<select id="getVideo" resultType="com.uniz.admin.domain.Video">
+		SELECT * FROM videoData WHERE VIDEOSN = #{videoSn}
+	</select>
+	
+	<select id="getTodayData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
+		SELECT * 
+		FROM VIDEODATA2
+		WHERE TO_CHAR(CREATEDATETIME) = #{todayDate}
+	</select>
+</mapper>

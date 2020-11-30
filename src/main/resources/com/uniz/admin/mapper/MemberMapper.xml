@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.MemberMapper">
+	<select id="getMemberList" resultType="com.uniz.admin.domain.Member">
+		SELECT * 
+		FROM USERDATA
+	</select>
+		
+	<select id="getMember" resultType="com.uniz.admin.domain.Member">
+		SELECT *
+		FROM USERDATA
+		WHERE USERSN = #{userSN}
+	</select>
+	
+	<select id="selectMember" resultType="Integer">
+		SELECT COUNT(*) FROM 
+		USERDATA 
+		WHERE USERSN = #{userSN}
+	</select>
+	
+	<update id="memberUpdate" >
+		UPDATE USERDATA
+		SET
+		USERSN = #{userSN},
+		USERTYPE = #{userType},
+		NICK = #{nick},
+		IMGURL = #{imgUrl},
+		STATE = #{state},
+		UPDATEDATETIME = sysdate
+		WHERE USERSN = {userSN}
+	</update>
+	
+	
+</mapper>
