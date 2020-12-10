@@ -14,7 +14,7 @@ public interface  UnizMapper {
 	
 	public int unizInsert(Uniz uniz);
 	
-	public int selectUniz(Uniz uniz);
+	public int selectUniz(@Param("unizTypeSn")int unizTypeSn, @Param("unizKeyword")String unizKeyword);
 	
 	public int unizUpdate(Uniz uniz);
 	
@@ -38,9 +38,13 @@ public interface  UnizMapper {
 
 	public int getCountUnizKeyWord(String keyWord);
 
-	public int unizKeyWordInsert(@Param("searchUnizType") List<Integer> searchUnizType, @Param("keyWord")String keyWord);
+	public int unizKeyWordInsert(@Param("searchUnizType") int searchUnizType, @Param("keyWord")String keyWord);
+	
+	public int unizKeyWordsInsert(@Param("searchUnizType") List<Integer> searchUnizType, @Param("keyWord")String keyWord);
 
-	public int titleVideoUnizListInsert(@Param("videoSN")int videoSN, @Param("UnizKeyWord")String UnizKeyWord, @Param("UnizTypeSN")int UnizTypeSN);
+	public int titleVideoUnizListInsert(@Param("videoSN")int videoSN, @Param("unizSN")Long unizSN);
 
 	public int titleVideoUnizListInsertAllKeyword(int videoSn, @Param("splitKeyWord")List<String> splitKeyWord, @Param("UnizTypeSN")int unizTypeSN);
+	
+	public Long getUnizsnForKeyword(@Param("UnizTypeSN")int UnizTypeSN, @Param("UnizKeyWord")String UnizKeyWord);
 }

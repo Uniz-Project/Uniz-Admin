@@ -1,7 +1,6 @@
 package com.uniz.admin.mapper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class UnizMapperTests {
 	private UnizMapper unizMapper;
 	@Setter(onMethod_ = @Autowired)
 	private VideoMapper videoMapper;
-	
+
 	@Test
 	public void autoVideoInsert() {
 		// 1. VideoData2 테이블에서 오늘날짜로 입력된 데이터를 가져온다.
@@ -50,20 +49,19 @@ public class UnizMapperTests {
 		searchUnizType.add(7);
 
 		String resultStr = "";
-		
-		
-		int count =0;
+
+		int count = 0;
 		// 3. 키워드마다 유니즈 키워드가 있는지 확인하고 없으면 유니즈 키워드로 등록한다.
 		for (int i = 0; i < splitKW.length; i++) {
 			// 3-1 해당 키워드가 있는지 조회
 			// T
-			System.out.println("splitKW["+i+"] : "+ splitKW[i]);
+			System.out.println("splitKW[" + i + "] : " + splitKW[i]);
 			count += 1;
 			if (unizMapper.getCountUnizKeyWord(splitKW[i]) <= 0) {
 				// 해당 키워드를 유니즈로 등록
 				try {
-					
-					int resultCnt = unizMapper.unizKeyWordInsert(searchUnizType, splitKW[i]);
+
+					int resultCnt = unizMapper.unizKeyWordsInsert(searchUnizType, splitKW[i]);
 
 					if (resultCnt > 0) {
 						resultStr = "success";
@@ -80,7 +78,6 @@ public class UnizMapperTests {
 			}
 			log.info(i + "번쨰 결과 --------" + resultStr);
 		}
-		
 
 	}
 
@@ -98,15 +95,16 @@ public class UnizMapperTests {
 		System.out.println(searchUnizType);
 
 	}
+
 	@Test
 	public void getSplitKeyWordTest() {
-		
+
 		List<Video2> Video2 = videoMapper.getVideo2List();
-		
+
 		// 2. 행에서 keywords마다 , 구분자로 잘라서 배열로 담고있는다
 		String[] splitKW = getSplitKeyWord(Video2);
 	}
-	
+
 	public String[] getSplitKeyWord(List<Video2> Video2) {
 		String keyWords = "";
 
@@ -127,130 +125,242 @@ public class UnizMapperTests {
 
 	// --------------------------------------------------------------------------------------
 	@Test
-	public void autoVideoUnizListInsert() {
+	public void UnizType10Insert() {
+		List<Integer> searchUnizType = new ArrayList<>();
 
-		// 1. 영상 리스트를 가져온다.
-		String todayDate = "20/11/24";
+		searchUnizType.add(10);
+		searchUnizType.add(1);
+		searchUnizType.add(2);
+		searchUnizType.add(4);
+		searchUnizType.add(6);
+		searchUnizType.add(7);
+
+		System.out.println(searchUnizType);
+		// 1. 영상리스트 가져오기
+		String todayDate = "20/12/09";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
-		String resultStr = "";
-		// 2. 영상 리스트 한 행에서 title과 키워드들을 비교한다.
 		for (int i = 0; i < Video2.size(); i++) {
-			String[] splitKeyWord = Video2.get(i).getKeywords().split(",");
-			
-			System.out.println("get i ---" +Video2.get(i));
-			for (int j = 0; j < splitKeyWord.length; j++) {
-				
-				try {
-					//기본 유니즈 카테고리등록
-					unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 10);
-				}catch(Exception e){
-					e.printStackTrace();
-					resultStr = "fail";
-				}
-				// 제목에 해당 키워드가 있으면 Type1
-				if (Video2.get(i).getTitle().contains(splitKeyWord[j])) {
+			// 2. 영상 리스트 한 행에서
+			if (Video2.get(i).getKeywords() != null) {
+				String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+				log.info(i + "행 영상 키워드 : ");
 
-					// 3. 비교 후 해당 키워드가 존재하면 해당 키워드의 유니즈를 VIDEOUNLIST에 등록한다
-					try {
-						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 1);
+				for (String keywords : splitKeyword) {
+					// 1. 10번 유니즈타입의 유니즈가 있는지 찾는다.
+					// 일단 예외처리없이
 
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
-					}
-				}
-				//Type2 = 게시자닉네임과 키워드
-				if (Video2.get(i).getAuthorNick().contains(splitKeyWord[j])) {
-					// 3. 비교 후 해당 키워드가 존재하면 해당 키워드의 유니즈를 VIDEOUNLIST에 등록한다
-					try {
-						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 2);	
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
-					}
-				}
-				//Type4 해시태그와 키워드
-				if (Video2.get(i).getTitleHashTags().contains(splitKeyWord[j])) {
-					// 3. 비교 후 해당 키워드가 존재하면 해당 키워드의 유니즈를 VIDEOUNLIST에 등록한다
-					try {
-						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 4);	
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
-					}
-				}	
-				
-				//Type6
-				if (Video2.get(i).getDuration() > 1000 ) {
-					//키워드 전체를 등록해야된다 
-//					List<String> keywords = new ArrayList<>(Arrays.asList(splitKeyWord));
-					
-					try {
-//						unizMapper.titleVideoUnizListInsertAllKeyword(Video2.get(i).getVideoSn(),keywords, 6);	
-						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 6);	
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
-					}
-				}	
-				
-				//Type7
-				if (Video2.get(i).getDuration() < 1000 ) {
-					// 3. 비교 후 해당 키워드가 존재하면 해당 키워드의 유니즈를 VIDEOUNLIST에 등록한
-					//List<String> keywords = new ArrayList<>(Arrays.asList(splitKeyWord));
-					try {
-						//unizMapper.titleVideoUnizListInsertAllKeyword(Video2.get(i).getVideoSn(), keywords, 7);	
-						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), splitKeyWord[j], 7);	
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
-					}
-				}	
+					int ValidUniz = unizMapper.selectUniz(10, keywords);
 
+					if (ValidUniz > 0) {
+						Long unizSN = unizMapper.getUnizsnForKeyword(10, keywords);
+						log.info("unizSN : " + unizSN);
+						// 10번 유니즈가 있을경우 videounizlist에 등록한다
+						unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+					} else if (ValidUniz == 0) {
+						// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+						int insertResult = unizMapper.unizKeyWordsInsert(searchUnizType, keywords);
+						log.info(insertResult);
+					}
+					// if
+				}
 			}
 		}
+	}
 
-		System.out.println(resultStr);
+	// --------------------------------------------------------------------------------------
+	@Test
+	public void UnizType1Insert() {
 
+		// 1. 영상리스트 가져오기
+		String todayDate = "20/12/09";
+		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
+
+		for (int i = 0; i < Video2.size(); i++) {
+			// 2. 영상 리스트 한 행에서
+			if (Video2.get(i).getKeywords() != null) {
+				String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+				log.info(i + "행 영상 키워드 : ");
+
+				for (String keywords : splitKeyword) {
+
+					// 키워드가 제목에 포함되어있는경우
+					if (Video2.get(i).getTitle().contains(keywords)) {
+						int ValidUniz = unizMapper.selectUniz(1, keywords);
+
+						if (ValidUniz > 0) {
+							Long unizSN = unizMapper.getUnizsnForKeyword(1, keywords);
+							log.info("unizSN : " + unizSN);
+							// 키워드에 제목이 있을경우 유니즈를 등록한다.
+							unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+
+						} else if (ValidUniz == 0) {
+							// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+							int insertResult = unizMapper.unizKeyWordInsert(1, keywords);
+							log.info(insertResult);
+						}
+					}
+					// if
+				}
+			}
+		}
 	}
 
 	@Test
-	public void autoTest() {
-		// 1. 영상 리스트를 가져온다.
-		String todayDate = "20/11/24";
+	public void UnizType2Insert() {
+
+		// 1. 영상리스트 가져오기
+		String todayDate = "20/12/09";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
-		
-		String resultStr = "";
-		// 2. 영상 리스트 한 행에서 title과 키워드들을 비교한다.
-		for (int i = 0; i < 1; i++) {
-			String[] splitKeyWord = Video2.get(i).getKeywords().split(",");
-			log.info("-------------------" + i + "번째 행 키워드뭉치 : " + splitKeyWord);
-			for (int j = 0; j < splitKeyWord.length; j++) {
 
-				// 제목에 해당 키워드가 있으면
-				if (Video2.get(i).getTitle().contains(splitKeyWord[j])) {
+		for (int i = 0; i < Video2.size(); i++) {
+			// 2. 영상 리스트 한 행에서
+			if (Video2.get(i).getKeywords() != null) {
+				String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+				log.info(i + "행 영상 키워드 : ");
 
-					// 3. 비교 후 해당 키워드가 존재하면 해당 키워드의 유니즈를 VIDEOUNLIST에 등록한다
-					try {
-						int resultCnt = unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(),
-								splitKeyWord[j],1);
+				for (String keywords : splitKeyword) {
 
-						if (resultCnt > 0) {
-							resultStr = "success";
-						} else {
-							resultStr = "fail";
+					// 키워드가 게시자이름에 포함되어있는 경우
+					if (Video2.get(i).getAuthorNick().contains(keywords)) {
+						int ValidUniz = unizMapper.selectUniz(2, keywords);
+
+						if (ValidUniz > 0) {
+							Long unizSN = unizMapper.getUnizsnForKeyword(2, keywords);
+							log.info("unizSN : " + unizSN);
+							// 키워드에 제목이 있을경우 유니즈를 등록한다.
+							unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+
+						} else if (ValidUniz == 0) {
+							// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+							int insertResult = unizMapper.unizKeyWordInsert(2, keywords);
+							log.info(insertResult);
 						}
+					}
+					// if
+				}
+			}
+		}
+	}
 
-					} catch (Exception e) {
-						e.printStackTrace();
-						resultStr = "fail";
+	@Test
+	public void UnizType4Insert() {
+
+		// 1. 영상리스트 가져오기
+		String todayDate = "20/12/09";
+		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
+
+		for (int i = 0; i < Video2.size(); i++) {
+			// 2. 영상 리스트 한 행에서
+			if (Video2.get(i).getKeywords() != null) {
+				String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+
+				if (Video2.get(i).getTitleHashTags() != null) {
+					String[] titleHashTag = Video2.get(i).getTitleHashTags().split(",");
+
+					for (String hashTag : titleHashTag) {
+
+						for (String keywords : splitKeyword) {
+
+							// 키워드가 게시자이름에 포함되어있는 경우
+							if (hashTag.contains(keywords)) {
+								int ValidUniz = unizMapper.selectUniz(4, keywords);
+
+								if (ValidUniz > 0) {
+									Long unizSN = unizMapper.getUnizsnForKeyword(4, keywords);
+									log.info("unizSN : " + unizSN);
+									// 키워드에 제목이 있을경우 유니즈를 등록한다.
+									unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+
+								} else if (ValidUniz == 0) {
+									// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+									int insertResult = unizMapper.unizKeyWordInsert(4, keywords);
+									log.info(insertResult);
+								}
+							}
+
+						}
+					}
+				}
+			}
+
+		}
+	}
+	
+	//긴 영상
+	@Test
+	public void UnizType6Insert() {
+
+		// 1. 영상리스트 가져오기
+		String todayDate = "20/12/09";
+		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
+
+		for (int i = 0; i < Video2.size(); i++) {
+			// 2. 영상 리스트 한 행에서
+			if (Video2.get(i).getKeywords() != null) {
+				String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+				log.info(i + "행 영상 키워드 : ");
+
+				for (String keywords : splitKeyword) {
+					
+					//긴영상 
+					if (Video2.get(i).getDuration() > 1500) {
+						int ValidUniz = unizMapper.selectUniz(6, keywords);
+
+						if (ValidUniz > 0) {
+							Long unizSN = unizMapper.getUnizsnForKeyword(6, keywords);
+							log.info("unizSN : " + unizSN);
+							// 키워드에 제목이 있을경우 유니즈를 등록한다.
+							unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+
+						} else if (ValidUniz == 0) {
+							// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+							int insertResult = unizMapper.unizKeyWordInsert(6, keywords);
+							log.info(insertResult);
+						}
+					}
+					// if
+				}
+			}
+		}
+	}
+	
+	//긴 영상
+		@Test
+		public void UnizType7Insert() {
+
+			// 1. 영상리스트 가져오기
+			String todayDate = "20/12/09";
+			List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
+
+			for (int i = 0; i < Video2.size(); i++) {
+				// 2. 영상 리스트 한 행에서
+				if (Video2.get(i).getKeywords() != null) {
+					String[] splitKeyword = Video2.get(i).getKeywords().split(",");
+					log.info(i + "행 영상 키워드 : ");
+
+					for (String keywords : splitKeyword) {
+						
+						//짧은 영상
+						if (Video2.get(i).getDuration() <= 1500) {
+							int ValidUniz = unizMapper.selectUniz(7, keywords);
+
+							if (ValidUniz > 0) {
+								Long unizSN = unizMapper.getUnizsnForKeyword(7, keywords);
+								log.info("unizSN : " + unizSN);
+								// 키워드에 제목이 있을경우 유니즈를 등록한다.
+								unizMapper.titleVideoUnizListInsert(Video2.get(i).getVideoSn(), unizSN);
+
+							} else if (ValidUniz == 0) {
+								// 없을 시 해당 유니즈를 만든다. 10, 1~ 7까지
+								int insertResult = unizMapper.unizKeyWordInsert(7, keywords);
+								log.info(insertResult);
+							}
+						}
+						// if
 					}
 				}
 			}
 		}
 
-		System.out.println(resultStr);	
-	}
 }

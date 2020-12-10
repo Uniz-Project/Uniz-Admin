@@ -36,7 +36,7 @@ public class UnizServiceImpl implements UnizService{
 	}
 
 	public int unizCheck(Uniz uniz){
-		return unizMapper.selectUniz(uniz);
+		return unizMapper.selectUniz(uniz.getUnizTypeSn(),uniz.getUnizKeyword());
 	}
 
 	@Override

@@ -27,12 +27,14 @@
 	
 	<select id="getTodayVideoData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
 		SELECT * 
-		FROM VIDEODATA2
+		FROM VIDEODATA
 		WHERE TO_CHAR(CREATEDATETIME) = #{todayDate}
+		ORDER BY 1 ASC
+		
 	</select>
 	
 	<select id="getVideo2List" resultType = "com.uniz.admin.domain.Video2">
 		SELECT * 
-		FROM VIDEODATA2
+		FROM VIDEODATA
 	</select>
 </mapper>
