@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Board {
+	private Long boardSN;
 	private Long userSN;
 	private Long postSN;
 	private String title;

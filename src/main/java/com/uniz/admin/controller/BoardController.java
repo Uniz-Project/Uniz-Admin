@@ -1,5 +1,6 @@
 package com.uniz.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniz.admin.domain.Board;
-import com.uniz.admin.domain.Member;
-import com.uniz.admin.domain.Uniz;
 import com.uniz.admin.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -28,8 +27,13 @@ public class BoardController {
 	
 	//게시물 관리 페이지
 	@GetMapping("/admin/board")
-	public String viewBoardList() {
+	public String viewBoardList(Model model) {
+//		List<String> titleList = new ArrayList<>();
 		
+		List<Board> titleList = boardService.getBoardTitle();
+		
+		log.info("titleList : " + titleList );
+		model.addAttribute("titleList", titleList);
 		return "admin/boardList";
 	}
 	
@@ -83,4 +87,17 @@ public class BoardController {
 		
 		return "/admin/boardDetail";
 	}
+	
+	@GetMapping("/admin/board/boardTitle/{boardSN}")
+	public @ResponseBody Map<String, Object> boardTitle(@PathVariable Long boardSN) {
+		
+		List<Board> boardList = boardService.getTitleBoardList(boardSN);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", boardList);
+		return map; 
+		
+	}
+	
+	
 }

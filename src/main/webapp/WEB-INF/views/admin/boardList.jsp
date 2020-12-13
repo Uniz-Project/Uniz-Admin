@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="ko">
 	<head>
 		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
@@ -27,10 +28,20 @@
 					<div class="container-fluid" id="container-wrapper">
 						<div class="d-sm-flex align-items-center justify-content-between mb-4">
 							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 게시판관리 > 목록</h1>
-							<!-- <button type="button" id="btnIns" class="btn btn-success mb-1" onclick="location.href='/admin/member/registerForm'">회원추가</button> -->
+							 
 						</div>
-	
+                        	
 						<!-- Row -->
+						<div class="dropdown">
+							    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">게시판전체
+							    <span class="caret"></span></button>
+							    <ul class="dropdown-menu" id="BoardTitle">
+							      <li><a href="/admin/board">게시판전체</a></li>
+							      <c:forEach items="${titleList}" var="list">
+									<li><button onClick="searchBoardTitle(${list.boardSN})">${list.boardTitle}</button></li>
+								</c:forEach>
+							    </ul>
+  						</div>
 						<div class="row">
 							<!-- DataTable with Hover -->
 							<div class="col-lg-12">
@@ -68,7 +79,6 @@
 			 $(document).ready(function() {
 				
 				 boardList();
-				
 			});  
 </script>
 <%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>

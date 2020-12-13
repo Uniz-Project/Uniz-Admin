@@ -10,7 +10,19 @@
 		WHERE  B.USERSN = U.USERSN 
 		AND B.BOARDSN = B2.BOARDSN
 	</select>
-
+	
+	<select id="getTitleBoardList" resultType="com.uniz.admin.domain.Board">
+		SELECT  B.POSTSN,B.TITLE,U.NICK,B2.BOARDTITLE,VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
+		FROM 
+        BOARDPOST B, USERDATA U, BOARD B2 
+		WHERE  
+        B.USERSN = U.USERSN 
+		AND 
+        B.BOARDSN = B2.BOARDSN
+        AND
+        B2.BOARDSN = #{boardSN}
+	</select>
+	
 	<select id="selectBoard" resultType="Integer">
 		SELECT COUNT(*) 
 		FROM BOARDPOST 
@@ -37,6 +49,11 @@
 		where  B.USERSN = U.USERSN 
 		AND B.BOARDSN = B2.BOARDSN
 		AND u.usersn = #{userSN}
+	</select>
+	
+	<select id="getBoardTitle" resultType="com.uniz.admin.domain.Board">
+		SELECT *
+		FROM BOARD
 	</select>
 	
 </mapper>
