@@ -2,8 +2,10 @@ package com.uniz.admin.mapper;
 
 import java.util.List;
 
-import com.uniz.admin.domain.Board;
+import org.apache.ibatis.annotations.Param;
+
 import com.uniz.admin.domain.Member;
+import com.uniz.admin.domain.MyUnizPoint;
 
 public interface MemberMapper {
 
@@ -14,5 +16,11 @@ public interface MemberMapper {
 	public int memberUpdate(Member member);
 
 	public int selectMember(Member member);
+
+	public List<MyUnizPoint> getUserUnizPoint(Long userSN);
+
+	public int changeUserState(@Param("userSN")Long userSN, @Param("state")int state);
+
+	public int userStateLogInsert(@Param("userSN")Long userSN,@Param("state")int state);
 
 }

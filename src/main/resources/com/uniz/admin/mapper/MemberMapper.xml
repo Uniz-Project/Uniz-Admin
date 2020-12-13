@@ -23,14 +23,39 @@
 	<update id="memberUpdate" >
 		UPDATE USERDATA
 		SET
-		USERSN = #{userSN},
 		USERTYPE = #{userType},
-		NICK = #{nick},
 		IMGURL = #{imgUrl},
 		STATE = #{state},
 		UPDATEDATETIME = sysdate
-		WHERE USERSN = {userSN}
+		
+		WHERE USERSN = #{userSN}
 	</update>
 	
+	<select id="getUserUnizPoint" resultType="com.uniz.admin.domain.MyUnizPoint">
+		SELECT up.*, u.UNIZKEYWORD
+		FROM MYUNIZPOINTLIST up, UNIZ u
+		WHERE
+		u.UNIZSN = up.UNIZSN 
+		AND
+		USERSN = #{unizSN}
+	</select>
+	
+	<insert id = "userStateLogInsert">
+	INSERT INTO USERSTATELOG
+	(USERSN, STATUSSN)
+	VALUES
+	(#{userSN}, #{state})
+
+	</insert>
+	
+	<update id ="changeUserState">
+	UPDATE 
+	  USERDATA
+	SET 
+	  STATE = #{state},
+	  LASTSTATEDATETIME = sysdate
+	WHERE 
+	  USERSN = #{userSN}   
+</update>
 	
 </mapper>

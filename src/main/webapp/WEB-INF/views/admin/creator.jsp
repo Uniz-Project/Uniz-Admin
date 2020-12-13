@@ -26,8 +26,8 @@
            
 					<div class="container-fluid" id="container-wrapper">
 						<div class="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 회원관리 > 목록</h1>
-							<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="location.href='/admin/member/creator'">크리에이터관리</button>
+							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 회원관리 > 크리에이터관리</h1>
+							
 						</div>
 	
 						<!-- Row -->
@@ -64,7 +64,7 @@
 					<!-- Container Fluid -->
 	</div>
 	<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
-	<script type="text/javascript" src="/resources/js/js/memberList.js"></script>
+	<script type="text/javascript" src="/resources/js/js/creator.js"></script>
 	<script>
        
 			 $(document).ready(function() {

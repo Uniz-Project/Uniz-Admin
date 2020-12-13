@@ -33,6 +33,11 @@
 												<input class="form-control  mb-3" type="text" id="tableData1" name="userSN" value="${member.userSN}" placeholder="" readonly="readonly">
 											</div>
 											<div class="form-group">
+												<label for="tableData3">아이디</label>
+												<input class="form-control  mb-3" type="text" id="tableData2" name="userID" value="${member.userID}" placeholder="" readonly="readonly">
+											</div>
+											
+											<div class="form-group">
 												<label for="tableData3">유저타입</label>
 												<input class="form-control  mb-3" type="text" id="tableData3" name="userType" value="${member.userType}" placeholder="" >
 											</div>

@@ -57,7 +57,7 @@ function codeList(){
 	
 	$("#codeTable").DataTable({
 		processing: true,
-		serverSide: false,
+		serverSide: true,
 		paging: true,
 		pagingType: "simple_numbers",
 		order: false,
