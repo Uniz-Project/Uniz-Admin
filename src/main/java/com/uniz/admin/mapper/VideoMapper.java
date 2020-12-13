@@ -2,6 +2,8 @@ package com.uniz.admin.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.uniz.admin.domain.Video;
 import com.uniz.admin.domain.Video2;
 
@@ -18,6 +20,10 @@ public interface VideoMapper {
 	public List<Video2> getTodayVideoData(String todayDate);
 
 	public List<Video2> getVideo2List();
+
+	public int videoDelete(@Param("videoSN")Long videoSN);
+
+	public int videoUpdate(Video video);
 
 	
 }

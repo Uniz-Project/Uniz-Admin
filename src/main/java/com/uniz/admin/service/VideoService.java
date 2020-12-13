@@ -8,10 +8,14 @@ import com.uniz.admin.domain.Wniz;
 
 public interface VideoService {
 
-	List<Video> videoList();
+	public List<Video> videoList();
 
-	String register(Video video);
+	public String register(Video video);
 
-	Video getVideo(int videoSn);
+	public Video getVideo(int videoSn);
+
+	public String videoDelete(Long videoSN);
+
+	public String videoUpdate(Video video);
 
 }

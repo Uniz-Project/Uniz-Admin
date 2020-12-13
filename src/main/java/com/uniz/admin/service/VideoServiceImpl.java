@@ -73,9 +73,46 @@ public class VideoServiceImpl implements VideoService {
 		
 		return videoMapper.getVideo(videoSn);
 	}
+
+	@Override
+	public String videoDelete(Long videoSN) {
+		final String SUCCESS= "SUCCESS";
+		final String FAIL = "FAIL";
+		final String DB_ERROR = "DB ERROR";
+		
+		if(videoSN != null) {
+			try {
+				int result = videoMapper.videoDelete(videoSN);
+				
+				return SUCCESS;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return DB_ERROR;
+			}
+		}
+		
+		return FAIL;
+		
+	}
 	
-
-	
-
-
+	@Override
+	public String videoUpdate(Video video) {
+		final String SUCCESS= "SUCCESS";
+		final String FAIL = "FAIL";
+		final String DB_ERROR = "DB ERROR";
+		
+		if(video != null) {
+			try {
+				int result = videoMapper.videoUpdate(video);
+				
+				return SUCCESS;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return DB_ERROR;
+			}
+		}
+		
+		return FAIL;
+		
+	}
 }

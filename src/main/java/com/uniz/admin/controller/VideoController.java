@@ -70,4 +70,28 @@ public class VideoController {
 		return "admin/videoRegister"; 
 	}
 	
+	@PostMapping("/admin/video/delete/{videoSN}")
+	public @ResponseBody Map<String, Object> videoDelete(@PathVariable Long videoSN) {
+		
+		String result = videoService.videoDelete(videoSN);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		
+		System.out.println("DEBUG - Insert data(post) : " +map);
+		return map;
+	}
+	
+	@PostMapping("/admin/video/update/{videoSN}")
+	public @ResponseBody Map<String, Object> videoUpdate(Video video) {
+		
+		String result = videoService.videoUpdate(video);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		
+		System.out.println("DEBUG - Insert data(post) : " +map);
+		return map;
+	}
+	
 }

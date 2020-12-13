@@ -37,4 +37,27 @@
 		SELECT * 
 		FROM VIDEODATA
 	</select>
+	
+	<delete id="videoDelete">
+		DELETE FROM 
+		VIDEODATA
+		WHERE 
+		VIDEOSN = #{videoSN}
+	</delete>
+	
+	<update id="videoUpdate">
+		UPDATE VIDEODATA
+		SET 
+			title = #{title},
+			authornick = #{authorNick},
+			urlpath = #{urlPath},
+			thumburl = #{thumbUrl},
+			likeCnt = #{likeCnt},
+			followCnt = #{followCnt},
+			viewCnt = #{viewCnt},
+			utbCateSn =  #{utbCateSn}, 
+			utbVideoId = #{utbVideoID}
+			
+		WHERE VIDEOSN = #{videoSN}
+	</update>
 </mapper>

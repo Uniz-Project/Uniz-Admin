@@ -48,7 +48,7 @@
 													<th>좋아요수</th>
 													<th>구독자수</th>
 													<th>조회수</th>
-													<th>카테고리</th>		
+													<th>카테고리</th>
 												</tr>
 											</thead>
 										</table>

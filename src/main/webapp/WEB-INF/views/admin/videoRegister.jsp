@@ -73,7 +73,7 @@
 	
 											
 
-											<input class="form-control" type="hidden" id="id" name="id" value="0" />
+											<input class="form-control" type="hidden" id="videoSN" name="videoSN" value="${video.videoSN}" />
 											
 										</form>									
 										
@@ -81,13 +81,12 @@
 											<button type="button"  onClick="history.go(-1)" id="btnClear" class="btn btn-secondary">목록</button>
 											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
 											<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="videoInsert();">입력</button>
-											<button type="button" id="btnUpd" class="btn btn-warning mb-1" onclick="videoUpdate();">수정</button>
+											<button type="button" id="btnUpd" class="btn btn-warning mb-1" onclick="Update();">수정</button>
 											<button type="button" id="btnDel" class="btn btn-danger mb-1" onclick="videoDelete();">삭제</button>
 										</div>
 									</div>
 								</div>
 							</div>
-
 						</div>
 						<!-- row -->
 					</div>
@@ -95,8 +94,8 @@
 				</div>
 		<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
 		<script type="text/javascript" src="/resources/js/js/videoList.js"></script>
-			</div>
-<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
+		</div>
+		<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
 	
 </body>
 </html>
