@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniz.admin.domain.Board;
 import com.uniz.admin.domain.Member;
+import com.uniz.admin.domain.MyUnizPoint;
 import com.uniz.admin.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +35,6 @@ public class MemberServiceImpl implements MemberService{
 		//해당 회원이 존재하면 실행
 		if (memberIsValidCheck(member)) {
 			try {
-				//회원정보를 관리자페이지에서 수정해도 되는지몰라서 일단 적용하지않았음 o
 				//DB에 문제가 있을 수 있으니 예외처리
 				int resultCnt = mapper.memberUpdate(member);
 				
@@ -81,6 +81,35 @@ public class MemberServiceImpl implements MemberService{
 		int chkValid = mapper.selectMember(member);
 		
 		return chkValid >= 1 ? true : false;  
+	}
+	
+	//회원의 유니즈포인트 조회
+	@Override
+	public List<MyUnizPoint> getUserUnizPoint(Long userSN) {
+		
+		return mapper.getUserUnizPoint(userSN);
+	}
+
+	@Override
+	public String changeUserState(Long userSN, int state) {
+		String SUCCESS = "SUCCESS";
+		String FAIL = "FAIL";
+		
+		if(userSN != null) {
+			try {
+				//회원상태를 3으로 변경해야한다.
+				mapper.changeUserState(userSN, state);
+				//userstateLog 테이블에도 데이터를 추가해 줘야한다.
+				mapper.userStateLogInsert(userSN, state);
+				
+				return SUCCESS;
+			}catch(Exception e){
+				e.printStackTrace();
+				return FAIL;
+			}
+			
+		}
+		return FAIL;
 	}
 
 }

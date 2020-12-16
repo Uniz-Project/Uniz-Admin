@@ -27,6 +27,7 @@
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
@@ -43,7 +44,6 @@
 <!-- 	<context:component-scan base-package="com.uniz.service"/>
 	<context:component-scan base-package="com.uniz.aop"/>
 	<context:component-scan base-package="com.uniz.task"/> -->
-	
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	<task:annotation-driven/>

@@ -57,7 +57,7 @@ function codeList(){
 	
 	$("#codeTable").DataTable({
 		processing: true,
-		serverSide: false,
+		serverSide: true,
 		paging: true,
 		pagingType: "simple_numbers",
 		order: false,
@@ -78,7 +78,7 @@ function codeList(){
 		},
 		ajax:{
 			"url": "/admin/uniz/unizlist",
-			"type" :"GET",
+			"type" :"POST",
 			"dataType" : "json"
 		},
 		columns: [

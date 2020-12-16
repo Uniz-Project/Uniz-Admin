@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Video2 {
-	
+	private int rnum;
 	private int videoSn; //비디오번호
 	private String title; //제목
 	private String authorNick; //게시자 닉네임
@@ -26,13 +26,13 @@ public class Video2 {
 	private int utbCateSn; //유튜브 번호
 	private String isFamilyFriendly; //모름
 	private String titleHashTags; //타이틀 해시태크
-	private String descHashTags; //모름;
+	private String descHashTags; //;
 	private String utbVideoID; //영상아아디ㅣ
 	private String authorId; //게시자 아이디
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date yUploadDatetime; //게시글작성일
 	private String keywords;
-	
+	private String searchKeyword;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date createDatetime; //생성일
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")

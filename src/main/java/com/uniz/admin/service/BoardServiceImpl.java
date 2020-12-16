@@ -81,5 +81,22 @@ public class BoardServiceImpl implements BoardService{
 		
 		return mapper.getMemberBoardList(userSN);
 	}
+
+	@Override
+	public List<Board> getBoardTitle() {
+		
+		return mapper.getBoardTitle();
+	}
+
+	@Override
+	public List<Board> getTitleBoardList(Long boardSN) {
+		try {						
+			 List<Board>boardList =  mapper.getTitleBoardList(boardSN);
+			 return boardList;		
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }

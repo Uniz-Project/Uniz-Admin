@@ -17,15 +17,15 @@ function memberList(){
 	
 	//memberList호출시 테이블 요소 변경
 	var element =
-		"<th>회원번호</th><th>아이디</th>\n\
-		<th>회원타입</th>\n\
-		<th>닉네임</th>\n\
-		<th>프로필</th>\n\
-		<th>회원상태</th>"+         
-		"<th>최종로그인시간</th>\n\
-		<th>가입일시</th>\n\
+		"<th>회원번호</th><th>회원아이디</th>\n\
+		<th>회원닉네임</th>\n\
+		<th>신청채널명</th>\n\
+		<th>카테고리</th>\n\
+		<th>이메일</th>"+         
+		"<th>처리상태</th>\n\
+		<th>신청일시</th>\n\
 		<th>변경일시</th>\n\
-		<th>최종회원상태</th>";
+		<th>회원타입</th>";
 		
 	//테이블에 추가
 	$("#rowData").html(element);
@@ -72,14 +72,14 @@ function memberList(){
 				}
 			},
 			{data: "userID"},
-			{data: "userType"},
 			{data: "nick"},
-			{data: "imgUrl"},
+			{"data": "imgUrl"},
+			{"data": "imgUrl"},
+			{"data": "imgUrl"},
 			{data: "state"},
-			{data: "lastLoginDatetime"},
 			{data: "createDatetime"},
 			{data: "updateDatetime"},
-			{data: "lastStateDatetime"}
+			{data: "userType"}
 			
 		]
 

@@ -3,6 +3,29 @@
 
 
 <mapper namespace="com.uniz.admin.mapper.UnizMapper">
+	
+	<select id="getUnizCount" resultType="Integer">
+		SELECT count(*)
+		from uniz
+	</select>
+	
+	<select id="getPagingUniz" resultType="com.uniz.admin.domain.Uniz">
+		<![CDATA[
+		SELECT *
+		FROM
+   		 (
+        SELECT /* + INDEX(T1 PK1) */
+            ROWNUM AS RNUM, T1.*
+        FROM
+            uniz T1
+        WHERE
+            ROWNUM <= #{start} + #{length}
+        )
+     WHERE
+     #{start}<= RNUM
+     ]]>
+	</select>
+
 	<select id="unizList2" resultType ="com.uniz.admin.domain.Uniz">
 		SELECT * 
 		FROM UNIZ
@@ -18,8 +41,9 @@
 	<select id="selectUniz" resultType="Integer">
 		SELECT COUNT(*) 
 		FROM uniz 
-		WHERE unizTypeSn=#{unizTypeSn} 
-		AND unizKeyword=#{unizKeyword}
+		WHERE unizTypeSn= #{unizTypeSn} 
+		AND unizKeyword= #{unizKeyword}
+		AND UNIZSN > 10001
 	</select>
 	
 	<update id="unizUpdate">
@@ -46,7 +70,15 @@
 		VALUES 
 		(#{unizSn}, #{parentUnizSn})     
 	</insert>
-	
+		
+	<select id="getUnizsnForKeyword" resultType="Long">
+			SELECT UNIZSN
+			FROM UNIZ
+			WHERE UNIZKEYWORD = #{UnizKeyWord}
+			AND UnizTypeSN = #{UnizTypeSN}
+			AND UNIZSN > 10001
+	</select>	
+		
 	<select id="unizLayerCheck" resultType="Integer">
 		SELECT count(*) 
 		FROM unizlayerlist 
@@ -72,7 +104,69 @@
 		SELECT unizsn, uniztypesn, unizKeyword, enable 
 		FROM uniz 
 		WHERE unizsn NOT IN (SELECT unizsn FROM unizlayerlist)
+		
 	</select>
 	
+	<select id="getCountUnizKeyWord" resultType="Integer">
+		SELECT COUNT(UNIZKEYWORD) 
+		FROM UNIZ 
+		WHERE UNIZKEYWORD = #{keyWord}
+		AND UNIZSN >= 10000
+		
+	</select>
 	
+	<insert id="unizKeyWordInsert">
+		INSERT INTO UNIZ 
+		(unizSN, unizTypeSN, unizKeyword)
+		VALUES 
+		(UNIZ_SEQ.NEXTVAL, #{searchUnizType} ,#{keyWord})     
+	</insert>
+	
+	<insert id="unizKeyWordsInsert">
+		INSERT INTO UNIZ
+		(unizSN, unizTypeSN, unizKeyword) 
+		SELECT UNIZ_SEQ.NEXTVAL, A.* FROM(
+		<foreach collection="searchUnizType" item="item" separator="UNION ALL ">		
+			SELECT #{item} as UnizTypeSN, 
+				   #{keyWord} as UnizKeyWord
+			FROM dual
+		</foreach>) A
+	</insert>
+	
+	<insert id= "titleVideoUnizListInsert">
+		
+		MERGE INTO VIDEOUNIZLIST
+  		  USING dual
+    	ON
+    	(VIDEOSN = #{videoSN}
+         	AND
+        UNIZSN = #{unizSN})
+    	
+    	WHEN NOT MATCHED THEN
+        INSERT(
+            VIDEOSN,
+            UNIZSN
+              )
+            VALUES(
+            #{videoSN},
+            #{unizSN}
+            )
+		
+	</insert>
+	
+	
+	
+	<!-- <insert id= "titleVideoUnizListInsertAll">
+		<selectKey keyProperty="UnizSN" resultType="Integer" order="BEFORE">
+			SELECT UNIZSN
+			FROM UNIZ
+			WHERE UNIZKEYWORD = #{UnizKeyWord}
+			
+		</selectKey>
+		INSERT INTO VIDEOUNIZLIST(VIDEOSN, UNIZSN)
+		VALUES 
+		(#{videoSN}, #{UnizSN})
+		
+	</insert> -->
+
 </mapper>

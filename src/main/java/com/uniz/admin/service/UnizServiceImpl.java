@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniz.admin.domain.Criteria;
+import com.uniz.admin.domain.DataTableDTO;
 import com.uniz.admin.domain.Uniz;
 import com.uniz.admin.domain.UnizLayer;
 import com.uniz.admin.domain.unizPageDTO;
@@ -23,8 +24,17 @@ public class UnizServiceImpl implements UnizService{
 	@Setter(onMethod_ = @Autowired)
 	UnizMapper unizMapper;
 	
-	public List<Uniz> unizList2(){
-		return unizMapper.unizList2();
+	public DataTableDTO unizList2(DataTableDTO dto,int draw, int start, int length){
+		
+		int total = unizMapper.getUnizCount(); //페이징용 전체 카운트
+		List data = unizMapper.getPagingUniz(start,length);
+		
+		dto.setDraw(draw);
+		dto.setRecordsFiltered(total);
+		dto.setRecordsTotal(total);
+		dto.setData(data);
+		
+		return dto;
 	}
 	
 	@Override
@@ -36,7 +46,7 @@ public class UnizServiceImpl implements UnizService{
 	}
 
 	public int unizCheck(Uniz uniz){
-		return unizMapper.selectUniz(uniz);
+		return unizMapper.selectUniz(uniz.getUnizTypeSn(),uniz.getUnizKeyword());
 	}
 
 	@Override

@@ -2,8 +2,10 @@ package com.uniz.admin.mapper;
 
 import java.util.List;
 
-import com.uniz.admin.domain.Board;
+import org.apache.ibatis.annotations.Param;
 
+import com.uniz.admin.domain.Board;
+ 
 public interface BoardMapper {
 
 	public List<Board> getBoardList();
@@ -15,6 +17,10 @@ public interface BoardMapper {
 	public Board getBoard(Long postSN);
 
 	public List<Board> getMemberBoardList(Long userSN);
+
+	public List<Board> getBoardTitle();
+
+	public List<Board> getTitleBoardList(@Param("boardSN")Long boardSN);
 
 	//public int boardUpdate(Long postSN);
 	

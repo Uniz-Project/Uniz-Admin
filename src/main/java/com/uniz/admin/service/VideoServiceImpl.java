@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniz.admin.domain.DataTableDTO;
 import com.uniz.admin.domain.Video;
 import com.uniz.admin.mapper.VideoMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -21,9 +23,22 @@ public class VideoServiceImpl implements VideoService {
 	private VideoMapper videoMapper;
 
 	@Override
-	public List<Video> videoList() {
-
-		return videoMapper.getVideoList();
+	public DataTableDTO videoList(DataTableDTO dto,int draw, int start, int length) {
+		
+		log.info("service on .....");
+		int total = videoMapper.getVideoCount();
+		log.info("total : " + total);
+		List data = videoMapper.getPagingVideoData(start,length);
+		
+		log.info("data : " + data);
+		dto.setDraw(draw);
+		dto.setRecordsFiltered(total);
+		dto.setRecordsTotal(total);
+		dto.setData(data);
+		
+		log.info("dto : " + dto); 
+		
+		return dto;
 	}
 
 	@Override
@@ -73,9 +88,46 @@ public class VideoServiceImpl implements VideoService {
 		
 		return videoMapper.getVideo(videoSn);
 	}
+
+	@Override
+	public String videoDelete(Long videoSN) {
+		final String SUCCESS= "SUCCESS";
+		final String FAIL = "FAIL";
+		final String DB_ERROR = "DB ERROR";
+		
+		if(videoSN != null) {
+			try {
+				int result = videoMapper.videoDelete(videoSN);
+				
+				return SUCCESS;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return DB_ERROR;
+			}
+		}
+		
+		return FAIL;
+		
+	}
 	
-
-	
-
-
+	@Override
+	public String videoUpdate(Video video) {
+		final String SUCCESS= "SUCCESS";
+		final String FAIL = "FAIL";
+		final String DB_ERROR = "DB ERROR";
+		
+		if(video != null) {
+			try {
+				int result = videoMapper.videoUpdate(video);
+				
+				return SUCCESS;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return DB_ERROR;
+			}
+		}
+		
+		return FAIL;
+		
+	}
 }

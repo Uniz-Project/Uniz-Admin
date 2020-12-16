@@ -5,18 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uniz.admin.domain.DataTableDTO;
 import com.uniz.admin.domain.Uniz;
 import com.uniz.admin.domain.UnizLayer;
 import com.uniz.admin.service.UnizService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
-
+@Log4j
 @Controller
 @AllArgsConstructor
 public class UnizController {
@@ -36,16 +40,25 @@ public class UnizController {
 	}
 
 	
-	@GetMapping("/admin/uniz/unizlist") 
-	public @ResponseBody Map<String, Object> unizList() {
+	@PostMapping("/admin/uniz/unizlist") 
+	public @ResponseBody DataTableDTO unizList(DataTableDTO dto, @RequestBody MultiValueMap<String, String> formData) {
+		
+		int draw = Integer.parseInt(formData.get("draw").get(0));
+		int start = Integer.parseInt(formData.get("start").get(0));
+		int length = Integer.parseInt(formData.get("length").get(0));	
+		
+		log.info("draw : " + draw);
+		log.info("start : " + start);
+		log.info("length : " + length);
+		
+		dto = unizService.unizList2(dto,draw,start,length);
 	
-	List<Uniz> unizList = unizService.unizList2();
-	
-	Map<String, Object> map = new HashMap<String, Object>();
-	map.put("data",unizList);
-	System.out.println("DEBUG - data(get): " +map);
-	return map; 
-	
+		return dto;
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("data",unizList);
+//		System.out.println("DEBUG - data(get): " +map);
+//		return map; 
+//	
 	}
 	
 	@GetMapping("/admin/uniz/unizLayerlist") 

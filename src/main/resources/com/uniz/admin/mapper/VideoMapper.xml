@@ -3,6 +3,29 @@
 
 
 <mapper namespace="com.uniz.admin.mapper.VideoMapper">
+	<select id="getVideoCount" resultType="Integer">
+		SELECT count(*)
+		from videodata
+		
+	</select>
+	
+	<select id="getPagingVideoData" resultType="com.uniz.admin.domain.Video2">
+		<![CDATA[
+		SELECT *
+		FROM
+   		 (
+        SELECT /* + INDEX(T1 PK1) */
+            ROWNUM AS RNUM, T1.*
+        FROM
+            videodata T1
+        WHERE
+            ROWNUM <= #{start}+ #{length}
+        )
+     WHERE
+     #{start}<= RNUM
+     ]]>
+	</select>
+	
 	<select id="getVideoList" resultType = "com.uniz.admin.domain.Video">
 		SELECT * 
 		FROM videodata
@@ -25,9 +48,39 @@
 		SELECT * FROM videoData WHERE VIDEOSN = #{videoSn}
 	</select>
 	
-	<select id="getTodayData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
+	<select id="getTodayVideoData" resultType= "com.uniz.admin.domain.Video2" parameterType="String">
 		SELECT * 
-		FROM VIDEODATA2
+		FROM VIDEODATA
 		WHERE TO_CHAR(CREATEDATETIME) = #{todayDate}
+		ORDER BY 1 ASC
+		
 	</select>
+	
+	<select id="getVideo2List" resultType = "com.uniz.admin.domain.Video2">
+		SELECT * 
+		FROM VIDEODATA
+	</select>
+	
+	<delete id="videoDelete">
+		DELETE FROM 
+		VIDEODATA
+		WHERE 
+		VIDEOSN = #{videoSN}
+	</delete>
+	
+	<update id="videoUpdate">
+		UPDATE VIDEODATA
+		SET 
+			title = #{title},
+			authornick = #{authorNick},
+			urlpath = #{urlPath},
+			thumburl = #{thumbUrl},
+			likeCnt = #{likeCnt},
+			followCnt = #{followCnt},
+			viewCnt = #{viewCnt},
+			utbCateSn =  #{utbCateSn}, 
+			utbVideoId = #{utbVideoID}
+			
+		WHERE VIDEOSN = #{videoSN}
+	</update>
 </mapper>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="ko">
 	<head>
 		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
@@ -27,21 +26,11 @@
            
 					<div class="container-fluid" id="container-wrapper">
 						<div class="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 게시판관리 > 목록</h1>
-							 
+							<h1 id="headTitle" class="h3 mb-0 text-gray-800" style="display: inline-block;"> 회원관리 > 크리에이터관리</h1>
+							
 						</div>
-                        	
+	
 						<!-- Row -->
-						<div class="dropdown">
-							    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">게시판전체
-							    <span class="caret"></span></button>
-							    <ul class="dropdown-menu" id="BoardTitle">
-							      <li><a href="/admin/board">게시판전체</a></li>
-							      <c:forEach items="${titleList}" var="list">
-									<li><button onClick="searchBoardTitle(${list.boardSN})">${list.boardTitle}</button></li>
-								</c:forEach>
-							    </ul>
-  						</div>
 						<div class="row">
 							<!-- DataTable with Hover -->
 							<div class="col-lg-12">
@@ -50,15 +39,16 @@
 										<table class="table align-items-center table-flush table-hover" style="width: 100%" id="boardTable">
 											<thead class="thead-light">
 												<tr id="rowData">
-													<th>게시판번호</th>
-													<th>제목</th>
+													<!-- <th>회원번호</th>
+													<th>소셜가입처</th>
+													<th>회원타입</th>
 													<th>닉네임</th>
-													<th>게시판명</th>
-													<th>조회수</th>
-													<th>좋아요수</th>               
-													<th>작성일</th>
-													<th>변경일</th>
-												
+													<th>프로필</th>
+													<th>회원상태</th>               
+													<th>최종로그인시간</th>
+													<th>가입일시</th>
+													<th>변경일시</th>
+													<th>최종회원상태</th> -->		
 												</tr>
 											</thead>
 										</table>
@@ -69,18 +59,22 @@
 						<!--Row-->
 					</div>
 					<!---Container Fluid-->
-					<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
 				</div>
-		</div>
-<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>		
-<script type="text/javascript" src="/resources/js/js/boardList.js"></script>
-<script>
+				<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+					<!-- Container Fluid -->
+	</div>
+	<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
+	<script type="text/javascript" src="/resources/js/js/creator.js"></script>
+	<script>
        
 			 $(document).ready(function() {
 				
-				 boardList();
+				 memberList();
+				
 			});  
-</script>
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+	</script>
+
 </body>
 </html>
+
+

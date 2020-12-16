@@ -14,4 +14,8 @@ public interface BoardService {
 
 	public List<Board> getMemberBoardList(Long userSN);
 
+	public List<Board> getBoardTitle();
+
+	public List<Board> getTitleBoardList(Long boardSN);
+
 }

@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Member {
 	private int userSN; //유저번호
+	private String userID; //아이디
+	private String password; //비밀번호
 	private String provider; //소셜가입처
-	private String userType; //유저타입
+	private int userType; //유저타입
 	private String nick; //닉네임
 	private String imgUrl; //프로필사진
 	private int state; //회원상태

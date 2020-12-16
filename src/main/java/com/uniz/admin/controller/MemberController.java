@@ -9,10 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
 import com.uniz.admin.domain.Board;
 import com.uniz.admin.domain.Member;
+import com.uniz.admin.domain.MyUnizPoint;
 import com.uniz.admin.service.BoardService;
 import com.uniz.admin.service.MemberService;
 
@@ -84,5 +88,48 @@ public class MemberController {
 		log.info("memberUpdate ..... :"+map);
 		return map;
 	}
-
+	
+	//회원정보수정클릭시 회원정보상세에서 수정하도록
+	@PostMapping("/admin/member/delete/{userSN}")
+	public @ResponseBody Map<String, Object> memberDelete(@PathVariable Long userSN){
+		
+		log.info(userSN);
+		final int STATECODE = 3; //탈퇴상태
+		
+		String result = memberService.changeUserState(userSN, STATECODE);
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+			
+		log.info("memberUpdate ..... :"+map);
+		return map;			 
+	}
+	
+	@GetMapping("/admin/member/uniz/{userSN}")
+	public String memberUniz(@PathVariable Long userSN, Model model){
+		
+		log.info("userSN : " + userSN);
+		
+		model.addAttribute("userSN", userSN);
+		return "/admin/userUnizPoint"; 
+	}
+	
+	@PostMapping("/admin/member/uniz/{userSN}")
+	public @ResponseBody Map<String, Object> memberUnizList(@PathVariable Long userSN) {
+		
+		log.info("userSN :" + userSN);
+		List<MyUnizPoint> userUnizPoint = memberService.getUserUnizPoint(userSN);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", userUnizPoint);
+	
+		return map;
+	}
+	
+	@GetMapping("/admin/member/creator")
+	public String creator() {
+		
+		return "/admin/creator";
+	}
+	
 }
