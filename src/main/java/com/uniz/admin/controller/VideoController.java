@@ -47,6 +47,7 @@ public class VideoController {
 		
 		log.info("dto" + dto);
 		return dto;
+		
 //		List<Video> videoList = videoService.videoList();
 //		
 //		Map<String, Object> map = new HashMap<String, Object>();

@@ -33,7 +33,7 @@ public class VideoServiceImpl implements VideoService {
 		log.info("data : " + data);
 		dto.setDraw(draw);
 		dto.setRecordsFiltered(total);
-		dto.setRecordsFiltered(total);
+		dto.setRecordsTotal(total);
 		dto.setData(data);
 		
 		log.info("dto : " + dto); 

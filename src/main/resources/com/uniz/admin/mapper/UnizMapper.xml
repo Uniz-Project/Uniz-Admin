@@ -3,6 +3,29 @@
 
 
 <mapper namespace="com.uniz.admin.mapper.UnizMapper">
+	
+	<select id="getUnizCount" resultType="Integer">
+		SELECT count(*)
+		from uniz
+	</select>
+	
+	<select id="getPagingUniz" resultType="com.uniz.admin.domain.Uniz">
+		<![CDATA[
+		SELECT *
+		FROM
+   		 (
+        SELECT /* + INDEX(T1 PK1) */
+            ROWNUM AS RNUM, T1.*
+        FROM
+            uniz T1
+        WHERE
+            ROWNUM <= #{start} + #{length}
+        )
+     WHERE
+     #{start}<= RNUM
+     ]]>
+	</select>
+
 	<select id="unizList2" resultType ="com.uniz.admin.domain.Uniz">
 		SELECT * 
 		FROM UNIZ

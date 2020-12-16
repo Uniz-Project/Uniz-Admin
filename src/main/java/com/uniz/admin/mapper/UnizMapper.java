@@ -47,4 +47,8 @@ public interface  UnizMapper {
 	public int titleVideoUnizListInsertAllKeyword(int videoSn, @Param("splitKeyWord")List<String> splitKeyWord, @Param("UnizTypeSN")int unizTypeSN);
 	
 	public Long getUnizsnForKeyword(@Param("UnizTypeSN")int UnizTypeSN, @Param("UnizKeyWord")String UnizKeyWord);
+
+	public int getUnizCount();
+
+	public List<Uniz> getPagingUniz(@Param("start")int start,@Param("length") int length);
 }
