@@ -18,7 +18,7 @@ function videoList(){
 	
 	$("#boardTable").DataTable({
 		processing: true,
-		serverSide: false,
+		serverSide: true,
 		paging: true,
 		pagingType: "simple_numbers",
 		order: false, 
@@ -39,11 +39,11 @@ function videoList(){
 		},
 		ajax:{
 			"url": "/admin/video/list",
-			"type" :"GET",
+			"type" :"post",
 			"dataType" : "json"
 		},
 		columns: [
-			{data: "videoSN", render : function(data, type, row){
+			{data: "videoSn", render : function(data, type, row){
 				return '<div class="dropdown">\n\
 				  <button style="border: 0px; background-color: white;"class="sidebar-link waves-effect waves-dark sidebar-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown">\n\
 				  <span class="hide-menu">'+data+'</span> </button>\n\

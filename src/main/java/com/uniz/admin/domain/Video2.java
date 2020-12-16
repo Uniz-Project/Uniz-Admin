@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Video2 {
-	
+	private int rnum;
 	private int videoSn; //비디오번호
 	private String title; //제목
 	private String authorNick; //게시자 닉네임

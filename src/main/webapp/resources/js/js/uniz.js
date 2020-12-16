@@ -64,6 +64,7 @@ function codeList(){
 		ordering: false,
 		info: true,
 		filter: true,
+		lengthMenu : [10,50,100],
 		
 		language: {
 			"zeroRecords": "데이터가 없습니다.",

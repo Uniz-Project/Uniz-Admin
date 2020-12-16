@@ -3,6 +3,29 @@
 
 
 <mapper namespace="com.uniz.admin.mapper.VideoMapper">
+	<select id="getVideoCount" resultType="Integer">
+		SELECT count(*)
+		from videodata
+		
+	</select>
+	
+	<select id="getPagingVideoData" resultType="com.uniz.admin.domain.Video2">
+		<![CDATA[
+		SELECT *
+		FROM
+   		 (
+        SELECT /* + INDEX(T1 PK1) */
+            ROWNUM AS RNUM, T1.*
+        FROM
+            videodata T1
+        WHERE
+            ROWNUM <= #{start}+ #{length}
+        )
+     WHERE
+     #{start}<= RNUM
+     ]]>
+	</select>
+	
 	<select id="getVideoList" resultType = "com.uniz.admin.domain.Video">
 		SELECT * 
 		FROM videodata

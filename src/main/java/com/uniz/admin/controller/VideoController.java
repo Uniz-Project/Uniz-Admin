@@ -6,18 +6,23 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.uniz.admin.domain.DataTableDTO;
 import com.uniz.admin.domain.Video;
 import com.uniz.admin.service.VideoService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @AllArgsConstructor
+@Log4j
 public class VideoController {
 	
 	private VideoService videoService;
@@ -28,14 +33,26 @@ public class VideoController {
 		return "admin/videoList";
 	}
 	
-	@GetMapping("/admin/video/list")
-	public @ResponseBody Map<String, Object> videoList(){
-		List<Video> videoList = videoService.videoList();
+	@PostMapping("/admin/video/list")
+	public @ResponseBody DataTableDTO videoList(DataTableDTO dto, @RequestBody MultiValueMap<String, String> formData){
+		int draw = Integer.parseInt(formData.get("draw").get(0));
+		int start = Integer.parseInt(formData.get("start").get(0));
+		int length = Integer.parseInt(formData.get("length").get(0));				
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", videoList);
-		System.out.println("DEBUG - data(get): " +map);
-		return map; 
+		log.info("draw : " + draw);
+		log.info("start : " + start);
+		log.info("length : " + length);
+		                      
+		dto = videoService.videoList(dto,draw,start,length);
+		
+		log.info("dto" + dto);
+		return dto;
+//		List<Video> videoList = videoService.videoList();
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("data", videoList);
+//		System.out.println("DEBUG - data(get): " +map);
+//		return map; 
 	}
 	
 	@GetMapping("/admin/video/registerForm")

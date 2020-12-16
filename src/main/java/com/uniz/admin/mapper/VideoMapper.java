@@ -25,5 +25,9 @@ public interface VideoMapper {
 
 	public int videoUpdate(Video video);
 
+	public int getVideoCount();
+
+	public List<Video2> getPagingVideoData(@Param("start")int start, @Param("length")int length);
+
 	
 }
