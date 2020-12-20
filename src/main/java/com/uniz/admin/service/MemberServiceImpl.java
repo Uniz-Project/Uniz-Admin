@@ -4,15 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.uniz.admin.domain.Board;
+import com.uniz.admin.domain.ApplyCreatorVO;
+import com.uniz.admin.domain.EmailVO;
 import com.uniz.admin.domain.Member;
 import com.uniz.admin.domain.MyUnizPoint;
 import com.uniz.admin.mapper.MemberMapper;
+import com.uniz.admin.utils.EmailSender;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -23,6 +25,7 @@ public class MemberServiceImpl implements MemberService{
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
 	
+	private EmailSender emailSender;
 
 	@Override
 	//Update임시..
@@ -110,6 +113,64 @@ public class MemberServiceImpl implements MemberService{
 			
 		}
 		return FAIL;
+	}
+
+	@Override
+	public List<ApplyCreatorVO> getCreatorMemberList() {
+		
+		return mapper.getCreatorMemberList();
+	}
+
+	@Override
+	public ApplyCreatorVO getCreatorMember(Long applySN) {
+		
+		return mapper.getCreatorMember(applySN);
+	}
+	
+	//일반회원 - > 크리에이터 승인
+	
+	@Override
+	@Transactional
+	public String applyCreator(ApplyCreatorVO creator,int state) {
+		final int USERTYPE = 2;
+		
+		String SUCCESS = "SUCCESS";
+		String FAIL = "FAIL";
+		
+		if(creator != null) {
+			try {
+				//1. applycreator 테이블의 상태를 변경한다.
+				creator.setState(state);
+				mapper.applyCreator(creator);
+				
+				//2. 유저타입을 2로 변경한다.
+				if(state == 11) {
+					mapper.changeUserType(creator.getUserSN(), USERTYPE);
+					//3. 이메일을 전송한다.
+					String userEmail = creator.getEmail();
+//					String test = "eodbs4747@naver.com";
+					
+					EmailVO email = new EmailVO();
+					
+					email.setReceiver(userEmail);
+					  email.setContent("<strong>저희 Uniz를 이용 해주셔서 감사합니다.</strong>" + "<br><br><br>" + 
+					  "크리에이터 등록이 되셨으므로 채널 게시판을 만드실 수 있으십니다.");
+					  email.setSubject("Uniz 크리에이터 신청 관련 이메일입니다");
+					  
+					  emailSender.SendEmail(email);
+					
+				}
+				
+				return SUCCESS;
+			}catch(Exception e){
+				e.printStackTrace();
+				return FAIL;
+			}
+			
+		}
+		return FAIL;
+		
+				
 	}
 
 }

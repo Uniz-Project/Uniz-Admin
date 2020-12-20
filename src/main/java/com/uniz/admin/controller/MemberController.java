@@ -9,11 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonObject;
+import com.uniz.admin.domain.ApplyCreatorVO;
 import com.uniz.admin.domain.Board;
 import com.uniz.admin.domain.Member;
 import com.uniz.admin.domain.MyUnizPoint;
@@ -132,4 +130,37 @@ public class MemberController {
 		return "/admin/creator";
 	}
 	
+	@PostMapping("/admin/member/creator")
+	public @ResponseBody Map<String, Object> creatorList(){
+		List<ApplyCreatorVO> CreatorList = memberService.getCreatorMemberList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", CreatorList);
+		log.info("memberList .... : " + map);
+		return map; //select 결과를 map으로
+	}
+	
+	@PostMapping("/admin/member/creator/accept/{applySN}/{state}")
+	public @ResponseBody Map<String, Object> acceptApply(@PathVariable Long applySN,@PathVariable int state){
+		log.info("applySN : " + applySN);
+		log.info("state : " + state);
+		
+		ApplyCreatorVO Creator = memberService.getCreatorMember(applySN);
+		
+		String result = memberService.applyCreator(Creator,state);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		log.info("memberList .... : " + map);
+		return map; //select 결과를 map으로
+	}
+	
+	@GetMapping("/admin/member/creator/detail/{applySN}")
+	public String creatorDetail(@PathVariable Long applySN, Model model) {
+		
+		ApplyCreatorVO Creator = memberService.getCreatorMember(applySN);
+		
+		model.addAttribute("Creator", Creator);
+		
+		return "/admin/creatorDetail";
+	}
 }

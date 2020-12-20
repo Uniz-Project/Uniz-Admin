@@ -31,5 +31,6 @@ public class Member {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date lastStateDatetime; //최종회원상태변경시간
 	
+	private ApplyCreatorVO creatorVO;
 	
 }

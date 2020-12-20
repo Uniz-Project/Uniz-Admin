@@ -57,5 +57,40 @@
 	WHERE 
 	  USERSN = #{userSN}   
 </update>
+<select id="getCreatorMemberList" resultType="com.uniz.admin.domain.ApplyCreatorVO">
+	select c.applysn , u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
+	from userData u, applycreator c, statuscode status, usertype utype
+	where u.usersn = c.usersn 
+	and status.statussn = c.state
+	and u.usertype = utype.usertypesn
+	and c.state = 10
+</select>
+
+<select id="getCreatorMember" resultType="com.uniz.admin.domain.ApplyCreatorVO">
+	select c.applysn , u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
+	from userData u, applycreator c, statuscode status, usertype utype
+	where u.usersn = c.usersn 
+	and status.statussn = c.state
+	and u.usertype = utype.usertypesn
+	and applysn = #{applySN}
+
+
+</select>
+
+<update id="applyCreator">
+	update applycreator
+	set 
+	state = #{state},
+	updatedatetime = sysdate
+	where usersn = #{userSN}
+</update>
+
+<update id="changeUserType">
+	update userdata
+	set 
+	usertype = #{userType},
+	updatedatetime = sysdate
+	where usersn = #{userSN}
+</update>
 	
 </mapper>
