@@ -92,5 +92,33 @@
 	updatedatetime = sysdate
 	where usersn = #{userSN}
 </update>
+
+<select id="getUserPassword" resultType="String">
+	select password
+	from userdata
+	where userid = #{userID}
+</select>
+
+<select id="userLogin" resultType="Integer">
+	SELECT COUNT(*) 
+	FROM USERDATA WHERE USERID = #{userID} 
+	AND PASSWORD = #{password}
+	AND USERTYPE = 99
+</select>
+
+<select id="getUser" resultType="com.uniz.admin.domain.Member">
+	SELECT * 
+	FROM USERDATA 
+	WHERE USERID = #{userID}
+</select>
+
+<update id="updateUserLogin">
+	UPDATE 
+	  USERDATA
+	SET
+	  LASTSTATEDATETIME = sysdate
+	WHERE 
+	  USERSN = #{userSN}
+</update>
 	
 </mapper>

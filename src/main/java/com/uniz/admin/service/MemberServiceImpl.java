@@ -2,7 +2,10 @@ package com.uniz.admin.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +27,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
-	
+	private BCryptPasswordEncoder PasswordEncode;
 	private EmailSender emailSender;
 
 	@Override
@@ -171,6 +174,37 @@ public class MemberServiceImpl implements MemberService{
 		return FAIL;
 		
 				
+	}
+
+	@Override
+	public int adminLogin(Member member, HttpSession session) {
+		final int SUCCESS = 1;
+		final int NO_DUPLICATION = 0;
+		final int FAIL = -1;
+		
+		//아이디, 비밀번호 유효성 체크
+		if(isVaildUser(member) == true) {
+			//아이디랑 비밀번호가 DB의 값과 일치하는지 확인한다.
+			String password= member.getPassword();
+			String dbPassword = mapper.getUserPassword(member);
+			Boolean pwdMatch = PasswordEncode.matches(password, dbPassword);
+			//로그인 성공
+			if(pwdMatch) {	
+				//세션 생성
+				member = mapper.getUser(member);
+				session.setAttribute("ADMIN", member);
+				session.setAttribute("userType", member.getUserType());
+				
+				//로그인 이력 변경
+				mapper.updateUserLogin(member.getUserSN());
+				return SUCCESS;
+			}
+		}
+		return FAIL;
+	}
+	
+	public boolean isVaildUser(Member dto) {
+		return dto.getUserID() != null &&  dto.getPassword() != null ? true : false;
 	}
 
 }

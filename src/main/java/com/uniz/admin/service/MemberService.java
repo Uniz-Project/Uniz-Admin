@@ -2,6 +2,8 @@ package com.uniz.admin.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.uniz.admin.domain.ApplyCreatorVO;
 import com.uniz.admin.domain.Member;
 import com.uniz.admin.domain.MyUnizPoint;
@@ -23,5 +25,7 @@ public interface MemberService {
 	public ApplyCreatorVO getCreatorMember(Long applySN);
 
 	public String applyCreator(ApplyCreatorVO creator, int state);
+
+	public int adminLogin(Member member, HttpSession session);
 	
 }

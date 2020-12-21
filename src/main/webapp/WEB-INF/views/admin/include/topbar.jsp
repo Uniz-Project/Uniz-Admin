@@ -60,7 +60,11 @@
 			<!-- ============================================================== -->
 			<!-- Right side toggle and nav items -->
 			<!-- ============================================================== -->
+			
+			
 			<ul class="navbar-nav">
+			
+				
 				<!-- ============================================================== -->
 				<!-- User profile and search -->
 				<!-- ============================================================== -->
@@ -68,7 +72,21 @@
 					class="nav-link dropdown-toggle waves-effect waves-dark" href=""
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
 						src="/resources/assets/images/users/1.jpg" alt="user"
-						class="profile-pic mr-2">Markarn Doe</a></li>
+						class="profile-pic mr-2">${ADMIN.nick}</a>
+						
+						<div class="dropdown">
+
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+ 						    <a class="dropdown-item" href="/admin/admin/logout">로그아웃</a>
+						    <!-- <a class="dropdown-item" onclick="location.href='localhost:8080/'">로그아웃</a> -->
+						    <!-- <a class="dropdown-item" href="/admin/uniz/unizLayer">UnizLayerList관리</a>
+						    <a class="dropdown-item" href="#">Something else here</a> -->
+ 						 </div>
+                        
+                        </div>
+						
+					</li>
+				
 			</ul>
 		</div>
 	</nav>

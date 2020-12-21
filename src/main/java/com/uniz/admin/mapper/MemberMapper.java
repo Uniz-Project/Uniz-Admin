@@ -32,4 +32,12 @@ public interface MemberMapper {
 
 	public void changeUserType(@Param("userSN")Long userSN, @Param("userType")int userType);
 
+	public String getUserPassword(Member member);
+
+	public int userLogin(Member member);
+
+	public Member getUser(Member member);
+
+	public void updateUserLogin(int userSN);
+
 }
