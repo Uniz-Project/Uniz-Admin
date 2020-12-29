@@ -94,8 +94,6 @@
 		</div>
 		<%@include file="/WEB-INF/views/admin/include/scripts.jsp" %>
 		<script type="text/javascript" src="/resources/js/js/wniz.js"></script>
-		<script src="/resources/scss/bootstrap/datatables/jquery.dataTables.min.js"></script>
-		<script src="/resources/scss/bootstrap/datatables/dataTables.bootstrap4.min.js"></script>
 		<script>
        
 			 $(document).ready(function() {

@@ -9,13 +9,10 @@
 			<!-- ============================================================== -->
 			<a class="navbar-brand justify-content-center" href="/admin/main">
 				<!-- Logo icon --> <b class="logo-icon"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-					<!-- Dark Logo icon --> <img
-					src="/resources/assets/images/logo-icon.png" alt="homepage"
-					class="dark-logo" />
 
 			</b> <!--End Logo icon --> <!-- Logo text --> <span class="logo-text">
 					<!-- dark Logo text --> <img
-					src="/resources/assets/images/logo-text.png" alt="homepage"
+					src="/resources/assets/images/logo-content4.png" alt="homepage"
 					class="dark-logo" />
 
 			</span>
@@ -48,13 +45,13 @@
 				<!-- Search -->
 				<!-- ============================================================== -->
 
-				<li class="nav-item hidden-sm-down">
+			<!-- 	<li class="nav-item hidden-sm-down">
 					<form class="app-search pl-3">
 						<input type="text" class="form-control"
 							placeholder="Search for..."> <a class="srh-btn"><i
 							class="ti-search"></i></a>
 					</form>
-				</li>
+				</li> -->
 			</ul>
 
 			<!-- ============================================================== -->

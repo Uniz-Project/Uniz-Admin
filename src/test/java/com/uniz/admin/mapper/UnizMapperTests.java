@@ -10,19 +10,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.uniz.admin.domain.Video2;
+import com.uniz.admin.utils.Util;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/*.xml")
 @Log4j
 public class UnizMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private UnizMapper unizMapper;
 	@Setter(onMethod_ = @Autowired)
 	private VideoMapper videoMapper;
-
+	
+	
+	
 	@Test
 	public void autoVideoInsert() {
 		// 1. VideoData2 테이블에서 오늘날짜로 입력된 데이터를 가져온다.
@@ -94,6 +97,12 @@ public class UnizMapperTests {
 		System.out.println(searchUnizType);
 
 	}
+	
+	@Test
+	public void test1234() {
+		log.info(Util.getToday());
+	}
+	
 
 	@Test
 	public void getSplitKeyWordTest() {
@@ -361,5 +370,4 @@ public class UnizMapperTests {
 				}
 			}
 		}
-
 }

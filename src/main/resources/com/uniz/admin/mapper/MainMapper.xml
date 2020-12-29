@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.uniz.admin.mapper.MainMapper">
+	
+	<select id="newUserCnt" resultType="Integer">
+		SELECT count(*) 
+		FROM userdata 
+		WHERE to_char(createdatetime) = #{data}
+	</select>
+	
+	<select id="todayBoardWriteCnt" resultType="Integer">
+		select sum(totalCnt.cnt)
+		from
+		(
+			select count(*) cnt
+			from boardpost
+			where to_char(createdatetime) = #{data}
+		union all
+			select count(*) cnt
+			from channelpost
+			where to_char(createdatetime) = #{data}
+		) totalCnt 
+		
+	</select>
+	
+	<select id="todayChannelCreateCnt" resultType="Integer">
+		SELECT count(*) 
+		FROM CHANNEL
+		WHERE to_char(createdatetime) = #{data}
+	</select>
+	
+	<select id="todayRegVideoCnt" resultType="Integer">
+		SELECT count(*) 
+		FROM Videodata
+		WHERE to_char(createdatetime) = #{data}
+	</select>
+	
+	 <select id="dailyMemberAmount" resultType="hashmap">
+	 	select to_char(createdatetime) as createDateTime , count(createdatetime) amount
+		from userdata
+		where to_char(createdatetime) between #{beforeDate} and #{date}
+		group by to_char(createdatetime)
+		order by createdatetime asc
+	 
+	 </select>
+	 
+	  <select id="dailyChannelAmount" resultType="hashmap">
+	 	select to_char(createdatetime) as createDateTime , count(createdatetime) amount
+		from channel
+		where to_char(createdatetime) between #{beforeDate} and #{date}
+		group by to_char(createdatetime)
+		order by createdatetime asc
+	 
+	 </select>
+	 
+	 <select id="pieChartData" resultType="com.uniz.admin.domain.UnizChartVO">
+	     	select ul.parentunizsn ,u.unizkeyword, count(utbcateSN) count
+			from videodata v, unizlayerlist ul, uniz u
+			where ul.unizsn = v.utbcateSN
+			and u.unizsn = parentunizsn
+			and parentunizsn != 1000
+			group by ul.parentunizsn,u.unizkeyword
+			order by count desc
+	 </select>
+	
+</mapper>

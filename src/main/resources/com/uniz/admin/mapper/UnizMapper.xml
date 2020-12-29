@@ -104,7 +104,6 @@
 		SELECT unizsn, uniztypesn, unizKeyword, enable 
 		FROM uniz 
 		WHERE unizsn NOT IN (SELECT unizsn FROM unizlayerlist)
-		
 	</select>
 	
 	<select id="getCountUnizKeyWord" resultType="Integer">

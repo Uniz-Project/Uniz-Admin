@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="/resources/assets/plugins/jquery/dist/jquery.min.js"></script>
-
 <script src="/resources/assets/plugins/popper.js/dist/umd/popper.min.js"></script>
 <script src="/resources/assets/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/resources/js/app-style-switcher.js"></script>
