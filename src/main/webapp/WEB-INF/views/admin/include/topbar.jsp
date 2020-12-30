@@ -68,7 +68,7 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle waves-effect waves-dark" href=""
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-						src="/resources/assets/images/users/1.jpg" alt="user"
+						src="/resources/assets/images/users/ADMIN.png" alt="user"
 						class="profile-pic mr-2">${ADMIN.nick}</a>
 						
 						<div class="dropdown">

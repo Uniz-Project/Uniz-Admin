@@ -18,7 +18,8 @@ public class Member {
 	private String nick; //닉네임
 	private String imgUrl; //프로필사진
 	private int state; //회원상태
-	
+	private String userType_s;
+	private String state_s;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date lastLoginDatetime; //최종로그인시간
 

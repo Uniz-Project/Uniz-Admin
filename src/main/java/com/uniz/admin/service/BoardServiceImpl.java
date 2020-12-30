@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uniz.admin.domain.Board;
 import com.uniz.admin.mapper.BoardMapper;
@@ -99,4 +100,13 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 	
+	@Transactional
+	@Override
+	public void updateBoard(Board board) {
+	
+		log.info("board"+ board);
+		int postResult = mapper.updateBoardPost(board);
+		int contentResult = mapper.updateBoardContent(board);
+		
+	}
 }

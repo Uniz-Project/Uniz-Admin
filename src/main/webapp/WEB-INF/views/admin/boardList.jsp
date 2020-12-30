@@ -35,10 +35,13 @@
 						<div class="dropdown">
 							    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">게시판전체
 							    <span class="caret"></span></button>
-							    <ul class="dropdown-menu" id="BoardTitle">
-							      <li><a href="/admin/board">게시판전체</a></li>
+							    
+							    <ul class="dropdown-menu" id="BoardTitle" style="background-color: transparent; border: none; overflow: auto; height: 150px;">
+									<li>
+									<button class="btn btn-primary" type="button" style="width:131px;" onClick="location.href='/admin/board'">게시판전체</button>
+									</li>
 							      <c:forEach items="${titleList}" var="list">
-									<li><button onClick="searchBoardTitle(${list.boardSN})">${list.boardTitle}</button></li>
+									<li><button class="btn btn-primary" style="width:131px; border:solid 1px black;" onClick="searchBoardTitle(${list.boardSN})">${list.boardTitle}</button></li>
 								</c:forEach>
 							    </ul>
   						</div>
@@ -50,7 +53,7 @@
 										<table class="table align-items-center table-flush table-hover" style="width: 100%" id="boardTable">
 											<thead class="thead-light">
 												<tr id="rowData">
-													<th>게시판번호</th>
+													<th>게시물번호</th>
 													<th>제목</th>
 													<th>닉네임</th>
 													<th>게시판명</th>

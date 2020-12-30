@@ -25,7 +25,7 @@ function memberList(){
 		"<th>처리상태</th>\n\
 		<th>신청일시</th>\n\
 		<th>변경일시</th>\n\
-		<th>회원타입</th><th>버튼</th>";
+		<th>회원타입</th><th>처리</th>";
 		
 	//테이블에 추가
 	$("#rowData").html(element);
@@ -73,8 +73,8 @@ function memberList(){
 			{data: "updateDateTime"},
 			{data: "userType"},
 			{data: "applySN", render : function(data, type, row){
-				return '<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="permit('+data+','+11+');">승인</button>'
-						+'<button type="button" id="btnIns" style="margin-left : 5px;" class="btn btn-danger mb-1" onclick="permit('+data+','+12+');">거절</button>'
+				return '<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="permit('+data+','+2+');">승인</button>'
+						+'<button type="button" id="btnIns" style="margin-left : 5px;" class="btn btn-danger mb-1" onclick="permit('+data+','+3+');">거절</button>'
 				}
 			},
 		]

@@ -20,8 +20,8 @@ function boardList(){
 		serverSide: false,
 		paging: true,
 		pagingType: "simple_numbers",
-		order: false, 
-		ordering: false,
+		order: [[6,'desc']], 
+		ordering: true,
 		info: true,
 		filter: true,
 		
@@ -75,8 +75,8 @@ function boardDetail(postSN){
 } 
 
 function boardUpdate(postSN){
-	alert("미구현");
-//	location.href="/admin/board/update/"+postSN;
+//	alert("미구현");
+	location.href="/admin/board/update/"+postSN;
 }
 
 //해당 게시물 삭제
@@ -115,8 +115,8 @@ function searchBoardTitle(boardSN){
 		serverSide: false,
 		paging: true,
 		pagingType: "simple_numbers",
-		order: false, 
-		ordering: false,
+		order: [[6,'desc']], 
+		ordering: true,
 		info: true,
 		filter: true,
 		

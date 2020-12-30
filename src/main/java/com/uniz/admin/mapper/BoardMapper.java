@@ -22,6 +22,10 @@ public interface BoardMapper {
 
 	public List<Board> getTitleBoardList(@Param("boardSN")Long boardSN);
 
+	public int updateBoardPost(Board board);
+
+	public int updateBoardContent(Board board);
+
 	//public int boardUpdate(Long postSN);
 	
 }

@@ -147,7 +147,7 @@ public class MemberServiceImpl implements MemberService{
 				mapper.applyCreator(creator);
 				
 				//2. 유저타입을 2로 변경한다.
-				if(state == 11) {
+				if(state == 2) {
 					mapper.changeUserType(creator.getUserSN(), USERTYPE);
 					//3. 이메일을 전송한다.
 					String userEmail = creator.getEmail();

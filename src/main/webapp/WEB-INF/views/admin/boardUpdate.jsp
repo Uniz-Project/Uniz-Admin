@@ -17,7 +17,7 @@
     <!-- Container Fluid -->
 					<div class="container-fluid" id="container-wrapper">
 						<div class="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 class="h3 mb-0 text-gray-800">회원정보수정</h1>
+							<h1 class="h3 mb-0 text-gray-800">회원게시물수정</h1>
 						</div>
 	
 						<!-- row -->
@@ -28,43 +28,30 @@
 										<h6 class="m-0 font-weight-bold text-primary">상세정보</h6>
 									</div>
 									<div class="card-body">
-										<form id="memberForm">
+										<form id="memberForm" action="/admin/board/update" method="post">
+										
+											<input type="hidden" value="${board.postSN}" name="postSN">
 											<div class="form-group">
-												<label for="tableData1">유저번호</label>
-												<input class="form-control  mb-3" type="text" id="tableData1" name="userSN" value="${member.userSN}" placeholder="" readonly="readonly">
+												<label for="tableData1">게시자</label>
+												<input class="form-control  mb-3" type="text" id="tableData1" name="nick" value="${board.nick}" placeholder="" readonly="readonly">
 											</div>
 	
 											<div class="form-group">
-												<label for="tableData2">소셜가입처</label>
-												<input class="form-control  mb-3" type="text" id="tableData2" name="provider" value="${member.provider}"placeholder="" readonly="readonly" >
+												<label for="tableData2">제목</label>
+												<input class="form-control  mb-3" type="text" id="tableData2" name="title" value="${board.title}"placeholder="">
 											</div>
 											<div class="form-group">
-												<label for="tableData3">유저타입</label>
-												<input class="form-control  mb-3" type="text" id="tableData3" name="userType" value="${member.userType}" placeholder="" >
+												<label for="tableData3">내용</label>
+												<textarea class="form-control  mb-3" id="tableData3" name="postContent" placeholder="" >${board.postContent}</textarea>
 											</div>
 											
-											<div class="form-group">
-												<label for="tableData4">닉네임</label>
-												<input class="form-control  mb-3" type="text" id="tableData4" name="nick" value="${member.nick}" placeholder="" readonly="readonly">
-											</div>
-											<div class="form-group">
-												<label for="tableData5">프로필사진</label>
-												<input class="form-control  mb-3" type="text" id="tableData5" name="imgUrl" value="${member.imgUrl}" placeholder="" >
-											</div>
-											<div class="form-group">
-												<label for="tableData6">회원상태</label>
-												<input class="form-control  mb-3" type="text" id="tableData6" name="state"  value="${member.state}"placeholder="" >
-											</div>
-											
-											<input class="form-control" type="hidden" id="id" name="id" value="0" />
-											
-										</form>									
 										
 										<div class="text-right">
 											<button type="button" onClick="formClear();" id="btnClear" class="btn btn-primary mb-1">초기화</button>
-											<button type="button" id="btnUpd" class="btn btn-warning mb-1" onclick="Update();">수정</button>
+											<button type="submit" id="btnUpd" class="btn btn-warning mb-1">수정</button>
 											<button type="button" id="btnDel" class="btn btn-danger mb-1" onclick="memberDelete();">삭제</button>
 										</div>
+										</form>									
 									</div>
 								</div>
 							</div>
@@ -74,8 +61,7 @@
 					</div>
 					<!-- Container Fluid -->
 				</div>
-<script type="text/javascript" src="/resources/js/js/memberList.js"></script>    
-<%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
+<script type="text/javascript" src="/resources/js/js/boardList.js"></script>
 <%@ include file="/WEB-INF/views/admin/include/footer.jsp" %>
 					<!-- Container Fluid -->
 	</div>

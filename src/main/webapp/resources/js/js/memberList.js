@@ -35,8 +35,8 @@ function memberList(){
 		serverSide: false,
 		paging: true,
 		pagingType: "simple_numbers",
-		order: false, 
-		ordering: false,
+		order: [[7,'desc']], 
+		ordering: true,
 		info: true,
 		filter: true,
 		
@@ -72,10 +72,10 @@ function memberList(){
 				}
 			},
 			{data: "userID"},
-			{data: "userType"},
+			{data: "userType_s"},
 			{data: "nick"},
 			{data: "imgUrl"},
-			{data: "state"},
+			{data: "state_s"},
 			{data: "lastLoginDatetime"},
 			{data: "createDatetime"},
 			{data: "updateDatetime"},

@@ -18,4 +18,6 @@ public interface BoardService {
 
 	public List<Board> getTitleBoardList(Long boardSN);
 
+	public void updateBoard(Board board);
+
 }

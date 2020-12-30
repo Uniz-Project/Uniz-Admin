@@ -12,14 +12,14 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/admin/member" aria-expanded="false">
                                 <i class="mr-3 fa fa-user" aria-hidden="true"></i><span
-                                    class="hide-menu">회원정보확인</span></a>
+                                    class="hide-menu">회원관리</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/admin/board" aria-expanded="false"><i class="mr-3 fa fa-table"
-                                    aria-hidden="true"></i><span class="hide-menu">게시판정보확인</span></a></li>
+                                    aria-hidden="true"></i><span class="hide-menu">게시판관리</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/admin/channel" aria-expanded="false"><i class="mr-3 fa fa-font"
-                                    aria-hidden="true"></i><span class="hide-menu">채널정보확인</span></a></li>
+                                    aria-hidden="true"></i><span class="hide-menu">채널관리</span></a></li>
                         <li class="sidebar-item">
                         <div class="dropdown">
                         	

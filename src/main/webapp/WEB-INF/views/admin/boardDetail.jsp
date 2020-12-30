@@ -39,12 +39,16 @@
 									${board.title}</div>
 
 								<div style="font-size: 8px; margin-top: 10px">
-									<span style="margin-right: 15px">작성자 : ${board.nick}</span> <span
+									<span style="margin-right: 15px">작성자 : ${board.nick}</span> 
+									<span
 										style="margin-right: 15px">작성일시 :${board_createDatetime }</span>
 									<span>최종 수정일시 : ${board_updateDatetime}</span>
 								</div>
 								<hr />
 								<div>${board.postContent}</div>
+								
+								
+								<div>이미지가들어갈 공간입니당</div>
 								<%-- <input type="hidden" id="categoryCd" value="${board.categoryCd}" />
 												<input type="hidden" id="id" value="${board.postSN}" /> --%>
 

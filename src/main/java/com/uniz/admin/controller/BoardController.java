@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,6 +72,16 @@ public class BoardController {
 		model.addAttribute("board",board);
 		
 		return "/admin/boardUpdate"; 
+	}
+	
+
+	@PostMapping("/admin/board/update")
+	public String boardUpdatePost(Board board) {
+		
+		boardService.updateBoard(board);
+		
+		
+		return "redirect:/admin/board";
 	}
 	
 	

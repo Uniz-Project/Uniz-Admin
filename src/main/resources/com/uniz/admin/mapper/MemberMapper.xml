@@ -4,8 +4,20 @@
 
 <mapper namespace="com.uniz.admin.mapper.MemberMapper">
 	<select id="getMemberList" resultType="com.uniz.admin.domain.Member">
-		SELECT * 
-		FROM USERDATA
+	
+		select u.*
+		, ut.usertype usertype_s
+		, s.codename state_s
+		from 
+		  userdata u 
+		, usertype ut
+		, statecode s
+		where 
+		u.usertype = ut.usertypesn
+		and u.state = s.codeid
+		and s.groupcodeid = 'A0001'
+		
+
 	</select>
 		
 	<select id="getMember" resultType="com.uniz.admin.domain.Member">
@@ -24,6 +36,7 @@
 		UPDATE USERDATA
 		SET
 		USERTYPE = #{userType},
+		NICK = #{nick},
 		IMGURL = #{imgUrl},
 		STATE = #{state},
 		UPDATEDATETIME = sysdate
@@ -57,23 +70,24 @@
 	WHERE 
 	  USERSN = #{userSN}   
 </update>
+
 <select id="getCreatorMemberList" resultType="com.uniz.admin.domain.ApplyCreatorVO">
-	select c.applysn , u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
-	from userData u, applycreator c, statuscode status, usertype utype
+	select c.applysn , u.userid, u.nick,c.channeltitle ,c.category, c.email,status.codename statusName,c.createdatetime,c.updatedatetime ,utype.usertype
+	from userData u, applycreator c, statecode status, usertype utype
 	where u.usersn = c.usersn 
-	and status.statussn = c.state
+	and status.codeid = c.state
 	and u.usertype = utype.usertypesn
-	and c.state = 10
+	and status.groupcodeid = 'B0001'
+	and c.state =1
 </select>
 
 <select id="getCreatorMember" resultType="com.uniz.admin.domain.ApplyCreatorVO">
-	select c.applysn , u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
+	select c.applysn , u.usersn,u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
 	from userData u, applycreator c, statuscode status, usertype utype
 	where u.usersn = c.usersn 
 	and status.statussn = c.state
 	and u.usertype = utype.usertypesn
 	and applysn = #{applySN}
-
 
 </select>
 

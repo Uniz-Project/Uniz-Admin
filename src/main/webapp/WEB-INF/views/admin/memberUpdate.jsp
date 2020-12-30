@@ -44,7 +44,7 @@
 											
 											<div class="form-group">
 												<label for="tableData4">닉네임</label>
-												<input class="form-control  mb-3" type="text" id="tableData4" name="nick" value="${member.nick}" placeholder="" readonly="readonly">
+												<input class="form-control  mb-3" type="text" id="tableData4" name="nick" value="${member.nick}" placeholder="">
 											</div>
 											<div class="form-group">
 												<label for="tableData5">프로필사진</label>

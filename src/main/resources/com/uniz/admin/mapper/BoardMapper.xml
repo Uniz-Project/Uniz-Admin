@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="getBoard" resultType="com.uniz.admin.domain.Board">
-		SELECT B.TITLE, U.NICK, B2.BOARDTITLE, BC.POSTCONTENT, B.VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
+		SELECT B.POSTSN, B.TITLE, U.NICK, B2.BOARDTITLE, BC.POSTCONTENT, B.VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME 
 		FROM BOARDPOST B, BOARDPOSTCONTENT BC, USERDATA U, BOARD B2
 		WHERE B.POSTSN = BC.POSTSN 
 		AND B.POSTSN = #{postSN} 
@@ -55,5 +55,20 @@
 		SELECT *
 		FROM BOARD
 	</select>
+	
+	<update id="updateBoardPost">
+	 	update boardpost
+	 	set
+	 		title = #{title},
+	 		updatedatetime = sysdate
+	 	where postsn = #{postSN}
+	</update>
+	
+	<update id="updateBoardContent">
+	 	update boardpostcontent
+	 	set
+	 		postcontent = #{postContent}
+	 	where postsn = #{postSN}
+	</update>
 	
 </mapper>
