@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.uniz.admin.domain.Board;
+import com.uniz.admin.domain.ReportVO;
  
 public interface BoardMapper {
 
@@ -26,6 +27,16 @@ public interface BoardMapper {
 
 	public int updateBoardContent(Board board);
 
+	public List<ReportVO> getReportList();
+
+	public ReportVO getReportBoard(@Param("reportSN")Long reportSN);
+
+	public void applyReport(@Param("reportSN")Long reportSN, @Param("state_n")int state);
+
+	public void deleteBoardReply(@Param("postSN")Long postSN);
+
+	public void deleteBoardContent(@Param("postSN")Long postSN);
+	
 	//public int boardUpdate(Long postSN);
 	
 }

@@ -3,6 +3,14 @@
 <html lang="ko">
 	<head>
 		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+		<style>
+			tr th:nth-child(2) {
+				width: 300px;
+			}
+			tr th:nth-child(4) {
+				width: 200px;
+			}
+		</style>
 	</head>
 	<body>
  	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -41,14 +49,13 @@
 												<tr>
 													<th>번호</th>
 													<th>제목</th>
-													<th>게시자ID</th>
 													<th>게시자명</th>
 													<th>유튜브URL</th>
 													<th>유튜브썸네일</th>               
 													<th>좋아요수</th>
-													<th>구독자수</th>
 													<th>조회수</th>
 													<th>카테고리</th>
+													<th>등록일</th>
 												</tr>
 											</thead>
 										</table>

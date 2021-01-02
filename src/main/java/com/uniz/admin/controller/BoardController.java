@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniz.admin.domain.Board;
+import com.uniz.admin.domain.ReportVO;
 import com.uniz.admin.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -110,5 +111,26 @@ public class BoardController {
 		
 	}
 	
+	@GetMapping("/admin/board/boardReportList")
+	public @ResponseBody Map<String, Object> boardReportList(){
+		List<ReportVO> reportList = boardService.getReportBoardList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", reportList);
+		return map; 
+	}
 	
+	@PostMapping("/admin/board/report/accept/{reportSN}/{state}")
+	public @ResponseBody Map<String, Object> acceptReport(@PathVariable Long reportSN,@PathVariable int state){
+		
+		ReportVO report = boardService.getReportBoard(reportSN);
+		
+		log.info("reportVO : " + report);
+		
+		String result = boardService.applyReport(report,state);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		
+		return map;
+	}
 }

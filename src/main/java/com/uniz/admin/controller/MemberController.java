@@ -150,8 +150,7 @@ public class MemberController {
 		String result = memberService.applyCreator(Creator,state);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", result);
-		log.info("memberList .... : " + map);
-		return map; //select 결과를 map으로
+		return map; //결과를 map으로
 	}
 	
 	@GetMapping("/admin/member/creator/detail/{applySN}")

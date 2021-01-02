@@ -21,8 +21,8 @@ function videoList(){
 		serverSide: true,
 		paging: true,
 		pagingType: "simple_numbers",
-		order: false, 
-		ordering: false,
+		order: [[8,'desc']], 
+		ordering: true,
 		info: true,
 		filter: true,
 		
@@ -56,16 +56,14 @@ function videoList(){
 				}
 			},
 			{data: "title"},
-			{data: "authorId"},
 			{data: "authorNick"},
 			{data: "urlPath"},
 			{data: "thumbUrl",render : function(data, type, row){return "<img src='"+data+"' style='height: 50px; ' alt='등록된 썸네일이 없습니다.'></img>"} },
 			{data: "likeCnt"},
-			{data: "followCnt"},
 			{data: "viewCnt"},
-			{data: "utbCateSn"}
-		]
-
+			{data: "utbCateSn"},
+			{data: "createDatetime"}
+		],
 	});
 }
 

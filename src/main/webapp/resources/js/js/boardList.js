@@ -162,3 +162,98 @@ function searchBoardTitle(boardSN){
 		]
 	});
 }
+function boardReportList(){
+	
+	
+	
+	$("#boardTable").DataTable().rows().clear().draw();
+	
+	$("#boardTable").DataTable().destroy().draw();
+	
+	var element =
+		"<th>신고번호</th><th>글번호</th><th>글제목</th>\n\
+		<th>신고사유</th>\n\
+		<th>신고유저</th>\n\
+		<th>신고일</th>\n\
+		<th>변경일</th>"+         
+		"<th>처리상태</th>\n\
+		<th>처리</th>";
+		
+	//테이블에 추가
+	$("#rowData").html(element);
+	
+	$("#headTitle").html("게시판 > 신고목록");
+	
+	$("#boardTable").DataTable({
+		processing: true,
+		serverSide: false,
+		paging: true,
+		pagingType: "simple_numbers",
+		order: [[4,'desc']], 
+		ordering: true,
+		info: true,
+		filter: true,
+		
+		language: {
+			"zeroRecords": "데이터가 없습니다.",
+			"lengthMenu": "_MENU_ 개씩 보기",
+			"search": "검색:",
+			"info": "_PAGE_ / _PAGES_",
+			"infoFiltered": "(전체 _MAX_개의 데이터 중 검색결과)",
+			"paginate": {
+				"previous": "이전",
+				"next": "다음"
+			} 
+		},
+		ajax:{
+			"url": "/admin/board/boardReportList",
+			"type" :"GET",
+			"dataType" : "json"
+		},
+		columns: [
+			
+			//postSN에 드랍다운 메뉴 추가 - render 
+			{data: "reportSN", render : function(data, type, row){
+				return '<a href="/admin/board/report/detail/'+data+'">'+data+'</a>'
+				}
+			},
+			{data: "postSN"},
+			{data: "title"},
+			{data: "reason"},
+			{data: "nick"},
+			{data: "reportDate"},
+			{data: "updateDate"},
+			{data: "state"},
+			{data: "reportSN", render : function(data, type, row){
+				return '<button type="button" id="btnIns" class="btn btn-success mb-1" onclick="permit('+data+','+2+');">승인</button>'
+						+'<button type="button" id="btnIns" style="margin-left : 5px;" class="btn btn-danger mb-1" onclick="permit('+data+','+3+');">거절</button>'
+				}
+			},
+		]
+	});
+}
+
+function permit(data, state){
+	let reportSN = parseInt(data);
+	const ChangeState = parseInt(state);
+	console.log(ChangeState);
+	$.ajax({
+		url: "/admin/board/report/accept/"+reportSN+'/'+state,
+		type: "post", 
+		contentType : "application/json; charset=UTF-8",
+		dataType: "json",
+		success: function(data){
+			if(data.result === "SUCCESS"){
+				$("#boardTable").DataTable().ajax.reload();
+				alert("정상적으로 수정되었습니다.");
+			} else {
+				alert("데이터 수정 중 오류가 발생하였습니다.\n입력한 정보를 다시 확인해 주세요.");
+			}
+		},
+		error: function(request, status, error){
+			console.log("code:" + request.status);
+			console.log("message:" + request.responseText);
+			console.log("error:" + error);
+		}
+	});
+}

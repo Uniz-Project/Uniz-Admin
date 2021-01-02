@@ -71,4 +71,49 @@
 	 	where postsn = #{postSN}
 	</update>
 	
+	<select id="getReportList" resultType="com.uniz.admin.domain.ReportVO"> 
+		select 
+		b.reportsn
+		,b.postsn
+		,b.title
+		,b.detail
+		,b.reason
+		,b.reportdate
+		,b.updatedate
+		,s.codename state
+		,u.nick 
+			from boardreport b, statecode s, userdata u
+		where b.state = s.codeid
+		and u.usersn = b.usersn
+		and b.state = 1 
+		and s.groupcodeid = 'C0001'
+	</select>
+	
+	<update id="applyReport">
+		update boardreport
+		set
+			state = #{state_n},
+			updatedate = sysdate
+		where reportsn = #{reportSN}
+	</update>
+	
+	<select id="getReportBoard" resultType="com.uniz.admin.domain.ReportVO">
+		select *
+		from boardreport
+		where reportsn = #{reportSN}
+	</select>
+	
+	<delete id="deleteBoardReply">
+		delete 
+		from boardpostreply
+		where postsn = #{postSN}
+	</delete>
+	
+	<delete id="deleteBoardContent">
+		delete
+		from boardpostcontent
+		where postsn = #{postSN}
+	</delete>
+	
+
 </mapper>

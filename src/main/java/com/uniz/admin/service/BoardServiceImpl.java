@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uniz.admin.domain.Board;
+import com.uniz.admin.domain.ReportVO;
 import com.uniz.admin.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -109,4 +110,57 @@ public class BoardServiceImpl implements BoardService{
 		int contentResult = mapper.updateBoardContent(board);
 		
 	}
+
+	@Override
+	public List<ReportVO> getReportBoardList() {
+		
+		return mapper.getReportList();
+	}
+
+	@Override
+	public ReportVO getReportBoard(Long reportSN) {
+		
+		return mapper.getReportBoard(reportSN);
+	}
+
+	@Override
+	public String applyReport(ReportVO reportVO, int state) {
+		
+		String SUCCESS = "SUCCESS";
+		String FAIL = "FAIL";
+		
+		if(reportVO != null) {
+			try {
+				
+				mapper.applyReport(reportVO.getReportSN(), state);
+				
+				if(state == 2) {
+					//승인 시 게시글도 삭제시켜줘야한다.
+					cascadeDeleteBoardPost(reportVO.getPostSN());
+				}
+				return SUCCESS;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return FAIL;
+			}
+		}
+		return FAIL;
+	}
+	
+	@Transactional
+	@Override
+	public void cascadeDeleteBoardPost(Long postSN) {
+		
+		//댓글삭제
+		mapper.deleteBoardReply(postSN);
+		log.info("댓글삭제완료");
+		//본문삭제
+		mapper.deleteBoardContent(postSN);
+		log.info("본문삭제완료");
+		//게시물삭제
+		mapper.boardDelete(postSN);
+		log.info("게시물삭제완료");
+	}
+	
+	
 }

@@ -4,6 +4,7 @@
 <html lang="ko">
 	<head>
 		<%@include file="/WEB-INF/views/admin/include/header.jsp" %>
+
 	</head>
 	<body>
  	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -44,6 +45,7 @@
 									<li><button class="btn btn-primary" style="width:131px; border:solid 1px black;" onClick="searchBoardTitle(${list.boardSN})">${list.boardTitle}</button></li>
 								</c:forEach>
 							    </ul>
+		  						<button type="button" id="btnDel" class="btn btn-danger" onClick="boardReportList()" >신고목록</button>
   						</div>
 						<div class="row">
 							<!-- DataTable with Hover -->

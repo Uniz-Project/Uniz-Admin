@@ -3,6 +3,7 @@ package com.uniz.admin.service;
 import java.util.List;
 
 import com.uniz.admin.domain.Board;
+import com.uniz.admin.domain.ReportVO;
 
 public interface BoardService {
 
@@ -20,4 +21,11 @@ public interface BoardService {
 
 	public void updateBoard(Board board);
 
+	public List<ReportVO> getReportBoardList();
+
+	public ReportVO getReportBoard(Long reportSN);
+
+	public String applyReport(ReportVO reportVO, int state);
+	
+	public void cascadeDeleteBoardPost(Long postSN);
 }
