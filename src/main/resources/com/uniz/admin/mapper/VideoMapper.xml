@@ -83,4 +83,11 @@
 			
 		WHERE VIDEOSN = #{videoSN}
 	</update>
+	
+	<delete id="deletePlayLog">
+		delete 
+		from myplaylog
+		where videosn = #{videoSN}
+	</delete>
+	
 </mapper>

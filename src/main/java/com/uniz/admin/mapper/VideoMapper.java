@@ -29,5 +29,7 @@ public interface VideoMapper {
 
 	public List<Video2> getPagingVideoData(@Param("start")int start, @Param("length")int length);
 
+	public void deletePlayLog(@Param("videoSN")Long videoSN);
+
 	
 }

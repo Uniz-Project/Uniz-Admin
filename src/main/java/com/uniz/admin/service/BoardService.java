@@ -27,5 +27,5 @@ public interface BoardService {
 
 	public String applyReport(ReportVO reportVO, int state);
 	
-	public void cascadeDeleteBoardPost(Long postSN);
+	public int cascadeDeleteBoardPost(Long postSN);
 }

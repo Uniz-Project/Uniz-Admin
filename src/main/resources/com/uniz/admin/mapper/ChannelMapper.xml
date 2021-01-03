@@ -4,11 +4,33 @@
 
 <mapper namespace="com.uniz.admin.mapper.ChannelMapper">
 	<select id="getChannelList" resultType = "com.uniz.admin.domain.Channel">
-		SELECT 
-		CP.POSTSN, C.CHANNELTITLE CHANNELTITLE, C.CHANNELCOMMENT CHANNELTEXT , U.NICK, CP.VIEWCNT, CP.LIKECNT, C.CREATEDATETIME, C.UPDATEDATETIME
+		select c.*, u.nick
 		FROM 
-		CHANNEL C, CHANNELPOST CP , USERDATA U 
-		WHERE C.CHANNELSN = CP.CHANNELSN AND CP.USERSN = U.USERSN
+		CHANNEL c, USERDATA u 
+		WHERE c.usersn = u.usersn
+	</select>
+	
+	<select id="getChannelBoardList" resultType = "com.uniz.admin.domain.Channel">
+		select 
+		c.postsn
+		,c.channelsn
+		,c.title posttitle
+		,c.viewcnt
+		,c.likecnt
+		,c.createdatetime
+		,c.updatedatetime
+		,c.replycnt
+		,u.nick
+		from channelpost c, userdata u
+		where c.usersn = u.usersn
+		and c.channelsn=#{channelSN}
+	</select>
+	
+	<select id="getChannel" resultType="com.uniz.admin.domain.Channel">
+		select c.*, u.nick
+		from channel C, userdata u
+		where c.usersn = u.usersn
+		and c.channelSN = #{channelSN}
 	</select>
 	
 	<select id="getBoard" resultType = "com.uniz.admin.domain.Channel"> 
@@ -31,4 +53,120 @@
 		DELETE FROM CHANNELPOST 
 		WHERE POSTSN = #{postSN}
 	</delete>
+	
+	<update id="updateChannel">
+		update channel
+		set 
+			channeltitle = #{channelTitle},
+			channelcomment = #{channelComment},
+			createdatetime = sysdate
+		 where channelsn = #{channelSN}
+	</update>
+	
+	<delete id="deleteBoardImg">
+		delete 
+		from channel_imgfile
+		where 
+		<foreach collection="channelList" item="item" open="" close="" separator="OR">		
+			postSN = #{item.postSN}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteBoardReply">
+		delete 
+		from channelreply
+		where 
+		<foreach collection="channelList" item="item" open="" close="" separator="OR">		
+			postSN = #{item.postSN}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteBoardContent">
+		delete 
+		from channelpostcontent
+		where 
+		<foreach collection="channelList" item="item" open="" close="" separator="OR">		
+			postSN = #{item.postSN} 
+		</foreach>
+	</delete>
+	
+	<delete id="deleteBoardPost">
+		delete 
+		from channelpost
+		where channelSN = #{channelSN} 
+	</delete>
+	
+	<delete id="deleteChannel">
+		delete 
+		from channel
+		where channelSN = #{channelSN}
+	</delete>
+	
+	<select id="getChannelPost" resultType="com.uniz.admin.domain.Channel">
+	
+	select 
+		 cp.postsn
+		,cp.title postTitle
+		,cp.viewcnt
+		,cp.likecnt
+		,cp.createdatetime createDateTime
+		,cp.updatedatetime updateDateTime
+		,c.channeltitle
+		,cps.postcontent
+		,u.nick
+	from 
+		channelpost cp,channelpostcontent cps, channel c, userdata u
+	where 
+		cp.postsn =  cps.postsn
+		and c.channelsn = cp.channelsn
+		and cp.usersn = u.usersn
+		and cp.postsn = #{postSN}
+	</select>
+	
+	<update id="updateChannelPost">
+		update channelPost
+		set 
+			title = #{postTitle},
+			updatedatetime = sysdate
+		where postsn = #{postSN}
+			
+	</update>
+	
+	<update id="updateChannelContent">
+			update channelpostcontent
+		set 
+			postcontent = #{postContent}
+		where postsn = #{postSN}
+	
+	</update>
+	
+	<delete id="deleteBoardImgOne">
+		delete 
+		from channel_imgfile
+		where 
+			postSN = #{postSN}
+	</delete>
+	
+	<delete id="deleteBoardReplyOne">
+		delete 
+		from channelreply
+		where 
+			postSN = #{postSN}
+	</delete>
+	
+	<delete id="deleteBoardContentOne">
+		delete 
+		from channelpostcontent
+		where 
+			postSN = #{postSN}
+	</delete>
+	
+	<delete id="deleteBoardPostOne">
+		delete 
+		from channelpost
+		where 
+			postSN = #{postSN}
+	</delete>
+	
+	
 </mapper>

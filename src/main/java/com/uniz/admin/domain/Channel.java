@@ -16,12 +16,13 @@ public class Channel {
 	private Long postSN;
 	private Long userSN;
 	private String channelTitle;
-	private String channelText;
+	private String channelComment;
 	private String nick;
 	private String postTitle;
 	private String postContent;
 	private int viewCnt;
 	private int likeCnt;
+	private int replyCnt;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	@DateTimeFormat(pattern ="yyyy-MM-dd")

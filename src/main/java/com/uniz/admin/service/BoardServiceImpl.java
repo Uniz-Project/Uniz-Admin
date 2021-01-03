@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getBoardList();
 	}
 	
+	@Transactional
 	@Override
 	//게시물 삭제
 	public String boardDelete(Long postSN) {
@@ -41,7 +42,7 @@ public class BoardServiceImpl implements BoardService{
 			try {
 				//DB에 문제가 있을 수 있으니 예외처리
 				//쿼리 실행
-				int resultCnt = mapper.boardDelete(postSN);
+				int resultCnt = cascadeDeleteBoardPost(postSN);
 
 				if (resultCnt > 0) {
 					//제대로 동작했을 경우 "success" 반환
@@ -149,17 +150,31 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Transactional
 	@Override
-	public void cascadeDeleteBoardPost(Long postSN) {
+	public int cascadeDeleteBoardPost(Long postSN) {
+		final int SUCCESS = 1;
+		final int FAIL= -1;
+		try {
+			
+			//이미지삭제
+			mapper.deleteBoardImg(postSN);
+			
+			//댓글삭제
+			mapper.deleteBoardReply(postSN);
+			log.info("댓글삭제완료");
+			
+			//본문삭제
+			mapper.deleteBoardContent(postSN);
+			log.info("본문삭제완료");
+			//게시물삭제
+			mapper.boardDelete(postSN);
+			log.info("게시물삭제완료");
+			
+			return SUCCESS;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return FAIL;
+		}
 		
-		//댓글삭제
-		mapper.deleteBoardReply(postSN);
-		log.info("댓글삭제완료");
-		//본문삭제
-		mapper.deleteBoardContent(postSN);
-		log.info("본문삭제완료");
-		//게시물삭제
-		mapper.boardDelete(postSN);
-		log.info("게시물삭제완료");
 	}
 	
 	

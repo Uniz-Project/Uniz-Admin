@@ -36,6 +36,8 @@ public interface BoardMapper {
 	public void deleteBoardReply(@Param("postSN")Long postSN);
 
 	public void deleteBoardContent(@Param("postSN")Long postSN);
+
+	public void deleteBoardImg(@Param("postSN")Long postSN);
 	
 	//public int boardUpdate(Long postSN);
 	

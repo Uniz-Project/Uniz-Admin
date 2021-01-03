@@ -97,8 +97,10 @@ public class VideoServiceImpl implements VideoService {
 		
 		if(videoSN != null) {
 			try {
-				int result = videoMapper.videoDelete(videoSN);
+				videoMapper.deletePlayLog(videoSN);
 				
+				int result = videoMapper.videoDelete(videoSN);
+				//playlog도 같이지워줘야한다.
 				return SUCCESS;
 			}catch(Exception e) {
 				e.printStackTrace();

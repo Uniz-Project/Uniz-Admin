@@ -115,5 +115,12 @@
 		where postsn = #{postSN}
 	</delete>
 	
+	<delete id="deleteBoardImg">
+		delete
+		from board_imgfile
+		where postsn= #{postSN}
+		
+	</delete>
+	
 
 </mapper>
