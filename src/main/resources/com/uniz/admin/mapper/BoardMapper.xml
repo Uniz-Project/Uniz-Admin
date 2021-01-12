@@ -122,5 +122,14 @@
 		
 	</delete>
 	
+	<select id="getBoardListWithFile" resultType="com.uniz.admin.domain.Board">
+		SELECT B.POSTSN, B.TITLE, U.NICK, B2.BOARDTITLE, BC.POSTCONTENT, B.VIEWCNT, B.LIKECNT, B.CREATEDATETIME, B.UPDATEDATETIME ,board_img.*
+		FROM BOARDPOST B, BOARDPOSTCONTENT BC, USERDATA U, BOARD B2, board_imgfile board_img
+		WHERE B.POSTSN = BC.POSTSN 
+		AND U.USERSN = B.USERSN 
+        AND B.BOARDSN = B2.BOARDSN
+        AND b.postsn = board_img.postsn
+        AND B.POSTSN = #{postSN}
+	</select>
 
 </mapper>

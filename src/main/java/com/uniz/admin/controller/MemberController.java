@@ -156,9 +156,11 @@ public class MemberController {
 	@GetMapping("/admin/member/creator/detail/{applySN}")
 	public String creatorDetail(@PathVariable Long applySN, Model model) {
 		
-		ApplyCreatorVO Creator = memberService.getCreatorMember(applySN);
+		List<ApplyCreatorVO> Creator = memberService.getCreatorMemberList(applySN);
 		
 		model.addAttribute("Creator", Creator);
+		
+		log.info("Creatpor : " + Creator);
 		
 		return "/admin/creatorDetail";
 	}

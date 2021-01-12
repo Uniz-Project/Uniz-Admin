@@ -22,6 +22,10 @@ public class Board {
 	private int viewCnt;
 	private int likeCnt;
 	
+	private String uuid;
+	private String uploadPath;
+	private String fileName;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private Date createDatetime; //가입일시

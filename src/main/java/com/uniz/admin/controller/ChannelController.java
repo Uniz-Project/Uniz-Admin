@@ -59,8 +59,8 @@ public class ChannelController {
 		
 		log.info("postSN ....:"+postSN);
 		
-		
-		Channel channel = channelService.getChannelPost(postSN);
+//		Channel channel = channelService.getChannelPost(postSN);
+		List<Channel> channel = channelService.getChannelPostWithFile(postSN);
 		
 		log.info("channel ...." + channel);
 		

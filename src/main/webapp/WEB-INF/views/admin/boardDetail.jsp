@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:formatDate var="board_createDatetime" value="${board.createDatetime}" pattern="yyyy-MM-dd"/>
-<fmt:formatDate var="board_updateDatetime" value="${board.updateDatetime}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="board_createDatetime" value="${board[0].createDatetime}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="board_updateDatetime" value="${board[0].updateDatetime}" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,21 +36,24 @@
 							<div id="originalForm" class="card-body">
 
 								<div style="font-weight: bold; font-size: 20px">
-									${board.title}</div>
+									${board[0].title}</div>
 
 								<div style="font-size: 8px; margin-top: 10px">
-									<span style="margin-right: 15px">작성자 : ${board.nick}</span> 
+									<span style="margin-right: 15px">작성자 : ${board[0].nick}</span> 
 									<span
 										style="margin-right: 15px">작성일시 :${board_createDatetime }</span>
 									<span>최종 수정일시 : ${board_updateDatetime}</span>
 								</div>
 								<hr />
-								<div>${board.postContent}</div>
+								<div>${board[0].postContent}</div>
 								
 								
-								<div>이미지가들어갈 공간입니당</div>
-								<%-- <input type="hidden" id="categoryCd" value="${board.categoryCd}" />
-												<input type="hidden" id="id" value="${board.postSN}" /> --%>
+								<div>
+								<c:forEach items="${board}" var="list">
+									<img src="/resources/imgUpload/category/${list.uploadPath}/${list.uuid}_${list.fileName}" style="display:inline-block; width:48%; height: 450px;">
+								
+								</c:forEach>								
+								</div>
 
 								<hr />
 

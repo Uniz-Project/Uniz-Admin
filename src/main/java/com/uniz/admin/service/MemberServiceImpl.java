@@ -207,4 +207,10 @@ public class MemberServiceImpl implements MemberService{
 		return dto.getUserID() != null &&  dto.getPassword() != null ? true : false;
 	}
 
+	@Override
+	public List<ApplyCreatorVO> getCreatorMemberList(Long applySN) {
+		
+		return mapper.getCreatorMemberFileList(applySN);
+	}
+
 }

@@ -28,4 +28,6 @@ public interface BoardService {
 	public String applyReport(ReportVO reportVO, int state);
 	
 	public int cascadeDeleteBoardPost(Long postSN);
+
+	public List<Board> getBoardListWithFile(Long postSN);
 }

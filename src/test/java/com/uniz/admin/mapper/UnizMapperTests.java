@@ -33,7 +33,7 @@ public class UnizMapperTests {
 		// 3. keywords에서 , 구분자로 짜른 키워드 한개마다 Uniz 테이블에서 유니즈 키워드가 있는지 확인한다.
 		// 4. 유니즈 키워드가 있을경우 다음으로 넘어가고 , 유니즈 키워드가 없을경우 새로운 유니즈 키워드로 등록한다.
 
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 //		List<Video2> Video2 = videoMapper.getVideo2List();
@@ -145,7 +145,7 @@ public class UnizMapperTests {
 
 		System.out.println(searchUnizType);
 		// 1. 영상리스트 가져오기
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 		for (int i = 0; i < Video2.size(); i++) {
@@ -181,7 +181,7 @@ public class UnizMapperTests {
 	public void UnizType1Insert() {
 
 		// 1. 영상리스트 가져오기
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 		for (int i = 0; i < Video2.size(); i++) {
@@ -218,7 +218,7 @@ public class UnizMapperTests {
 	public void UnizType2Insert() {
 
 		// 1. 영상리스트 가져오기
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 		for (int i = 0; i < Video2.size(); i++) {
@@ -255,7 +255,7 @@ public class UnizMapperTests {
 	public void UnizType4Insert() {
 
 		// 1. 영상리스트 가져오기
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 		for (int i = 0; i < Video2.size(); i++) {
@@ -300,7 +300,7 @@ public class UnizMapperTests {
 	public void UnizType6Insert() {
 
 		// 1. 영상리스트 가져오기
-		String todayDate = "20/12/10";
+		String todayDate = "21/01/06";
 		List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 		for (int i = 0; i < Video2.size(); i++) {
@@ -338,7 +338,7 @@ public class UnizMapperTests {
 		public void UnizType7Insert() {
 
 			// 1. 영상리스트 가져오기
-			String todayDate = "20/12/10";
+			String todayDate = "21/01/06";
 			List<Video2> Video2 = videoMapper.getTodayVideoData(todayDate);
 
 			for (int i = 0; i < Video2.size(); i++) {

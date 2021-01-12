@@ -61,7 +61,6 @@ function boardList(){
 			{data: "nick"},
 			{data: "boardTitle"},
 			{data: "viewCnt"},
-			{data: "likeCnt"},
 			{data: "createDatetime"},
 			{data: "updateDatetime"}
 		]
@@ -155,8 +154,6 @@ function searchBoardTitle(boardSN){
 			{data: "title"},
 			{data: "nick"},
 			{data: "boardTitle"},
-			{data: "viewCnt"},
-			{data: "likeCnt"},
 			{data: "createDatetime"},
 			{data: "updateDatetime"}
 		]

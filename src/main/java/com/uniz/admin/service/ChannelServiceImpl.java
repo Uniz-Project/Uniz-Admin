@@ -181,4 +181,10 @@ public class ChannelServiceImpl implements ChannelService {
 	//js에서 ajax호출시 반환받은 resultStr값으로 상태에 따른 alert출력.
 	return resultStr;
 	}
+
+	@Override
+	public List<Channel> getChannelPostWithFile(Long postSN) {
+		
+		return channelMapper.getChannelPostWithFile(postSN);
+	}
 }

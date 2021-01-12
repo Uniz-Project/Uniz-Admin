@@ -91,7 +91,8 @@ public class BoardController {
 		
 		log.info("postSN ....:"+postSN);
 		
-		Board board = boardService.getBoard(postSN);
+		List<Board> board = boardService.getBoardListWithFile(postSN);
+//		Board board = boardService.getBoard(postSN);
 		
 		log.info("board ...." + board);
 		

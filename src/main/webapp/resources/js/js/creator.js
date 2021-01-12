@@ -17,7 +17,7 @@ function memberList(){
 	
 	//memberList호출시 테이블 요소 변경
 	var element =
-		"<th>회원번호</th><th>회원아이디</th>\n\
+		"<th>등록번호</th><th>회원아이디</th>\n\
 		<th>회원닉네임</th>\n\
 		<th>신청채널명</th>\n\
 		<th>카테고리</th>\n\

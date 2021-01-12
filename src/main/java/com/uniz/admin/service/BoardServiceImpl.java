@@ -176,6 +176,12 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 	}
+
+	@Override
+	public List<Board> getBoardListWithFile(Long postSN) {
+		
+		return mapper.getBoardListWithFile(postSN);
+	}
 	
 	
 }

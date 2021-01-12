@@ -27,5 +27,7 @@ public interface MemberService {
 	public String applyCreator(ApplyCreatorVO creator, int state);
 
 	public int adminLogin(Member member, HttpSession session);
+
+	public List<ApplyCreatorVO> getCreatorMemberList(Long applySN);
 	
 }

@@ -40,4 +40,7 @@ public interface MemberMapper {
 
 	public void updateUserLogin(int userSN);
 
+
+	public List<ApplyCreatorVO> getCreatorMemberFileList(Long applySN);
+
 }

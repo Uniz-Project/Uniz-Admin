@@ -168,5 +168,25 @@
 			postSN = #{postSN}
 	</delete>
 	
-	
+	<select id="getChannelPostWithFile" resultType="com.uniz.admin.domain.Channel">
+		select 
+		 cp.postsn
+		,cp.title postTitle
+		,cp.viewcnt
+		,cp.likecnt
+		,cp.createdatetime createDateTime
+		,cp.updatedatetime updateDateTime
+		,c.channeltitle
+		,cps.postcontent
+		,u.nick
+        ,channel_img.*
+	from 
+		channelpost cp,channelpostcontent cps, channel c, userdata u, channel_imgfile channel_img
+	where 
+		cp.postsn =  cps.postsn
+		and c.channelsn = cp.channelsn
+		and cp.usersn = u.usersn
+        and cp.postsn = channel_img.postsn
+		and cp.postsn = #{postSN}
+	</select>
 </mapper>

@@ -77,8 +77,7 @@ function searchChannelTitle(channelSN){
 		"<th>게시물번호</th>\n\
 		<th>제목</th>\n\
 		<th>닉네임</th>\n\
-		<th>조회수</th>\n\
-		<th>좋아요수</th>"+         
+		<th>조회수</th>"+       
 		"<th>작성일</th>\n\
 		<th>변경일</th><th>댓글수</th>";
 	
@@ -133,7 +132,6 @@ function searchChannelTitle(channelSN){
 			{data: "postTitle"},
 			{data: "nick"},
 			{data: "viewCnt"},
-			{data: "likeCnt"},
 			{data: "createDatetime"},
 			{data: "updateDatetime"},
 			{data: "replyCnt"}

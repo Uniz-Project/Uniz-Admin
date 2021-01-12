@@ -26,7 +26,12 @@ public class ApplyCreatorVO {
 	
 	private int userTypeSN;
 	private String userType;
-
+	
+	//VO만드세요
+	private String uuid;
+	private String uploadPath;
+	private String fileName;
+	
 	private List<ApplyAttachVO> attachList;
 		
 }

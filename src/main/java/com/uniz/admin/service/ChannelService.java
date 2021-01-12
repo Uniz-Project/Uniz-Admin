@@ -26,4 +26,6 @@ public interface ChannelService {
 
 	int cascadeDeleteChannelBoard(Long postSN);
 
+	public List<Channel> getChannelPostWithFile(Long postSN);
+
 }

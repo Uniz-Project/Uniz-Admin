@@ -2,13 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:formatDate var="chanel_createDatetime" value="${channel.createDatetime}" pattern="yyyy-MM-dd"/>
-<fmt:formatDate var="chanel_updateDatetime" value="${channel.updateDatetime}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="chanel_createDatetime" value="${channel[0].createDatetime}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="chanel_updateDatetime" value="${channel[0].updateDatetime}" pattern="yyyy-MM-dd"/>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@include file="/WEB-INF/views/admin/include/header.jsp"%>
+	<style type="text/css">
+		.cl{
+			display: inline-block;
+		    width: 48%;
+		    height: 300px;
+		}
+	</style>
 </head>
 <body>
 	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
@@ -33,25 +40,32 @@
 					<div class="col-md-12">
 						<div class="card mb-4">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">${channel.channelTitle}</h6>
+								<h6 class="m-0 font-weight-bold text-primary">${channel[0].channelTitle}</h6>
 							</div>
 							<div id="originalForm" class="card-body">
 								<div style="font-weight: bold; font-size: 20px">
-									${channel.postTitle}</div>
+									${channel[0].postTitle}</div>
 
 								<div style="font-size: 8px; margin-top: 10px">
-									<span style="margin-right: 15px">작성자 : ${channel.nick}</span> <span
+									<span style="margin-right: 15px">작성자 : ${channel[0].nick}</span> <span
 										style="margin-right: 15px">작성일시
 										:${chanel_createDatetime}</span> <span>최종 수정일시 :
 										${chanel_updateDatetime}</span>
 								</div>
 								<hr />
-								<div>${channel.postContent}</div>
+								<div>${channel[0].postContent}</div>
 								<%-- <input type="hidden" id="categoryCd" value="${board.categoryCd}" />
 												<input type="hidden" id="id" value="${board.postSN}" /> --%>
 
 								<hr />
-
+								
+								<div>
+								<c:forEach items="${channel}" var="list">
+									<img class="cl" src="/resources/imgUpload/channel/${list.uploadPath}/${list.uuid}_${list.fileName}">
+								
+								</c:forEach>								
+								</div>
+								
 								<div id="divBtns" class="text-right p-3">
 									<button type="button"  onClick="history.go(-1)" id="btnClear" class="btn btn-secondary">목록</button>
 								</div>

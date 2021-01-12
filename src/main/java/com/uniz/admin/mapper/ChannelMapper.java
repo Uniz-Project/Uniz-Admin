@@ -45,5 +45,7 @@ public interface ChannelMapper {
 	public void deleteBoardContentOne(Long postSN);
 
 	public void deleteBoardPostOne(Long postSN);
+
+	public List<Channel> getChannelPostWithFile(Long postSN);
 	
 }

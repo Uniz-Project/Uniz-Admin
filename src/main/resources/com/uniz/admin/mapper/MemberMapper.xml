@@ -82,12 +82,12 @@
 </select>
 
 <select id="getCreatorMember" resultType="com.uniz.admin.domain.ApplyCreatorVO">
-	select c.applysn , u.usersn,u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype
+	select c.applysn , u.usersn,u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype 
 	from userData u, applycreator c, statuscode status, usertype utype
 	where u.usersn = c.usersn 
 	and status.statussn = c.state
 	and u.usertype = utype.usertypesn
-	and applysn = #{applySN}
+	and c.applysn = #{applySN}
 
 </select>
 
@@ -134,5 +134,14 @@
 	WHERE 
 	  USERSN = #{userSN}
 </update>
-	
+
+<select id="getCreatorMemberFileList" resultType="com.uniz.admin.domain.ApplyCreatorVO">
+	select c.applysn , u.usersn,u.userid, u.nick,c.channeltitle ,c.category, c.email,status.statusname,c.state,c.createdatetime,c.updatedatetime ,utype.usertype , apply_img.*
+	from userData u, applycreator c, statuscode status, usertype utype, apply_imgfile apply_img
+	where u.usersn = c.usersn 
+	and status.statussn = c.state
+    and c.applysn = apply_img.applysn
+	and u.usertype = utype.usertypesn
+	and c.applysn = #{applySN}
+</select>
 </mapper>
